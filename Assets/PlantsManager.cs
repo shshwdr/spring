@@ -7,17 +7,22 @@ public enum HelperPlantType { red, yellow, blue};
 public class PlantsManager : Singleton<PlantsManager>
 {
 
-    Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
+    public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
         {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 20 } } },
     };
-    Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantKeepCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
+    public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantKeepCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
         {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 1 } } },
     };
-    Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantProd = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
+    public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantProd = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.p, 1 } } },
+        {HelperPlantType.red,new Dictionary<PlantProperty, int>() {
+            { PlantProperty.p, 1 },
+            {PlantProperty.water, 1 },
+        }},
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.s, 1 } } },
+        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 1 } } },
     };
 
     public Dictionary<PlantProperty, int> currentResource = new Dictionary<PlantProperty, int>() {
@@ -40,6 +45,13 @@ public class PlantsManager : Singleton<PlantsManager>
 
     };
 
+    public Dictionary<HelperPlantType, string> plantName = new Dictionary<HelperPlantType, string>() {
+        { HelperPlantType.red, "Red" },
+        { HelperPlantType.yellow, "Yellow" },
+        { HelperPlantType.blue, "Blue" },
+
+    };
+
     public Dictionary<PlantProperty, int> currentResourceRate = new Dictionary<PlantProperty, int>() {
         { PlantProperty.p, 0 },
         { PlantProperty.s,0 },
@@ -57,6 +69,13 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.bee, 0 },
         { PlantProperty.pest, 0 },
     };
+
+    public Dictionary<GameObject, bool> isPlantUnlocked = new Dictionary<GameObject, bool>()
+    {
+
+    };
+    public List<GameObject> helperPlantList;
+
     Dictionary<int, HelperPlant> plantedPlant = new Dictionary<int, HelperPlant>();
     float currentTime = 0;
     // Start is called before the first frame update

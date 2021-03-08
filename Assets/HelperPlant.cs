@@ -5,7 +5,6 @@ using UnityEngine;
 public class HelperPlant : MonoBehaviour
 {
     public HelperPlantType type;
-    public string name;
     [HideInInspector]
     public bool isAlive = true;
     // Start is called before the first frame update

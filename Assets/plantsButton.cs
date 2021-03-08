@@ -1,21 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
-public class plantsButton : MonoBehaviour
+public class PlantsButton : MonoBehaviour
 {
+    [HideInInspector]
     public GameObject spawnPlantPrefab;
+
+    public TMP_Text name;
+    public Image image;
+
+    [HideInInspector]
+    public HelperPlant helperPlant;
+    HUD hud;
     // Start is called before the first frame update
     void Start()
     {
         
     }
-
+    public void init(GameObject plant,HUD h)
+    {
+        spawnPlantPrefab = plant;
+        helperPlant = plant.GetComponent<HelperPlant>();
+        name.text = PlantsManager.Instance.plantName[helperPlant.type];
+        image.sprite = plant.GetComponent<SpriteRenderer>().sprite;
+        image.color = plant.GetComponent<SpriteRenderer>().color;
+        hud = h;
+    }
     public void SpawnPlant()
     {
         GameObject spawnInstance = Instantiate(spawnPlantPrefab);
     }
-
+    public void PointerEnter()
+    {
+        hud.ShowPlantDetail(gameObject);
+    }
+    public void PointerExit()
+    {
+        hud.HidePlantDetail();
+    }
     // Update is called once per frame
     void Update()
     {
