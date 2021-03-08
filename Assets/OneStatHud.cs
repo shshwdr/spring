@@ -17,7 +17,7 @@ public class OneStatHud : MonoBehaviour
     {
         name.text = n;
         value.text = v.ToString();
-        rate.text = r.ToString();
+        rate.text = (r>=0?"+":"-") + r.ToString();
     }
     // Update is called once per frame
     void Update()

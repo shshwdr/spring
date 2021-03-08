@@ -7,15 +7,17 @@ public class HUD : MonoBehaviour
     public GameObject statsContent;
     public GameObject oneStatPrefab;
     PlantsManager plantManager;
+    Dictionary<PlantProperty, OneStatHud> hudByProperty;
     // Start is called before the first frame update
     void Start()
     {
         plantManager = PlantsManager.Instance;
+        hudByProperty = new Dictionary<PlantProperty, OneStatHud>();
         foreach (var pair in plantManager.currentResource)
         {
             GameObject oneStatInstance = Instantiate(oneStatPrefab);
             OneStatHud oneStatHud = oneStatInstance.GetComponent<OneStatHud>();
-            oneStatHud.init(plantManager.resourceName[pair.Key], pair.Value, plantManager.currentResourceRate[pair.Key]);
+            hudByProperty[pair.Key] = oneStatHud;
             oneStatInstance.transform.parent = statsContent.transform;
         }
     }
@@ -23,6 +25,11 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (var pair in plantManager.currentResource)
+        {
+
+            OneStatHud oneStatHud = hudByProperty[pair.Key];
+            oneStatHud.init(plantManager.resourceName[pair.Key], pair.Value, plantManager.currentResourceRate[pair.Key]);
+        }
     }
 }

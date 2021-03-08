@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public enum PlantProperty {s,p,n,water,bee,pest };
 public enum HelperPlantType { red, yellow, blue};
 public class PlantsManager : Singleton<PlantsManager>
@@ -41,6 +41,15 @@ public class PlantsManager : Singleton<PlantsManager>
     };
 
     public Dictionary<PlantProperty, int> currentResourceRate = new Dictionary<PlantProperty, int>() {
+        { PlantProperty.p, 0 },
+        { PlantProperty.s,0 },
+        { PlantProperty.n, 0 },
+        { PlantProperty.water, 0 },
+        { PlantProperty.bee, 0 },
+        { PlantProperty.pest, 0 },
+    };
+
+    public Dictionary<PlantProperty, int> baseResourceRate = new Dictionary<PlantProperty, int>() {
         { PlantProperty.p, 1 },
         { PlantProperty.s, 1 },
         { PlantProperty.n, 1 },
@@ -53,7 +62,13 @@ public class PlantsManager : Singleton<PlantsManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        UpdateRate();
+    }
+
+    public void AddPlant(HelperPlant newPlant)
+    {
+        plantedPlant[0] = newPlant;
+        UpdateRate();
     }
 
     // Update is called once per frame
@@ -63,28 +78,20 @@ public class PlantsManager : Singleton<PlantsManager>
         if (currentTime >= 1)
         {
             currentTime -= 1;
-            foreach (var pair in plantedPlant)
+            foreach (var pair in currentResourceRate)
             {
-                var plant = pair.Value;
-                if (plant.isAlive)
-                {
-                    var prodDictionary = helperPlantProd[plant.type];
-                    foreach(var pairI in prodDictionary)
-                    {
-                        currentResource[pairI.Key] += pairI.Value;
-                    }
-                }
+                currentResource[pair.Key] += pair.Value;
             }
         }
     }
 
     public void UpdateRate()
     {
-        foreach (var key in currentResourceRate.Keys)
+        foreach (var key in currentResourceRate.Keys.ToArray<PlantProperty>())
         {
-            currentResourceRate[key] = 0;
+            currentResourceRate[key] = baseResourceRate[key];
         }
-            foreach (var pair in plantedPlant)
+        foreach (var pair in plantedPlant)
         {
             var plant = pair.Value;
             if (plant.isAlive)
