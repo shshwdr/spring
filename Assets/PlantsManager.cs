@@ -9,11 +9,15 @@ public class PlantsManager : Singleton<PlantsManager>
 
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 20 } } },
+        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
+        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
     };
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantKeepCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 1 } } },
+        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
     };
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantProd = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
@@ -84,6 +88,33 @@ public class PlantsManager : Singleton<PlantsManager>
         UpdateRate();
     }
 
+    public bool IsPlantable(HelperPlant plant)
+    {
+        var prodDictionary = helperPlantCost[plant.type];
+        foreach (var pair in prodDictionary)
+        {
+            if( currentResource[ pair.Key] < pair.Value)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void ReduceResource(Dictionary<PlantProperty, int> origin, Dictionary<PlantProperty, int> reduce)
+    {
+        foreach (var pair in reduce)
+        {
+            origin[pair.Key] -= pair.Value;
+        }
+    }
+
+    public void Purchase(GameObject plantPrefab)
+    {
+        ReduceResource(currentResource, helperPlantCost[plantPrefab.GetComponent<HelperPlant>().type]);
+        GameObject spawnInstance = Instantiate(plantPrefab);
+    }
+
     public void AddPlant(HelperPlant newPlant)
     {
         plantedPlant[0] = newPlant;
@@ -119,6 +150,12 @@ public class PlantsManager : Singleton<PlantsManager>
                 foreach (var pairI in prodDictionary)
                 {
                     currentResourceRate[pairI.Key] += pairI.Value;
+                }
+
+                var keepCostDictionary = helperPlantKeepCost[plant.type];
+                foreach (var pairI in keepCostDictionary)
+                {
+                    currentResourceRate[pairI.Key] -= pairI.Value;
                 }
             }
         }

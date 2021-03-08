@@ -21,6 +21,8 @@ public class PlantDetail : MonoBehaviour
         {
             //this is a button
             var helperPlant = plantButton.helperPlant;
+            stats.text += getOnetimeCost(helperPlant);
+            stats.text += getDurationCost(helperPlant);
             stats.text += getProduction(helperPlant);
         }
         else
@@ -31,11 +33,35 @@ public class PlantDetail : MonoBehaviour
 
     string getProduction(HelperPlant plant)
     {
-        string res = ""; 
+        string res = "\nProduce:\n"; 
         var prodDictionary = plantManager.helperPlantProd[plant.type];
         foreach (var pair in prodDictionary)
         {
             res += plantManager.resourceName[pair.Key]+"\t"+ pair.Value.ToString();
+            res += "\n";
+        }
+        return res;
+    }
+
+    string getOnetimeCost(HelperPlant plant)
+    {
+        string res = "One Time Cost:\n";
+        var prodDictionary = plantManager.helperPlantCost[plant.type];
+        foreach (var pair in prodDictionary)
+        {
+            res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
+            res += "\n";
+        }
+        return res;
+    }
+
+    string getDurationCost(HelperPlant plant)
+    {
+        string res = "\nDuration Cost\n";
+        var prodDictionary = plantManager.helperPlantKeepCost[plant.type];
+        foreach (var pair in prodDictionary)
+        {
+            res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
             res += "\n";
         }
         return res;

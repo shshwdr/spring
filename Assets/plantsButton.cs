@@ -31,7 +31,12 @@ public class PlantsButton : MonoBehaviour
     }
     public void SpawnPlant()
     {
-        GameObject spawnInstance = Instantiate(spawnPlantPrefab);
+        //try to purchase
+        if (PlantsManager.Instance.IsPlantable(helperPlant))
+        {
+            PlantsManager.Instance.Purchase(spawnPlantPrefab);
+        }
+
     }
     public void PointerEnter()
     {
@@ -44,6 +49,13 @@ public class PlantsButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (PlantsManager.Instance.IsPlantable(helperPlant))
+        {
+            GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            GetComponent<Button>().interactable = false;
+        }
     }
 }
