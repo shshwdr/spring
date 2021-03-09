@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlantDetail : MonoBehaviour
 {
     public TMP_Text stats;
     PlantsManager plantManager;
+    public TMP_Text actionText;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,25 +23,64 @@ public class PlantDetail : MonoBehaviour
         {
             //this is a plant button
             var helperPlant = plantButton.helperPlant;
+            stats.text += getName(helperPlant);
             stats.text += getOnetimeCost(helperPlant);
             stats.text += getDurationCost(helperPlant);
             stats.text += getProduction(helperPlant);
-        }
-        else
-        {
-            var helperPlant = plant.GetComponent<HelperPlant>();
-            if (helperPlant)
+            if (!plantManager.hasSlot())
             {
-                //this is planted plant
-                stats.text += getOnetimeCost(helperPlant);
-                stats.text += getDurationCost(helperPlant);
-                stats.text += getProduction(helperPlant);
+
+                actionText.text = "Out of slots";
             }
             else
             {
+                if (plantManager.IsPlantable(helperPlant.type))
+                {
 
-                var maintree = plant.GetComponent<MainTree>();
-                //this is the tree
+                    actionText.text = "Click to plant";
+                }
+                else
+                {
+
+                    actionText.text = "Insufficient Resource";
+                }
+            }
+        }
+        else
+        {
+            var maintree = plant.GetComponent<MainTree>();
+            if (maintree)
+            {
+                stats.text += getName(maintree);
+                stats.text += getDurationCost(maintree);
+                stats.text += getProduction(maintree);
+                stats.text += getUpgrade(maintree);
+                if (maintree.isAtMaxLevel()) {
+                    actionText.text = "\nIs At Max Level. Attract bees and wait for fruit.";
+                }
+                else
+                {
+                    if (maintree.upgradable())
+                    {
+
+                        actionText.text = "Click to upgrade";
+                    }
+                    else
+                    {
+
+                        actionText.text = "Can't Upgrade";
+                    }
+                }
+            }
+            else
+            {
+                //this is planted plant
+                //stats.text += getOnetimeCost(helperPlant);
+                var helperPlant = plant.GetComponent<HelperPlant>();
+                stats.text += getName(helperPlant);
+                stats.text += getDurationCost(helperPlant);
+                stats.text += getProduction(helperPlant);
+                actionText.text = "Click to remove";
 
             }
         }
@@ -47,8 +88,12 @@ public class PlantDetail : MonoBehaviour
 
     string getProduction(HelperPlant plant)
     {
-        string res = "\nProduce:\n"; 
         var prodDictionary = plantManager.helperPlantProd[plant.type];
+        if (prodDictionary.Count == 0)
+        {
+            return "";
+        }
+        string res = "\nProduce:\n"; 
         foreach (var pair in prodDictionary)
         {
             res += plantManager.resourceName[pair.Key]+"\t"+ pair.Value.ToString();
@@ -57,13 +102,49 @@ public class PlantDetail : MonoBehaviour
         return res;
     }
 
+    string InsufficientResourcePrefix = "<color=#FF0000>";
+    string InsufficientResourceSurfix = "</color>";
+    string getUpgrade(MainTree plant)
+    {
+        if (plant.isAtMaxLevel())
+        {
+            return "\n";
+        }
+
+        string res = "\nUpgrade Cost:\n";
+        var prodDictionary = plantManager.helperPlantCost[plant.nextLevelType()];
+        foreach (var pair in prodDictionary)
+        {
+            bool isResourceAvailable = plantManager.IsResourceAvailable(pair.Key, pair.Value);
+            res += isResourceAvailable ? "" : InsufficientResourcePrefix;
+            res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
+            res += isResourceAvailable ? "" : InsufficientResourceSurfix;
+            res += "\n";
+        }
+        res += "\nNext Level Keep Cost:\n";
+        var keepCostDictionary = plantManager.helperPlantKeepCost[plant.nextLevelType()];
+        foreach (var pair in keepCostDictionary)
+        {
+            
+            res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
+            res += "\n";
+        }
+        return res;
+    }
+    string getName(HelperPlant plant)
+    {
+        return plantManager.plantName[plant.type]+"\n";
+    }
     string getOnetimeCost(HelperPlant plant)
     {
-        string res = "One Time Cost:\n";
+        string res = "\nOne Time Cost:\n";
         var prodDictionary = plantManager.helperPlantCost[plant.type];
         foreach (var pair in prodDictionary)
         {
+            bool isResourceAvailable = plantManager.IsResourceAvailable(pair.Key, pair.Value);
+            res += isResourceAvailable ? "" : InsufficientResourcePrefix;
             res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
+            res += isResourceAvailable ? "" : InsufficientResourceSurfix;
             res += "\n";
         }
         return res;

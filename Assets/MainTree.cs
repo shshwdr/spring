@@ -4,13 +4,45 @@ using UnityEngine;
 
 public class MainTree : HelperPlant
 {
-
+    public List<HelperPlantType> upgradeList;
+    int currentLevel = 0;
     // Start is called before the first frame update
     protected override void Start()
     {
         PlantsManager.Instance.maintree = this;
+        type = upgradeList[currentLevel];
+        base.Start();
     }
 
+    public void Upgrade()
+    {
+        currentLevel += 1;
+        type = upgradeList[currentLevel];
+        PlantsManager.Instance.ReduceCostForType(type);
+        PlantsManager.Instance.UpdateRate();
+
+        HUD.Instance.ShowPlantDetail(gameObject);
+    }
+
+    public bool isAtMaxLevel()
+    {
+        return currentLevel == upgradeList.Count - 1;
+    }
+
+    public bool upgradable()
+    {
+        return PlantsManager.Instance.IsPlantable(nextLevelType(),true);
+    }
+
+    protected override void OnMouseDown()
+    {
+        Upgrade();
+    }
+
+    public HelperPlantType nextLevelType()
+    {
+        return upgradeList[currentLevel + 1];
+    }
 
     // Update is called once per frame
     void Update()

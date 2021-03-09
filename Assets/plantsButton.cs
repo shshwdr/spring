@@ -32,7 +32,7 @@ public class PlantsButton : MonoBehaviour
     public void SpawnPlant()
     {
         //try to purchase
-        if (PlantsManager.Instance.IsPlantable(helperPlant))
+        if (PlantsManager.Instance.IsPlantable(helperPlant.type))
         {
             PlantsManager.Instance.Purchase(spawnPlantPrefab);
         }
@@ -49,7 +49,7 @@ public class PlantsButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlantsManager.Instance.IsPlantable(helperPlant))
+        if (PlantsManager.Instance.IsPlantable(helperPlant.type))
         {
             GetComponent<Button>().interactable = true;
         }

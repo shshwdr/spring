@@ -6,6 +6,8 @@ public class HelperPlant : MonoBehaviour
 {
     public HelperPlantType type;
     [HideInInspector]
+    public int slot;
+    [HideInInspector]
     public bool isAlive = true;
     public float hp;
 
@@ -23,6 +25,12 @@ public class HelperPlant : MonoBehaviour
 
     private void OnMouseExit()
     {
+        HUD.Instance.HidePlantDetail();
+    }
+    protected virtual void OnMouseDown()
+    {
+        PlantsManager.Instance.Remove(gameObject);
+
         HUD.Instance.HidePlantDetail();
     }
 

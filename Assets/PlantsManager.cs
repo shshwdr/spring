@@ -22,9 +22,9 @@ public class PlantsManager : Singleton<PlantsManager>
         {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
         {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
         {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
+        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 2 } } },
+        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 3 } } },
     };
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantProd = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
@@ -34,9 +34,9 @@ public class PlantsManager : Singleton<PlantsManager>
         }},
         {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.s, 1 } } },
         {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 1 } } },
-        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
+        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  } },
+        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { } },
+        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { } },
     };
 
     public Dictionary<PlantProperty, int> currentResource = new Dictionary<PlantProperty, int>() {
@@ -82,7 +82,7 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.p, 1 },
         { PlantProperty.s, 1 },
         { PlantProperty.n, 1 },
-        { PlantProperty.water, 5 },
+        { PlantProperty.water, 10 },
         { PlantProperty.bee, 0 },
         { PlantProperty.pest, 0 },
     };
@@ -102,14 +102,18 @@ public class PlantsManager : Singleton<PlantsManager>
     Dictionary<int, HelperPlant> plantedPlant = new Dictionary<int, HelperPlant>();
     float currentTime = 0;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        UpdateRate();
+
         plantSlots = new List<PlantSlot>();
-        for (int i = 0;i< plantsSlotParent.childCount; i++)
+        for (int i = 0; i < plantsSlotParent.childCount; i++)
         {
             plantSlots.Add(plantsSlotParent.GetChild(i).GetComponent<PlantSlot>());
         }
+    }
+    void Start()
+    {
+        UpdateRate();
     }
 
     public int firstAvailableSlot()
@@ -129,13 +133,20 @@ public class PlantsManager : Singleton<PlantsManager>
     {
         return firstAvailableSlot()!=-1;
     }
+    public bool IsResourceAvailable(PlantProperty property, int value)
+    {
+        return currentResource[property] >= value;
+    }
 
-    public bool IsPlantable(HelperPlant plant)
+    public bool IsResourceRateAvailable(PlantProperty property, int value)
+    {
+        return currentResourceRate[property] >= value;
+    }
+    public bool IsPlantable(HelperPlantType type,bool ignoreSlot = false)
     {
         if (!ignoreResourcePlant)
         {
-
-            var prodDictionary = helperPlantCost[plant.type];
+            var prodDictionary = helperPlantCost[type];
             foreach (var pair in prodDictionary)
             {
                 if (currentResource[pair.Key] < pair.Value)
@@ -144,7 +155,7 @@ public class PlantsManager : Singleton<PlantsManager>
                 }
             }
         }
-        return hasSlot();
+        return ignoreSlot || hasSlot();
     }
 
     void ReduceResource(Dictionary<PlantProperty, int> origin, Dictionary<PlantProperty, int> reduce)
@@ -161,11 +172,24 @@ public class PlantsManager : Singleton<PlantsManager>
         if (slotId!=-1)
         {
             var slot = plantSlots[slotId];
-            ReduceResource(currentResource, helperPlantCost[plantPrefab.GetComponent<HelperPlant>().type]);
+            ReduceCostForType(plantPrefab.GetComponent<HelperPlant>().type);
             GameObject spawnInstance = Instantiate(plantPrefab, slot.transform);
             slot.isAvailable = false;
             plantedPlant[slotId] = spawnInstance.GetComponent<HelperPlant>();
+            spawnInstance.GetComponent<HelperPlant>().slot = slotId;
         }
+    }
+
+    public void ReduceCostForType(HelperPlantType type)
+    {
+        ReduceResource(currentResource, helperPlantCost[type]);
+    }
+
+    public void Remove(GameObject plantPrefab)
+    {
+        int slotId = plantPrefab.GetComponent<HelperPlant>().slot;
+        plantedPlant[slotId] = null;
+        Destroy(plantPrefab);
     }
 
     public void AddPlant(HelperPlant newPlant)
@@ -196,20 +220,30 @@ public class PlantsManager : Singleton<PlantsManager>
         foreach (var pair in plantedPlant)
         {
             var plant = pair.Value;
-            if (plant.isAlive)
+            if (plant && plant.isAlive)
             {
-                var prodDictionary = helperPlantProd[plant.type];
-                foreach (var pairI in prodDictionary)
-                {
-                    currentResourceRate[pairI.Key] += pairI.Value;
-                }
-
-                var keepCostDictionary = helperPlantKeepCost[plant.type];
-                foreach (var pairI in keepCostDictionary)
-                {
-                    currentResourceRate[pairI.Key] -= pairI.Value;
-                }
+                UpdateOneTypeRate(plant.type);
             }
+        }
+        if (maintree)
+        {
+
+            UpdateOneTypeRate(maintree.type);
+        }
+    }
+
+    void UpdateOneTypeRate(HelperPlantType type)
+    {
+        var prodDictionary = helperPlantProd[type];
+        foreach (var pairI in prodDictionary)
+        {
+            currentResourceRate[pairI.Key] += pairI.Value;
+        }
+
+        var keepCostDictionary = helperPlantKeepCost[type];
+        foreach (var pairI in keepCostDictionary)
+        {
+            currentResourceRate[pairI.Key] -= pairI.Value;
         }
     }
 }
