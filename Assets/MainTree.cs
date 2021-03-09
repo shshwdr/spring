@@ -5,11 +5,13 @@ using UnityEngine;
 public class MainTree : HelperPlant
 {
     public List<HelperPlantType> upgradeList;
+    public List<int> slotCount = new List<int>() { 2, 4, 6 };
     int currentLevel = 0;
     // Start is called before the first frame update
     protected override void Start()
     {
         PlantsManager.Instance.maintree = this;
+        PlantsManager.Instance.unlockedSlot = slotCount[currentLevel];
         type = upgradeList[currentLevel];
         base.Start();
     }
@@ -18,6 +20,7 @@ public class MainTree : HelperPlant
     {
         currentLevel += 1;
         type = upgradeList[currentLevel];
+        PlantsManager.Instance.unlockedSlot = slotCount[currentLevel];
         PlantsManager.Instance.ReduceCostForType(type);
         PlantsManager.Instance.UpdateRate();
 

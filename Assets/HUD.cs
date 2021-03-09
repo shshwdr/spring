@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HUD : Singleton<HUD>
 {
@@ -9,6 +10,10 @@ public class HUD : Singleton<HUD>
     public GameObject plantsContent;
     public GameObject plantButtonPrefab;
     public GameObject plantDetailPanel;
+    public TMP_Text speedText;
+    int currentSpeedId = 1;
+    List<float> speedList = new List<float>() { 0.5f, 1, 2, 4 };
+    bool isPaused = false;
     PlantsManager plantManager;
     Dictionary<PlantProperty, OneStatHud> hudByProperty;
     // Start is called before the first frame update
@@ -40,6 +45,40 @@ public class HUD : Singleton<HUD>
     {
         plantDetailPanel.SetActive(true);
         plantDetailPanel.GetComponent<PlantDetail>().updateValue(plant);
+    }
+
+    public void changeSpeed()
+    {
+        currentSpeedId += 1;
+        if (currentSpeedId >= speedList.Count)
+        {
+            currentSpeedId = 0;
+        }
+        resumeSpeed();
+
+    }
+
+    public void resumeSpeed()
+    {
+
+        var speed = speedList[currentSpeedId];
+        Time.timeScale = speed;
+        speedText.text = speed + "x speed";
+    }
+
+    public void togglePause()
+    {
+        isPaused = !isPaused;
+        if (isPaused)
+        {
+
+            Time.timeScale = 0;
+            speedText.text = 0 + "x speed";
+        }
+        else
+        {
+            resumeSpeed();
+        }
     }
 
     public void HidePlantDetail()

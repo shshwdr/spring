@@ -90,7 +90,7 @@ public class PlantsManager : Singleton<PlantsManager>
     public Transform plantsSlotParent;
     List<PlantSlot> plantSlots;
 
-    int unlockedSlot = 2;
+    public int unlockedSlot = 2;
 
 
     public Dictionary<GameObject, bool> isPlantUnlocked = new Dictionary<GameObject, bool>()
@@ -190,6 +190,7 @@ public class PlantsManager : Singleton<PlantsManager>
         int slotId = plantPrefab.GetComponent<HelperPlant>().slot;
         plantedPlant[slotId] = null;
         Destroy(plantPrefab);
+        UpdateRate();
     }
 
     public void AddPlant(HelperPlant newPlant)
