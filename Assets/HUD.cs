@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HUD : MonoBehaviour
+public class HUD : Singleton<HUD>
 {
     public GameObject statsContent;
     public GameObject oneStatPrefab;
@@ -41,6 +41,7 @@ public class HUD : MonoBehaviour
         plantDetailPanel.SetActive(true);
         plantDetailPanel.GetComponent<PlantDetail>().updateValue(plant);
     }
+
     public void HidePlantDetail()
     {
         plantDetailPanel.SetActive(false);

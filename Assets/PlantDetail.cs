@@ -19,7 +19,7 @@ public class PlantDetail : MonoBehaviour
         var plantButton = plant.GetComponent<PlantsButton>();
         if (plantButton)
         {
-            //this is a button
+            //this is a plant button
             var helperPlant = plantButton.helperPlant;
             stats.text += getOnetimeCost(helperPlant);
             stats.text += getDurationCost(helperPlant);
@@ -27,7 +27,21 @@ public class PlantDetail : MonoBehaviour
         }
         else
         {
-            //this is planted plant
+            var helperPlant = plant.GetComponent<HelperPlant>();
+            if (helperPlant)
+            {
+                //this is planted plant
+                stats.text += getOnetimeCost(helperPlant);
+                stats.text += getDurationCost(helperPlant);
+                stats.text += getProduction(helperPlant);
+            }
+            else
+            {
+
+                var maintree = plant.GetComponent<MainTree>();
+                //this is the tree
+
+            }
         }
     }
 

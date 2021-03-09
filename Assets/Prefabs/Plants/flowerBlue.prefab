@@ -1,12 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4778531740017146970
+--- !u!1001 &8547555448118331614
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8682640099129570432, guid: 9332ecff35b325048a9701cd272249cc,
+        type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8682640099129570433, guid: 9332ecff35b325048a9701cd272249cc,
         type: 3}
       propertyPath: m_RootOrder
@@ -62,10 +67,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8682640099129570462, guid: 9332ecff35b325048a9701cd272249cc,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.85955095
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682640099129570462, guid: 9332ecff35b325048a9701cd272249cc,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682640099129570462, guid: 9332ecff35b325048a9701cd272249cc,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8682640099129570463, guid: 9332ecff35b325048a9701cd272249cc,
         type: 3}
       propertyPath: m_Name
-      value: flower
+      value: flowerBlue
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9332ecff35b325048a9701cd272249cc, type: 3}

@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainTree : MonoBehaviour
+public class MainTree : HelperPlant
 {
+
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        PlantsManager.Instance.maintree = this;
     }
+
 
     // Update is called once per frame
     void Update()
