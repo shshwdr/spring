@@ -4,19 +4,25 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class PlantDetail : MonoBehaviour
+public class PlantDetail : Singleton<PlantDetail>
 {
     public TMP_Text stats;
     PlantsManager plantManager;
     public TMP_Text actionText;
+    GameObject plant;
     // Start is called before the first frame update
     void Start()
     {
         plantManager = PlantsManager.Instance;
         gameObject.SetActive(false);
     }
-    public void updateValue(GameObject plant)
+
+    public void UpdateValue()
     {
+        if (!plant || !gameObject.active)
+        {
+            return;
+        }
         stats.text = "";
         var plantButton = plant.GetComponent<PlantsButton>();
         if (plantButton)
@@ -25,7 +31,7 @@ public class PlantDetail : MonoBehaviour
             var helperPlant = plantButton.helperPlant;
             stats.text += getName(helperPlant);
             stats.text += getOnetimeCost(helperPlant);
-            stats.text += getDurationCost(helperPlant,true);
+            stats.text += getDurationCost(helperPlant, true);
             stats.text += getProduction(helperPlant);
             if (!plantManager.hasSlot())
             {
@@ -55,7 +61,8 @@ public class PlantDetail : MonoBehaviour
                 stats.text += getDurationCost(maintree);
                 stats.text += getProduction(maintree);
                 stats.text += getUpgrade(maintree);
-                if (maintree.isAtMaxLevel()) {
+                if (maintree.isAtMaxLevel())
+                {
                     actionText.text = "\nIs At Max Level. Attract bees and wait for fruit.";
                 }
                 else
@@ -84,6 +91,11 @@ public class PlantDetail : MonoBehaviour
 
             }
         }
+    }
+    public void updateValue(GameObject p)
+    {
+        plant = p;
+        UpdateValue();
     }
 
     string getProduction(HelperPlant plant)
@@ -162,9 +174,9 @@ public class PlantDetail : MonoBehaviour
         foreach (var pair in prodDictionary)
         {
             bool isResourceAvailable = plantManager.IsResourceRateAvailable(pair.Key, pair.Value);
-            res += (isResourceAvailable&&showInsufficient) ? "" : InsufficientResourceRatePrefix;
+            res += (!isResourceAvailable&&showInsufficient) ?  InsufficientResourceRatePrefix:"";
             res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
-            res += (isResourceAvailable && showInsufficient) ? "" : InsufficientResourceSurfix;
+            res += (!isResourceAvailable && showInsufficient) ? InsufficientResourceSurfix:"";
             res += "\n";
         }
         return res;

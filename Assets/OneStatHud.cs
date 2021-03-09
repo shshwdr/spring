@@ -14,9 +14,9 @@ public class OneStatHud : MonoBehaviour
         
     }
 
-    string minusResourcePrefix = "<color=#FF0000>";
+    string minusResourcePrefix = "<color=#B90018>";
 
-    string AddResourcePrefix = "<color=#00FF00>";
+    string AddResourcePrefix = "<color=#037610>";
     string InsufficientResourceSurfix = "</color>";
     public void init(string n, float v, float r)
     {
@@ -30,7 +30,7 @@ public class OneStatHud : MonoBehaviour
         {
             rate.text += minusResourcePrefix;
         }
-        rate.text = (r>=0?"+": "") + r.ToString();
+        rate.text += (r>=0?"+": "") + r.ToString();
         if (r != 0)
         {
             rate.text += InsufficientResourceSurfix;

@@ -18,6 +18,10 @@ public class MainTree : HelperPlant
 
     public void Upgrade()
     {
+        if (!upgradable())
+        {
+            return;
+        }
         currentLevel += 1;
         type = upgradeList[currentLevel];
         PlantsManager.Instance.unlockedSlot = slotCount[currentLevel];

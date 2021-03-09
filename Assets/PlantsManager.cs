@@ -223,6 +223,7 @@ public class PlantsManager : Singleton<PlantsManager>
             {
                 currentResource[pair.Key] += pair.Value;
             }
+            PlantDetail.Instance.UpdateValue();
         }
     }
 
@@ -245,6 +246,8 @@ public class PlantsManager : Singleton<PlantsManager>
 
             UpdateOneTypeRate(maintree.type);
         }
+
+        PlantDetail.Instance.UpdateValue();
     }
 
     void UpdateOneTypeRate(HelperPlantType type)
