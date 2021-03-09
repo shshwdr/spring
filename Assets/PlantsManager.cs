@@ -6,7 +6,7 @@ public enum PlantProperty {s,p,n,water,bee,pest };
 public enum HelperPlantType { red, yellow, blue};
 public class PlantsManager : Singleton<PlantsManager>
 {
-
+    public bool ignoreResourcePlant = true;
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
         {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
@@ -74,6 +74,12 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.pest, 0 },
     };
 
+    public Transform plantsSlotParent;
+    List<PlantSlot> plantSlots;
+
+    int unlockedSlot = 2;
+
+
     public Dictionary<GameObject, bool> isPlantUnlocked = new Dictionary<GameObject, bool>()
     {
 
@@ -86,19 +92,46 @@ public class PlantsManager : Singleton<PlantsManager>
     void Start()
     {
         UpdateRate();
+        plantSlots = new List<PlantSlot>();
+        for (int i = 0;i< plantsSlotParent.childCount; i++)
+        {
+            plantSlots.Add(plantsSlotParent.GetChild(i).GetComponent<PlantSlot>());
+        }
+    }
+
+    public PlantSlot firstAvailableSlot()
+    {
+        for (int i = 0;i < unlockedSlot;i++)
+        {
+            var slot = plantSlots[i];
+            if (slot.isAvailable)
+            {
+                return slot;
+            }
+        }
+        return null;
+    }
+
+    public bool hasSlot()
+    {
+        return firstAvailableSlot()!=null;
     }
 
     public bool IsPlantable(HelperPlant plant)
     {
-        var prodDictionary = helperPlantCost[plant.type];
-        foreach (var pair in prodDictionary)
+        if (!ignoreResourcePlant)
         {
-            if( currentResource[ pair.Key] < pair.Value)
+
+            var prodDictionary = helperPlantCost[plant.type];
+            foreach (var pair in prodDictionary)
             {
-                return false;
+                if (currentResource[pair.Key] < pair.Value)
+                {
+                    return false;
+                }
             }
         }
-        return true;
+        return hasSlot();
     }
 
     void ReduceResource(Dictionary<PlantProperty, int> origin, Dictionary<PlantProperty, int> reduce)
@@ -111,8 +144,14 @@ public class PlantsManager : Singleton<PlantsManager>
 
     public void Purchase(GameObject plantPrefab)
     {
-        ReduceResource(currentResource, helperPlantCost[plantPrefab.GetComponent<HelperPlant>().type]);
-        GameObject spawnInstance = Instantiate(plantPrefab);
+        var slot = firstAvailableSlot();
+        if (slot)
+        {
+
+            ReduceResource(currentResource, helperPlantCost[plantPrefab.GetComponent<HelperPlant>().type]);
+            GameObject spawnInstance = Instantiate(plantPrefab, slot.transform);
+            slot.isAvailable = false;
+        }
     }
 
     public void AddPlant(HelperPlant newPlant)
