@@ -2,54 +2,68 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-public enum PlantProperty {s,p,n,water,bee,pest };
-public enum HelperPlantType { red, yellow, blue , appleTree1, appleTree2, appleTree3};
+public enum PlantProperty { s, p, n, water, bee, pest };
+public enum HelperPlantType { red, yellow, blue, purple, appleTree1, appleTree2, appleTree3 };
 public class PlantsManager : Singleton<PlantsManager>
 {
     public bool ignoreResourcePlant = true;
     public MainTree maintree;
-    public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
-    {
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-    };
-    public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantKeepCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
-    {
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 2 } } },
-        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 3 } } },
-    };
-    public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantProd = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
-    {
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() {
-            { PlantProperty.p, 1 },
-            {PlantProperty.water, 1 },
-        }},
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.s, 1 } } },
-        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 1 } } },
-        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  } },
-        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { } },
-        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { } },
-    };
+    public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantCost;
+    public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantKeepCost;
+    public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantProd;
 
-    public Dictionary<PlantProperty, int> currentResource = new Dictionary<PlantProperty, int>() {
+    public Dictionary<PlantProperty, int> currentResource;
+
+    public Dictionary<PlantProperty, string> resourceName;
+
+    public Dictionary<HelperPlantType, string> plantName;
+
+    public Dictionary<PlantProperty, int> currentResourceRate;
+
+    public Dictionary<PlantProperty, int> baseResourceRate;
+
+    public Transform plantsSlotParent;
+    List<PlantSlot> plantSlots;
+
+    public int unlockedSlot = 2;
+
+
+    public Dictionary<GameObject, bool> isPlantUnlocked;
+    public List<GameObject> helperPlantList;
+
+    Dictionary<int, HelperPlant> plantedPlant = new Dictionary<int, HelperPlant>();
+    float currentTime = 0;
+
+    void initValues()
+    {
+        isPlantUnlocked = new Dictionary<GameObject, bool>();
+        currentResourceRate = new Dictionary<PlantProperty, int>() {
+        { PlantProperty.p, 0 },
+        { PlantProperty.s,0 },
+        { PlantProperty.n, 0 },
+        { PlantProperty.water, 0 },
+        { PlantProperty.bee, 0 },
+        { PlantProperty.pest, 0 },
+    };
+        baseResourceRate = new Dictionary<PlantProperty, int>() {
         { PlantProperty.p, 0 },
         { PlantProperty.s, 0 },
         { PlantProperty.n, 0 },
-        { PlantProperty.water, 100 },
+        { PlantProperty.water, 10 },
         { PlantProperty.bee, 0 },
         { PlantProperty.pest, 0 },
+    };
+        plantName = new Dictionary<HelperPlantType, string>() {
+        { HelperPlantType.red, "Red Flower" },
+        { HelperPlantType.yellow, "Yellow Flower" },
+        { HelperPlantType.blue, "Blue Flower" },
+        { HelperPlantType.purple, "Purple Flower" },
+        { HelperPlantType.appleTree1, "Apple Tree - child" },
+        { HelperPlantType.appleTree2, "Apple Tree - middle" },
+        { HelperPlantType.appleTree3, "Apple Tree - flower" },
 
     };
-
-    public Dictionary<PlantProperty, string> resourceName = new Dictionary<PlantProperty, string>() {
+        resourceName = new Dictionary<PlantProperty, string>() {
         { PlantProperty.p, "calcium" },
         { PlantProperty.s, "Potassium"  },
         { PlantProperty.n, "Nitrogen" },
@@ -58,53 +72,51 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.pest, "Pest Attrack" },
 
     };
-
-    public Dictionary<HelperPlantType, string> plantName = new Dictionary<HelperPlantType, string>() {
-        { HelperPlantType.red, "Red" },
-        { HelperPlantType.yellow, "Yellow" },
-        { HelperPlantType.blue, "Blue" },
-        { HelperPlantType.appleTree1, "Apple Tree - child" },
-        { HelperPlantType.appleTree2, "Apple Tree - middle" },
-        { HelperPlantType.appleTree3, "Apple Tree - flower" },
-
-    };
-
-    public Dictionary<PlantProperty, int> currentResourceRate = new Dictionary<PlantProperty, int>() {
+        currentResource = new Dictionary<PlantProperty, int>() {
         { PlantProperty.p, 0 },
-        { PlantProperty.s,0 },
+        { PlantProperty.s, 0 },
         { PlantProperty.n, 0 },
-        { PlantProperty.water, 0 },
+        { PlantProperty.water, 100 },
         { PlantProperty.bee, 0 },
         { PlantProperty.pest, 0 },
+
     };
-
-    public Dictionary<PlantProperty, int> baseResourceRate = new Dictionary<PlantProperty, int>() {
-        { PlantProperty.p, 1 },
-        { PlantProperty.s, 1 },
-        { PlantProperty.n, 1 },
-        { PlantProperty.water, 10 },
-        { PlantProperty.bee, 0 },
-        { PlantProperty.pest, 0 },
-    };
-
-    public Transform plantsSlotParent;
-    List<PlantSlot> plantSlots;
-
-    public int unlockedSlot = 2;
-
-
-    public Dictionary<GameObject, bool> isPlantUnlocked = new Dictionary<GameObject, bool>()
+        helperPlantProd = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
-
+        {HelperPlantType.red,new Dictionary<PlantProperty, int>() {
+            { PlantProperty.p, 1 },
+        }},
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.s, 1 } } },
+        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 1 } } },
+        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.bee, 1 }, { PlantProperty.s, 1 } } },
+        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  } },
+        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { } },
+        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { } },
+    }; 
+        helperPlantKeepCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
+    {
+        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() {  { PlantProperty.n, 1 } } },
+        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 2 }, { PlantProperty.n, 2 } } },
+        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 3 } , { PlantProperty.n, 3 } , { PlantProperty.s, 2 } } },
+    }; helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
+    {
+        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
+        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
+        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.n, 5 }, { PlantProperty.p, 5 } } },
+        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
+        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.n,10}, { PlantProperty.p, 10 } } },
+        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.s, 20 }, { PlantProperty.p, 50 } } },
     };
-    public List<GameObject> helperPlantList;
-
-    Dictionary<int, HelperPlant> plantedPlant = new Dictionary<int, HelperPlant>();
-    float currentTime = 0;
+    }
     // Start is called before the first frame update
     private void Awake()
     {
-
+        initValues();
         plantSlots = new List<PlantSlot>();
         for (int i = 0; i < plantsSlotParent.childCount; i++)
         {
@@ -118,7 +130,7 @@ public class PlantsManager : Singleton<PlantsManager>
 
     public int firstAvailableSlot()
     {
-        for (int i = 0; i < unlockedSlot;i++)
+        for (int i = 0; i < unlockedSlot; i++)
         {
             var slot = plantSlots[i];
             if (slot.isAvailable)
@@ -131,7 +143,7 @@ public class PlantsManager : Singleton<PlantsManager>
 
     public bool hasSlot()
     {
-        return firstAvailableSlot()!=-1;
+        return firstAvailableSlot() != -1;
     }
     public bool IsResourceAvailable(PlantProperty property, int value)
     {
@@ -142,7 +154,7 @@ public class PlantsManager : Singleton<PlantsManager>
     {
         return currentResourceRate[property] >= value;
     }
-    public bool IsPlantable(HelperPlantType type,bool ignoreSlot = false)
+    public bool IsPlantable(HelperPlantType type, bool ignoreSlot = false)
     {
         if (!ignoreResourcePlant)
         {
@@ -169,7 +181,7 @@ public class PlantsManager : Singleton<PlantsManager>
     public void Purchase(GameObject plantPrefab)
     {
         var slotId = firstAvailableSlot();
-        if (slotId!=-1)
+        if (slotId != -1)
         {
             var slot = plantSlots[slotId];
             ReduceCostForType(plantPrefab.GetComponent<HelperPlant>().type);
@@ -190,6 +202,8 @@ public class PlantsManager : Singleton<PlantsManager>
         int slotId = plantPrefab.GetComponent<HelperPlant>().slot;
         plantedPlant[slotId] = null;
         Destroy(plantPrefab);
+
+        plantSlots[slotId].isAvailable = true;
         UpdateRate();
     }
 

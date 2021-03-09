@@ -25,7 +25,7 @@ public class PlantDetail : MonoBehaviour
             var helperPlant = plantButton.helperPlant;
             stats.text += getName(helperPlant);
             stats.text += getOnetimeCost(helperPlant);
-            stats.text += getDurationCost(helperPlant);
+            stats.text += getDurationCost(helperPlant,true);
             stats.text += getProduction(helperPlant);
             if (!plantManager.hasSlot())
             {
@@ -103,6 +103,8 @@ public class PlantDetail : MonoBehaviour
     }
 
     string InsufficientResourcePrefix = "<color=#FF0000>";
+
+    string InsufficientResourceRatePrefix = "<color=#FF6200>";
     string InsufficientResourceSurfix = "</color>";
     string getUpgrade(MainTree plant)
     {
@@ -125,8 +127,11 @@ public class PlantDetail : MonoBehaviour
         var keepCostDictionary = plantManager.helperPlantKeepCost[plant.nextLevelType()];
         foreach (var pair in keepCostDictionary)
         {
-            
+
+            bool isResourceAvailable = plantManager.IsResourceRateAvailable(pair.Key, pair.Value);
+            res += isResourceAvailable ? "" : InsufficientResourceRatePrefix;
             res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
+            res += isResourceAvailable ? "" : InsufficientResourceSurfix;
             res += "\n";
         }
         return res;
@@ -150,13 +155,16 @@ public class PlantDetail : MonoBehaviour
         return res;
     }
 
-    string getDurationCost(HelperPlant plant)
+    string getDurationCost(HelperPlant plant,bool showInsufficient = false)
     {
         string res = "\nDuration Cost\n";
         var prodDictionary = plantManager.helperPlantKeepCost[plant.type];
         foreach (var pair in prodDictionary)
         {
+            bool isResourceAvailable = plantManager.IsResourceRateAvailable(pair.Key, pair.Value);
+            res += (isResourceAvailable&&showInsufficient) ? "" : InsufficientResourceRatePrefix;
             res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
+            res += (isResourceAvailable && showInsufficient) ? "" : InsufficientResourceSurfix;
             res += "\n";
         }
         return res;

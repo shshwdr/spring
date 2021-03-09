@@ -9,9 +9,10 @@ Assets/AssetStoreTools*
 builds
 windowsBuild
 build
-
+WindowsBuild
 buildWindows
 pakcedBuild
+*.rar
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #

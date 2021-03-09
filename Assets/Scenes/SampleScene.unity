@@ -265,7 +265,7 @@ MonoBehaviour:
   slot: 0
   isAlive: 1
   hp: 0
-  upgradeList: 030000000400000005000000
+  upgradeList: 040000000500000006000000
   slotCount: 020000000400000006000000
 --- !u!114 &117339783
 MonoBehaviour:
@@ -383,6 +383,7 @@ MonoBehaviour:
   - {fileID: 1072396907640421441, guid: a8a1250397108d844a42a91938184908, type: 3}
   - {fileID: 8682640099129570463, guid: 9332ecff35b325048a9701cd272249cc, type: 3}
   - {fileID: 6652149665147289357, guid: 12b7dc363bab7e04ca68c90be626029d, type: 3}
+  - {fileID: 2858529316436187061, guid: 6225d9974f288cd4da8fa468512ba9ee, type: 3}
 --- !u!1 &210852912
 GameObject:
   m_ObjectHideFlags: 0

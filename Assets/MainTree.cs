@@ -39,6 +39,10 @@ public class MainTree : HelperPlant
 
     protected override void OnMouseDown()
     {
+        if (isAtMaxLevel())
+        {
+            return;
+        }
         Upgrade();
     }
 
