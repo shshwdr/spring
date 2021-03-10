@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PestManager : Singleton<PestManager>
 {
-
+    [HideInInspector]
     public List<Pest> currentPests = new List<Pest>();
+    public Transform pestSpawnParent;
+
+    public GameObject pestPrefab;
     // Start is called before the first frame update
 
     public List<Transform> pestsList()
@@ -19,7 +22,33 @@ public class PestManager : Singleton<PestManager>
     }
     void Start()
     {
-        
+        StartCoroutine(spawnMultiWavePest(pestPrefab, 7, 2,1f));
+    }
+
+    IEnumerator spawnMultiWavePest(GameObject pest, float waveInterval, int summonAmount, float interval = 1f)
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(waveInterval);
+            StartCoroutine(spawnMultiPest(pest, summonAmount, interval));
+        }
+    }
+
+    IEnumerator spawnMultiPest(GameObject pest, int summonAmount, float interval = 1f)
+    {
+        for(int i = 0; i < summonAmount; i++)
+        {
+            spawnOnePest(pest);
+            yield return new WaitForSeconds(interval);
+        }
+        yield return new WaitForSeconds(interval);
+    }
+
+    public void spawnOnePest(GameObject pest)
+    {
+
+        var trans = Utils.RandomTransform(pestSpawnParent);
+        Instantiate(pest, trans);
     }
 
     public void AddPest(Pest p)

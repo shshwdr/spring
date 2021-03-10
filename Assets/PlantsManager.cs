@@ -38,9 +38,16 @@ public class PlantsManager : Singleton<PlantsManager>
         List<Transform> res = new List<Transform>();
         foreach(var plantValue in plantedPlant.Values)
         {
-            res.Add(plantValue.transform);
+            if(plantValue && plantValue.isAlive)
+            {
+                res.Add(plantValue.transform);
+
+            }
         }
-        res.Add(maintree.transform);
+        if (maintree && maintree.isAlive)
+        {
+            res.Add(maintree.transform);
+        }
         return res;
     }
     void initValues()

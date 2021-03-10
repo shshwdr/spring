@@ -10,15 +10,11 @@ public class SummonPlant : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int i = 0;
-        foreach(Transform po in summonPositionParent)
+
+        for(int i = 0; i < summonAmount; i++)
         {
-            i++;
-            Instantiate(summonObj, po);
-            if (i >= summonAmount)
-            {
-                break;
-            }
+            var trans = Utils.RandomTransform(summonPositionParent);
+            Instantiate(summonObj, trans);
         }
     }
 
