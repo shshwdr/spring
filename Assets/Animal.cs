@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Animal : MonoBehaviour
+public class Animal : HPObject
 {
     public Transform target;
     public float attackRadius = 1f;
-    public bool isAlive;
     public float attackCooldown = 1f;
     float currentAttackCooldown = 0;
     public float walkSpeed = 1f;
+    public int atk = 1;
     // Start is called before the first frame update
-    protected virtual void Start()
+    protected override void Start()
     {
-        
+
+        base.Start();
     }
 
     protected bool isCloseToTarget()
@@ -23,7 +24,7 @@ public class Animal : MonoBehaviour
 
     protected void attack()
     {
-        Debug.Log("attack");
+        target.GetComponent<HPObject>().beAttacked(atk);
     }
 
     public Transform getClosestTransform(List<Transform> list)
@@ -44,15 +45,21 @@ public class Animal : MonoBehaviour
     }
 
     // Update is called once per frame
-    protected virtual void Update()
+    protected override void Update()
     {
         if (isAlive)
         {
             if (target)
             {
+                currentAttackCooldown += Time.deltaTime;
                 if (isCloseToTarget())
                 {
-                    attack();
+                    if (currentAttackCooldown >= attackCooldown)
+                    {
+
+                        attack();
+                        currentAttackCooldown = 0;
+                    }
                 }
                 else
                 {

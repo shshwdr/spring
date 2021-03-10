@@ -261,10 +261,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec5358432b13e0419bdd3b809fa2732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAlive: 1
+  maxHP: 10
   type: 3
   slot: 0
-  isAlive: 1
-  hp: 0
   upgradeList: 040000000500000006000000
   slotCount: 020000000400000006000000
 --- !u!114 &117339783
@@ -471,12 +471,12 @@ PrefabInstance:
     - target: {fileID: 1881286037005167941, guid: 0b5ce2060bebbdd4db9e0089b995a160,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.095866
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 1881286037005167941, guid: 0b5ce2060bebbdd4db9e0089b995a160,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.028956845
+      value: -0.21
       objectReference: {fileID: 0}
     - target: {fileID: 1881286037005167941, guid: 0b5ce2060bebbdd4db9e0089b995a160,
         type: 3}

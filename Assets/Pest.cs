@@ -8,6 +8,7 @@ public class Pest : Animal
     protected override void Start()
     {
         PestManager.Instance.AddPest(this);
+        base.Start();
     }
     private void OnMouseDown()
     {

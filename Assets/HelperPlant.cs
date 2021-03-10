@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HelperPlant : MonoBehaviour
+public class HelperPlant : HPObject
 {
     public HelperPlantType type;
     [HideInInspector]
     public int slot;
-    [HideInInspector]
-    public bool isAlive = true;
-    public float hp;
 
     // Start is called before the first frame update
-    protected virtual void Start()
+    protected override void Start()
     {
-        isAlive = true;
         PlantsManager.Instance.AddPlant(this);
+        base.Start();
     }
 
     private void OnMouseEnter()
@@ -35,7 +32,7 @@ public class HelperPlant : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
     }
 }

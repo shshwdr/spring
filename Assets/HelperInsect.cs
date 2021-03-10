@@ -8,6 +8,7 @@ public class HelperInsect : Animal
     protected override void Start()
     {
         HelperInsectManager.Instance.Add(this);
+        base.Start();
     }
 
     private void OnMouseDown()
