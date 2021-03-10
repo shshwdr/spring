@@ -27,9 +27,21 @@ public class HelperPlant : HPObject
     }
     protected virtual void OnMouseDown()
     {
-        PlantsManager.Instance.Remove(gameObject);
 
+        PlantsManager.Instance.Remove(gameObject);
+        die();
         HUD.Instance.HidePlantDetail();
+    }
+
+    public override void die()
+    {
+        var summons = GetComponent<SummonPlant>();
+        if (summons)
+        {
+            summons.clean();
+        }
+        base.die();
+
     }
 
     // Update is called once per frame

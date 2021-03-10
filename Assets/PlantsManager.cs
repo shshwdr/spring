@@ -92,7 +92,7 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.p, 0 },
         { PlantProperty.s, 0 },
         { PlantProperty.n, 0 },
-        { PlantProperty.water, 100 },
+        { PlantProperty.water, 200 },
         { PlantProperty.bee, 0 },
         { PlantProperty.pest, 0 },
 
@@ -217,7 +217,7 @@ public class PlantsManager : Singleton<PlantsManager>
     {
         int slotId = plantPrefab.GetComponent<HelperPlant>().slot;
         plantedPlant[slotId] = null;
-        Destroy(plantPrefab);
+        //Destroy(plantPrefab);
 
         plantSlots[slotId].isAvailable = true;
         UpdateRate();

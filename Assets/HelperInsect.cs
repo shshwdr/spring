@@ -16,6 +16,15 @@ public class HelperInsect : Animal
         
     }
 
+    public override void die()
+    {
+        HelperInsectManager.Instance.helperInsects.Remove(this);
+        base.die();
+
+    }
+
+
+
     // Update is called once per frame
     protected override void Update()
     {

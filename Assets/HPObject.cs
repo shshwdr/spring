@@ -22,7 +22,7 @@ public class HPObject : MonoBehaviour
         }
     }
 
-    public void die()
+    public virtual void die()
     {
         isAlive = false;
         Destroy(gameObject);

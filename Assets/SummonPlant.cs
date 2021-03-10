@@ -7,6 +7,7 @@ public class SummonPlant : MonoBehaviour
     public GameObject summonObj;
     public int summonAmount = 2;
     public Transform summonPositionParent;
+    public List<GameObject> summoned = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +15,15 @@ public class SummonPlant : MonoBehaviour
         for(int i = 0; i < summonAmount; i++)
         {
             var trans = Utils.RandomTransform(summonPositionParent);
-            Instantiate(summonObj, trans);
+            var go = Instantiate(summonObj, trans);
+            summoned.Add(go); 
+        }
+    }
+    public void clean()
+    {
+        foreach(var go in summoned)
+        {
+            go.GetComponent<HPObject>().die();
         }
     }
 
