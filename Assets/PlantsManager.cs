@@ -33,7 +33,16 @@ public class PlantsManager : Singleton<PlantsManager>
 
     Dictionary<int, HelperPlant> plantedPlant = new Dictionary<int, HelperPlant>();
     float currentTime = 0;
-
+    public List<Transform> plantsList()
+    {
+        List<Transform> res = new List<Transform>();
+        foreach(var plantValue in plantedPlant.Values)
+        {
+            res.Add(plantValue.transform);
+        }
+        res.Add(maintree.transform);
+        return res;
+    }
     void initValues()
     {
         isPlantUnlocked = new Dictionary<GameObject, bool>();
