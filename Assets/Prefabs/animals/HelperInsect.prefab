@@ -1,15 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &1185564891131274956
+--- !u!114 &4533879657945492867
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3116790856298093038}
+  m_GameObject: {fileID: 6235100531276478758}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99539f9cffb493844a542005e4afdff9, type: 3}
+  m_Script: {fileID: 11500000, guid: 997c599f802c9aa459467c50987d65ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
@@ -17,7 +17,7 @@ MonoBehaviour:
   isAlive: 1
   attackCooldown: 1
   walkSpeed: 1
---- !u!1001 &8428406468402813887
+--- !u!1001 &662347074917972855
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -79,21 +79,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6896884331954061904, guid: 574a193dc24f4a0419024a8335bfc30a,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 6896884331954061905, guid: 574a193dc24f4a0419024a8335bfc30a,
         type: 3}
       propertyPath: m_Name
-      value: pest
+      value: HelperInsect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 574a193dc24f4a0419024a8335bfc30a, type: 3}
---- !u!1 &3116790856298093038 stripped
+--- !u!1 &6235100531276478758 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6896884331954061905, guid: 574a193dc24f4a0419024a8335bfc30a,
     type: 3}
-  m_PrefabInstance: {fileID: 8428406468402813887}
+  m_PrefabInstance: {fileID: 662347074917972855}
   m_PrefabAsset: {fileID: 0}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Animal : MonoBehaviour
 {
-    protected Transform target;
+    public Transform target;
     public float attackRadius = 1f;
     public bool isAlive;
     public float attackCooldown = 1f;
