@@ -471,12 +471,12 @@ PrefabInstance:
     - target: {fileID: 1881286037005167941, guid: 0b5ce2060bebbdd4db9e0089b995a160,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.17
+      value: -0.93
       objectReference: {fileID: 0}
     - target: {fileID: 1881286037005167941, guid: 0b5ce2060bebbdd4db9e0089b995a160,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.21
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1881286037005167941, guid: 0b5ce2060bebbdd4db9e0089b995a160,
         type: 3}
@@ -2093,6 +2093,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Frog
+      objectReference: {fileID: 0}
+    - target: {fileID: 627519308935557595, guid: 1cf300ff3d2f0a74da9a1df645c06dee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cf300ff3d2f0a74da9a1df645c06dee, type: 3}

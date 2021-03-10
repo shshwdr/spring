@@ -65,7 +65,7 @@ public class PlantsManager : Singleton<PlantsManager>
         plantName = new Dictionary<HelperPlantType, string>() {
         { HelperPlantType.red, "Red Flower" },
         { HelperPlantType.yellow, "Yellow Flower" },
-        { HelperPlantType.blue, "Blue Flower" },
+        { HelperPlantType.blue, "Pond" },
         { HelperPlantType.purple, "Purple Flower" },
         { HelperPlantType.appleTree1, "Apple Tree - child" },
         { HelperPlantType.appleTree2, "Apple Tree - middle" },

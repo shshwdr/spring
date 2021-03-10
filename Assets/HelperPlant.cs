@@ -8,6 +8,7 @@ public class HelperPlant : HPObject
     [HideInInspector]
     public int slot;
 
+
     // Start is called before the first frame update
     protected override void Start()
     {
