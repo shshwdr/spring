@@ -13,7 +13,6 @@ public class HelperPlant : HPObject
     // Start is called before the first frame update
     protected override void Start()
     {
-        PlantsManager.Instance.AddPlant(this);
         base.Start();
     }
 
@@ -31,11 +30,15 @@ public class HelperPlant : HPObject
         isDragging = false;
         if (canPlant())
         {
+            PlantsManager.Instance.Purchase(gameObject);
+            PlantsManager.Instance.AddPlant(this);
         }
         else
         {
             Destroy(gameObject);
         }
+
+        PlantsManager.Instance.shadowCollider.gameObject.SetActive(false);
     }
 
     private void OnMouseExit()
@@ -84,6 +87,7 @@ public class HelperPlant : HPObject
             transform.Translate(mousePosition);
             if (Input.GetMouseButtonUp(0) && isDragging)
                 Plant();
+
         }
     }
 }

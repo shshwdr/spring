@@ -35,12 +35,12 @@ public class PlantsManager : Singleton<PlantsManager>
     public Dictionary<GameObject, bool> isPlantUnlocked;
     public List<GameObject> helperPlantList;
 
-    Dictionary<int, HelperPlant> plantedPlant = new Dictionary<int, HelperPlant>();
+    List<HelperPlant> plantedPlant = new List<HelperPlant>();
     float currentTime = 0;
     public List<Transform> plantsList()
     {
         List<Transform> res = new List<Transform>();
-        foreach(var plantValue in plantedPlant.Values)
+        foreach(var plantValue in plantedPlant)
         {
             if(plantValue && plantValue.isAlive)
             {
@@ -192,6 +192,10 @@ public class PlantsManager : Singleton<PlantsManager>
     }
     bool IsPositionValid(Collider2D col)
     {
+        if (!shadowCollider.OverlapPoint(col.transform.position))
+        {
+            return false;
+        }
         Collider2D[] colliders = new Collider2D[20];
         ContactFilter2D contactFilter = new ContactFilter2D();
         col.OverlapCollider(contactFilter, colliders);
@@ -245,17 +249,18 @@ public class PlantsManager : Singleton<PlantsManager>
         }
     }
 
-    public void Purchase(GameObject plantPrefab)
+    public void Purchase(GameObject plant)
     {
-        var slotId = firstAvailableSlot();
-        if (slotId != -1)
+        //var slotId = firstAvailableSlot();
+       // if (slotId != -1)
         {
-            var slot = plantSlots[slotId];
-            ReduceCostForType(plantPrefab.GetComponent<HelperPlant>().type);
-            GameObject spawnInstance = Instantiate(plantPrefab, slot.transform);
-            slot.isAvailable = false;
-            plantedPlant[slotId] = spawnInstance.GetComponent<HelperPlant>();
-            spawnInstance.GetComponent<HelperPlant>().slot = slotId;
+            //var slot = plantSlots[slotId];
+            ReduceCostForType(plant.GetComponent<HelperPlant>().type);
+            plantedPlant.Add(plant.GetComponent<HelperPlant>());
+            //GameObject spawnInstance = Instantiate(plantPrefab, slot.transform);
+            //slot.isAvailable = false;
+            //plantedPlant[slotId] = spawnInstance.GetComponent<HelperPlant>();
+            //spawnInstance.GetComponent<HelperPlant>().slot = slotId;
         }
     }
 
@@ -300,9 +305,8 @@ public class PlantsManager : Singleton<PlantsManager>
         {
             currentResourceRate[key] = baseResourceRate[key];
         }
-        foreach (var pair in plantedPlant)
+        foreach (var plant in plantedPlant)
         {
-            var plant = pair.Value;
             if (plant && plant.isAlive)
             {
                 UpdateOneTypeRate(plant.type);
