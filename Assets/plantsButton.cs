@@ -11,7 +11,6 @@ public class PlantsButton : MonoBehaviour
 
     public TMP_Text name;
     public Image image;
-
     [HideInInspector]
     public HelperPlant helperPlant;
     HUD hud;
@@ -20,6 +19,7 @@ public class PlantsButton : MonoBehaviour
     {
         
     }
+
     public void init(GameObject plant,HUD h)
     {
         spawnPlantPrefab = plant;
@@ -28,16 +28,25 @@ public class PlantsButton : MonoBehaviour
         image.sprite = plant.GetComponent<SpriteRenderer>().sprite;
         image.color = plant.GetComponent<SpriteRenderer>().color;
         hud = h;
+
+    }
+
+    private void OnMouseDown()
+    {
+        SpawnPlant();
     }
     public void SpawnPlant()
     {
         //try to purchase
         if (PlantsManager.Instance.IsPlantable(helperPlant.type))
         {
-            PlantsManager.Instance.Purchase(spawnPlantPrefab);
+            //PlantsManager.Instance.Purchase(spawnPlantPrefab);
+
+            GameObject spawnInstance = Instantiate(spawnPlantPrefab);
         }
 
     }
+
     public void PointerEnter()
     {
         hud.ShowPlantDetail(gameObject);

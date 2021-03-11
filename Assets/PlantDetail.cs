@@ -150,6 +150,11 @@ public class PlantDetail : Singleton<PlantDetail>
     }
     string getName(HelperPlant plant)
     {
+        if (!plantManager)
+        {
+
+            plantManager = PlantsManager.Instance;
+        }
         return plantManager.plantName[plant.type]+"\n";
     }
     string getOnetimeCost(HelperPlant plant)

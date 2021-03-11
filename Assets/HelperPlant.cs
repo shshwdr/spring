@@ -8,7 +8,7 @@ public class HelperPlant : HPObject
     [HideInInspector]
     public int slot;
 
-
+    bool isDragging = true;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -18,12 +18,24 @@ public class HelperPlant : HPObject
 
     private void OnMouseEnter()
     {
-        HUD.Instance.ShowPlantDetail(gameObject);
+        if (!isDragging)
+        {
+
+            HUD.Instance.ShowPlantDetail(gameObject);
+        }
+    }
+
+    private void Plant()
+    {
+        isDragging = false;
     }
 
     private void OnMouseExit()
     {
-        HUD.Instance.HidePlantDetail();
+        if (!isDragging)
+        {
+            HUD.Instance.HidePlantDetail();
+        }
     }
     protected virtual void OnMouseDown()
     {
@@ -47,5 +59,12 @@ public class HelperPlant : HPObject
     // Update is called once per frame
     protected override void Update()
     {
+        if (isDragging)
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            transform.Translate(mousePosition);
+            if (Input.GetMouseButtonUp(0) && isDragging)
+                Plant();
+        }
     }
 }

@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed18a594cbf366541a10a88cfdcda76b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreResourcePlant: 0
+  ignoreResourcePlant: 1
   maintree: {fileID: 0}
   plantsSlotParent: {fileID: 159109595}
   unlockedSlot: 2
@@ -1919,7 +1919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1611191582
 RectTransform:
   m_ObjectHideFlags: 0
