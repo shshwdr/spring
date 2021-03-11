@@ -7,6 +7,7 @@ public class HelperPlant : HPObject
     public HelperPlantType type;
     [HideInInspector]
     public int slot;
+    public Collider2D plantCollider;
 
     bool isDragging = true;
     // Start is called before the first frame update
@@ -28,6 +29,13 @@ public class HelperPlant : HPObject
     private void Plant()
     {
         isDragging = false;
+        if (canPlant())
+        {
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnMouseExit()
@@ -55,12 +63,23 @@ public class HelperPlant : HPObject
         base.die();
 
     }
-
+    bool canPlant()
+    {
+        return PlantsManager.Instance.IsPlantable(type, plantCollider);
+    }
     // Update is called once per frame
     protected override void Update()
     {
         if (isDragging)
         {
+            if (!canPlant())
+            {
+                GetComponent<SpriteRenderer>().color = Color.red;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().color = Color.white;
+            }
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             transform.Translate(mousePosition);
             if (Input.GetMouseButtonUp(0) && isDragging)

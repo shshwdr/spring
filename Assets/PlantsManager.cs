@@ -22,6 +22,10 @@ public class PlantsManager : Singleton<PlantsManager>
 
     public Dictionary<PlantProperty, int> baseResourceRate;
 
+    public Collider2D groundCollider2;
+    public Collider2D groundCollider1;
+    public Collider2D shadowCollider;
+
     public Transform plantsSlotParent;
     List<PlantSlot> plantSlots;
 
@@ -170,6 +174,7 @@ public class PlantsManager : Singleton<PlantsManager>
     {
         return currentResourceRate[property] >= value;
     }
+    [System.Obsolete("Method is obsolete.", false)]
     public bool IsPlantable(HelperPlantType type, bool ignoreSlot = false)
     {
         if (!ignoreResourcePlant)
@@ -184,6 +189,52 @@ public class PlantsManager : Singleton<PlantsManager>
             }
         }
         return ignoreSlot || hasSlot();
+    }
+    bool IsPositionValid(Collider2D col)
+    {
+        Collider2D[] colliders = new Collider2D[20];
+        ContactFilter2D contactFilter = new ContactFilter2D();
+        col.OverlapCollider(contactFilter, colliders);
+        bool collideGround = true;
+        bool collideShadow = false;
+        bool collideOtherPlant = false;
+        foreach(var collided in colliders)
+        {
+            if (!collided)
+            {
+                break;
+            }
+            if (collided == groundCollider1 || collided == groundCollider2)
+            {
+                collideGround = false;
+                break;
+            }
+            if (collided == shadowCollider)
+            {
+                collideShadow = true;
+            }
+            if(collided.name == "plant" && collided.GetComponentInParent<HelperPlant>())
+            {
+                collideOtherPlant = true;
+                break;
+            }
+        }
+        return collideGround&& collideShadow && !collideOtherPlant;
+    }
+    public bool IsPlantable(HelperPlantType type, Collider2D pos)
+    {
+        if (!ignoreResourcePlant)
+        {
+            var prodDictionary = helperPlantCost[type];
+            foreach (var pair in prodDictionary)
+            {
+                if (currentResource[pair.Key] < pair.Value)
+                {
+                    return false;
+                }
+            }
+        }
+        return IsPositionValid(pos);
     }
 
     void ReduceResource(Dictionary<PlantProperty, int> origin, Dictionary<PlantProperty, int> reduce)

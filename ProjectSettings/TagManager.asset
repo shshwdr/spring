@@ -50,3 +50,6 @@ TagManager:
   - name: plants
     uniqueID: 3694641809
     locked: 0
+  - name: shadow
+    uniqueID: 1501188177
+    locked: 0
