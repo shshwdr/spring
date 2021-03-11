@@ -17,10 +17,41 @@ PrefabInstance:
       propertyPath: attackRadius
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 2308318583092338648, guid: 14a5643071c45fb40adf810b54b3feba,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.1572101
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308318583092338648, guid: 14a5643071c45fb40adf810b54b3feba,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.017980292
+      objectReference: {fileID: 0}
     - target: {fileID: 3116790856298093038, guid: 14a5643071c45fb40adf810b54b3feba,
         type: 3}
       propertyPath: m_Name
-      value: caterpillar
+      value: snail
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116790856298093039, guid: 14a5643071c45fb40adf810b54b3feba,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6fe30eb7f8144cc48b9686cf79da9500,
+        type: 3}
+    - target: {fileID: 3116790856298093039, guid: 14a5643071c45fb40adf810b54b3feba,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116790856298093039, guid: 14a5643071c45fb40adf810b54b3feba,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3116790856298093039, guid: 14a5643071c45fb40adf810b54b3feba,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3116790856298093040, guid: 14a5643071c45fb40adf810b54b3feba,
         type: 3}

@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99539f9cffb493844a542005e4afdff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAlive: 1
+  maxHP: 1
   target: {fileID: 0}
   attackRadius: 1
-  isAlive: 1
   attackCooldown: 1
   walkSpeed: 1
+  atk: 1
 --- !u!1001 &8428406468402813887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,6 +86,21 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 6896884331954061904, guid: 574a193dc24f4a0419024a8335bfc30a,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896884331954061904, guid: 574a193dc24f4a0419024a8335bfc30a,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896884331954061904, guid: 574a193dc24f4a0419024a8335bfc30a,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6896884331954061905, guid: 574a193dc24f4a0419024a8335bfc30a,
         type: 3}
       propertyPath: m_Name
