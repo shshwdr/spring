@@ -22,7 +22,7 @@ public class PestManager : Singleton<PestManager>
     }
     void Start()
     {
-        //StartCoroutine(spawnMultiWavePest(pestPrefab, 8, 2,1f));
+        StartCoroutine(spawnMultiWavePest(pestPrefab, 4, 1,1f));
     }
 
     IEnumerator spawnMultiWavePest(GameObject pest, float waveInterval, int summonAmount, float interval = 1f)

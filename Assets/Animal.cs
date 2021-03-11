@@ -10,6 +10,7 @@ public class Animal : HPObject
     float currentAttackCooldown = 0;
     public float walkSpeed = 1f;
     public int atk = 1;
+    public bool isFacingRight = true;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -63,11 +64,25 @@ public class Animal : HPObject
                 }
                 else
                 {
+
                     Vector3 direction = ((Vector2)(target.position - transform.position)).normalized;
+                    if(direction.x<0&& isFacingRight)
+                    {
+                        flip();
+                    }else if(direction.x>0 && !isFacingRight)
+                    {
+                        flip();
+                    }
                     transform.position += direction * walkSpeed * Time.deltaTime;
 
                 }
             }
         }
+    }
+    void flip() {
+        isFacingRight = !isFacingRight;
+        var scale = transform.localScale;
+        scale.x = -scale.x;
+        transform.localScale = scale;
     }
 }

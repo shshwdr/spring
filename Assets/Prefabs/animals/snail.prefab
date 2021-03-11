@@ -17,6 +17,11 @@ PrefabInstance:
       propertyPath: attackRadius
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1185564891131274956, guid: 14a5643071c45fb40adf810b54b3feba,
+        type: 3}
+      propertyPath: isFacingRight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2308318583092338648, guid: 14a5643071c45fb40adf810b54b3feba,
         type: 3}
       propertyPath: m_Radius
