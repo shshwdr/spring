@@ -11,6 +11,8 @@ public class Animal : HPObject
     public float walkSpeed = 1f;
     public int atk = 1;
     public bool isFacingRight = true;
+    public bool hasTargetP = false;
+    public Vector3 targetP = Vector3.zero;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -20,7 +22,7 @@ public class Animal : HPObject
 
     protected bool isCloseToTarget()
     {
-        return (target.position - transform.position).magnitude <= attackRadius;
+        return (targetPosition() - transform.position).magnitude <= attackRadius;
     }
 
     protected void attack()
@@ -45,12 +47,22 @@ public class Animal : HPObject
         return res;
     }
 
+    Vector3 targetPosition()
+    {
+        return target!=null ? target.position : targetP;
+    }
+
+    public bool hasTarget()
+    {
+        return target!=null || hasTargetP;
+    }
+
     // Update is called once per frame
     protected override void Update()
     {
         if (isAlive)
         {
-            if (target)
+            if (hasTarget())
             {
                 currentAttackCooldown += Time.deltaTime;
                 if (isCloseToTarget())
@@ -65,7 +77,7 @@ public class Animal : HPObject
                 else
                 {
 
-                    Vector3 direction = ((Vector2)(target.position - transform.position)).normalized;
+                    Vector3 direction = ((Vector2)(targetPosition() - transform.position)).normalized;
                     if(direction.x<0&& isFacingRight)
                     {
                         flip();
