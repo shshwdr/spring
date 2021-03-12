@@ -7,6 +7,8 @@ public class TreeFlower : MonoBehaviour
     public GameObject flowerScentPrefab;
     GameObject flowerScent;
     public GameObject fruitPrefab;
+    [HideInInspector]
+    public MainTree tree;
     bool isPollinated;
     bool isDragging;
     // Start is called before the first frame update
@@ -31,6 +33,7 @@ public class TreeFlower : MonoBehaviour
         }
         isPollinated = true;
         Instantiate(fruitPrefab, transform.position, Quaternion.identity);
+        tree.createFruit();
         Destroy(gameObject);
     }
 

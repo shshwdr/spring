@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class MainTree : HelperPlant
 {
+    public int fruitNumberToFinish;
+    int fruitNumberFinished;
     public List<HelperPlantType> upgradeList;
     public List<int> slotCount = new List<int>() { 2, 4, 6 };
     int currentLevel = 0;
+    public GameObject treeFlowerPrefab;
+    public Transform flowerPositionParent;
+    List<Transform> flowerGeneratedPositions;
+    List<bool> isFlowerPositionUsed;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -15,6 +21,39 @@ public class MainTree : HelperPlant
         type = upgradeList[currentLevel];
         base.Start();
         isDragging = false;
+        flowerGeneratedPositions = new List<Transform>();
+        isFlowerPositionUsed = new List<bool>();
+        foreach (Transform t in flowerPositionParent)
+        {
+            flowerGeneratedPositions.Add(t);
+            isFlowerPositionUsed.Add(false);
+        }
+
+        SpawnFlower();
+    }
+
+    public void SpawnFlower()
+    {
+        for(int i = 0;i< flowerGeneratedPositions.Count; i++)
+        {
+            if (!isFlowerPositionUsed[i])
+            {
+                var go = Instantiate(treeFlowerPrefab, flowerGeneratedPositions[i].position, flowerGeneratedPositions[i].rotation);
+                go.GetComponent<TreeFlower>().tree = this;
+                isFlowerPositionUsed[i] = true;
+                break;
+            }
+        }
+    }
+
+    public void createFruit()
+    {
+        fruitNumberFinished++;
+        if (fruitNumberFinished >= fruitNumberToFinish)
+        {
+            HUD.Instance.showGardenButton();
+        }
+
     }
 
     public void Upgrade()

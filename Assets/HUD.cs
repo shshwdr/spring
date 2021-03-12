@@ -11,6 +11,7 @@ public class HUD : Singleton<HUD>
     public GameObject plantButtonPrefab;
     public GameObject plantDetailPanel;
     public TMP_Text speedText;
+    public GameObject gardenButton;
     int currentSpeedId = 1;
     List<float> speedList = new List<float>() { 0.5f, 1, 2, 4 };
     bool isPaused = false;
@@ -79,6 +80,11 @@ public class HUD : Singleton<HUD>
         {
             resumeSpeed();
         }
+    }
+
+    public void showGardenButton()
+    {
+        gardenButton.SetActive(true);
     }
 
     public void HidePlantDetail()
