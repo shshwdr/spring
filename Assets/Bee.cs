@@ -83,15 +83,13 @@ public class Bee : Animal
             dir = dir.normalized;
             var dis = Random.Range(moveDisMin, moveDisMax);
             targetP = transform.position + dir*dis;
-
-            Vector3 viewPos = Camera.current.WorldToViewportPoint(targetP);
-            if (viewPos.x<0 || viewPos.x >1 || viewPos.y < 0 || viewPos.y > 1)
+            Vector3 viewPos = Camera.main.WorldToViewportPoint(targetP);
+            if (viewPos.x < 0 || viewPos.x > 1 || viewPos.y < 0 || viewPos.y > 1)
             {
                 var pos = -transform.position;
                 dir = pos.normalized;
                 targetP = transform.position + dir * dis;
-            }
-                
+            }  
 
             hasTargetP = true;
         }

@@ -25,7 +25,7 @@ public class FlowerScent : MonoBehaviour
 
             LayerMask mask = LayerMask.GetMask("Bee");
             RaycastHit2D hit = Physics2D.Linecast(TrailRecorded[0], TrailRecorded[num - 1], mask);
-            if (hit)
+            if (hit && treeFlower)
             {
                 hit.collider.GetComponent<Bee>().setTarget(treeFlower.transform);
             }
