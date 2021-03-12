@@ -63,7 +63,15 @@ public class PlantDetail : Singleton<PlantDetail>
                 stats.text += getUpgrade(maintree);
                 if (maintree.isAtMaxLevel())
                 {
-                    actionText.text = "\nIs At Max Level. Attract bees and wait for fruit.";
+                    if (maintree.isAtMaxFlower())
+                    {
+
+                        actionText.text = "\nIs At Max Level. Attract bees and wait for fruit.";
+                    }
+                    else
+                    {
+                        actionText.text = "\nClick to spawn flowers";
+                    }
                 }
                 else
                 {
@@ -122,7 +130,14 @@ public class PlantDetail : Singleton<PlantDetail>
     {
         if (plant.isAtMaxLevel())
         {
+            if (plant.isAtMaxFlower())
+            {
+
+                return "\n";
+            }
+
             return "\n";
+
         }
 
         string res = "\nUpgrade Cost:\n";

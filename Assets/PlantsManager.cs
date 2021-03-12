@@ -267,6 +267,8 @@ public class PlantsManager : Singleton<PlantsManager>
     public void ReduceCostForType(HelperPlantType type)
     {
         ReduceResource(currentResource, helperPlantCost[type]);
+
+        PlantsManager.Instance.UpdateRate();
     }
 
     public void Remove(GameObject plantPrefab)

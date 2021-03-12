@@ -7,12 +7,15 @@ public class MainTree : HelperPlant
     public int fruitNumberToFinish;
     int fruitNumberFinished;
     public List<HelperPlantType> upgradeList;
+    public HelperPlantType flowerPlantType;
     public List<int> slotCount = new List<int>() { 2, 4, 6 };
     int currentLevel = 0;
     public GameObject treeFlowerPrefab;
     public Transform flowerPositionParent;
     List<Transform> flowerGeneratedPositions;
     List<bool> isFlowerPositionUsed;
+    int totalFlowerNumber;
+    int currentFlowerNumber;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -28,12 +31,13 @@ public class MainTree : HelperPlant
             flowerGeneratedPositions.Add(t);
             isFlowerPositionUsed.Add(false);
         }
+        totalFlowerNumber = flowerGeneratedPositions.Count;
 
-        SpawnFlower();
     }
 
     public void SpawnFlower()
     {
+        currentFlowerNumber++;
         for(int i = 0;i< flowerGeneratedPositions.Count; i++)
         {
             if (!isFlowerPositionUsed[i])
@@ -66,10 +70,23 @@ public class MainTree : HelperPlant
         type = upgradeList[currentLevel];
         PlantsManager.Instance.unlockedSlot = slotCount[currentLevel];
         PlantsManager.Instance.ReduceCostForType(type);
-        PlantsManager.Instance.UpdateRate();
 
         HUD.Instance.ShowPlantDetail(gameObject);
     }
+
+    public void PurchaseFlower()
+    {
+        if (canPurchaseFlower())
+        {
+
+            PlantsManager.Instance.ReduceCostForType(flowerPlantType);
+            SpawnFlower();
+
+            HUD.Instance.ShowPlantDetail(gameObject);
+        }
+
+    }
+
 
     public bool isAtMaxLevel()
     {
@@ -81,10 +98,24 @@ public class MainTree : HelperPlant
         return PlantsManager.Instance.IsPlantable(nextLevelType(),true);
     }
 
+    public bool canPurchaseFlower()
+    {
+        return PlantsManager.Instance.IsPlantable(flowerPlantType, true);
+    }
+
+    public bool isAtMaxFlower()
+    {
+        return currentFlowerNumber >= totalFlowerNumber;
+    }
     protected override void OnMouseDown()
     {
         if (isAtMaxLevel())
         {
+
+            if (!isAtMaxFlower())
+            {
+                PurchaseFlower();
+            }
             return;
         }
         Upgrade();
