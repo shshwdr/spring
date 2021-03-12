@@ -9,7 +9,7 @@ public class HelperPlant : HPObject
     public int slot;
     public Collider2D plantCollider;
 
-    bool isDragging = true;
+    protected bool isDragging = true;
     // Start is called before the first frame update
     protected override void Start()
     {

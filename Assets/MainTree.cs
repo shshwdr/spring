@@ -14,6 +14,7 @@ public class MainTree : HelperPlant
         PlantsManager.Instance.unlockedSlot = slotCount[currentLevel];
         type = upgradeList[currentLevel];
         base.Start();
+        isDragging = false;
     }
 
     public void Upgrade()
