@@ -12,7 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea00e5e61cc59534693c80a8a8fefd23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAlive: 1
+  maxHP: 1
+  target: {fileID: 0}
+  attackRadius: 0.2
+  attackCooldown: 1
+  walkSpeed: 1
+  atk: 1
+  isFacingRight: 1
+  hasTargetP: 0
+  targetP: {x: 0, y: 0, z: 0}
   duration: 0
+  waitMinTime: 0
+  waitMaxTime: 0
+  moveDisMin: 1
+  moveDisMax: 2
 --- !u!1001 &5582850837143278164
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85,6 +99,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bee
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896884331954061905, guid: 574a193dc24f4a0419024a8335bfc30a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 574a193dc24f4a0419024a8335bfc30a, type: 3}

@@ -19,10 +19,27 @@ public class Bee : Animal
     public float moveDisMin = 1f;
     public float moveDisMax = 2f;
 
+    public float focusTime = 1f;
+    float currentFocusTime = 0f;
+
     void Start()
     {
-        randomX = Random.Range(-3, 3);
-        randomZ = Random.Range(-3, 3);
+    }
+
+    protected override void attack()
+    {
+        if (target.GetComponent<TreeFlower>())
+        {
+            target.GetComponent<TreeFlower>().GetPollinate();
+            die();
+        }
+    }
+
+    public void setTarget(Transform t)
+    {
+        currentFocusTime = 0;
+        target = t;
+        hasTargetP = false;
     }
 
     protected override void Update()
@@ -46,36 +63,22 @@ public class Bee : Animal
             targetP = transform.position + dir*dis;
             hasTargetP = true;
         }
+        if(target)
+        {
+            currentFocusTime += Time.deltaTime;
+        }
         if (isCloseToTarget())
         {
             targetP = Vector3.positiveInfinity;
             hasTargetP = false;
             waitTime = 0;
         }
+        if(target && currentFocusTime>= focusTime)
+        {
+            target = null;
+            waitTime = 0;
+        }
         base.Update();
 
-        //if (elapsedTime < duration && move)
-        //{
-        //    //if its moving and didn't move too much
-        //    transform.Translate(new Vector3(randomX, 0, randomZ) * Time.deltaTime);
-        //    elapsedTime += Time.deltaTime;
-
-        //}
-        //else
-        //{
-        //    //do not move and start waiting for random time
-        //    move = false;
-        //    wait = Random.Range(waitMinTime, waitMaxTime);
-        //    waitTime = 0f;
-        //}
-
-        //else if (!move)
-        //{
-        //    //done waiting. Move to these random directions
-        //    move = true;
-        //    elapsedTime = 0f;
-        //    randomX = Random.Range(-3, 3);
-        //    randomZ = Random.Range(-3, 3);
-        //}
     }
 }

@@ -25,7 +25,7 @@ public class Animal : HPObject
         return (targetPosition() - transform.position).magnitude <= attackRadius;
     }
 
-    protected void attack()
+    protected virtual void attack()
     {
         target.GetComponent<HPObject>().beAttacked(atk);
     }

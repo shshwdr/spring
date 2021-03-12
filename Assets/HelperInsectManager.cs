@@ -5,6 +5,8 @@ using UnityEngine;
 public class HelperInsectManager : Singleton<HelperInsectManager>
 {
     public List<HelperInsect> helperInsects = new List<HelperInsect>();
+
+    //public List<Bee> beeList = new List<Bee>();
     // Start is called before the first frame update
     void Start()
     {

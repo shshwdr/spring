@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Bee
   - 
   - 
   - 
@@ -49,6 +49,9 @@ TagManager:
     locked: 0
   - name: plants
     uniqueID: 3694641809
+    locked: 0
+  - name: treeFlower
+    uniqueID: 4071786575
     locked: 0
   - name: animal
     uniqueID: 3640362995
