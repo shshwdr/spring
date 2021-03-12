@@ -22,8 +22,11 @@ public class Bee : Animal
     public float focusTime = 1f;
     float currentFocusTime = 0f;
 
-    void Start()
+    public float beeLife = 10;
+    float currentBeeLife;
+    protected override void Start()
     {
+        currentBeeLife = 0;
     }
 
     protected override void attack()
@@ -32,6 +35,9 @@ public class Bee : Animal
         {
             target.GetComponent<TreeFlower>().GetPollinate();
             die();
+        }
+        else
+        {
         }
     }
 
@@ -42,9 +48,25 @@ public class Bee : Animal
         hasTargetP = false;
     }
 
+    public  override void die()
+    {
+        BeeManager.Instance.currentBeeCount -= 1;
+        base.die();
+    }
+
     protected override void Update()
     {
-        //if waiting, wait
+        if(currentBeeLife > beeLife && !GetComponent<SpriteRenderer>().isVisible)
+        {
+            die();
+        }
+            //if waiting, wait
+            currentBeeLife += Time.deltaTime;
+        if (currentBeeLife > beeLife && !hasTarget())
+        {
+            targetP = BeeManager.Instance.getClosestSpawnTransform(transform.position).position;
+            hasTargetP = true;
+        }
 
         if (waitTime < wait)
         {
@@ -61,6 +83,16 @@ public class Bee : Animal
             dir = dir.normalized;
             var dis = Random.Range(moveDisMin, moveDisMax);
             targetP = transform.position + dir*dis;
+
+            Vector3 viewPos = Camera.current.WorldToViewportPoint(targetP);
+            if (viewPos.x<0 || viewPos.x >1 || viewPos.y < 0 || viewPos.y > 1)
+            {
+                var pos = -transform.position;
+                dir = pos.normalized;
+                targetP = transform.position + dir * dis;
+            }
+                
+
             hasTargetP = true;
         }
         if(target)
