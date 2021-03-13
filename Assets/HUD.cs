@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class HUD : Singleton<HUD>
 {
@@ -12,6 +13,15 @@ public class HUD : Singleton<HUD>
     public GameObject plantDetailPanel;
     public TMP_Text speedText;
     public GameObject gardenButton;
+
+    [Header("camera")]
+    public Camera treeCamera;
+    public Camera gardenCamera;
+    public float cameraMoveTime = 0.5f;
+
+    public GameObject treePanel;
+    public GameObject gardenPanel;
+
     int currentSpeedId = 1;
     List<float> speedList = new List<float>() { 0.5f, 1, 2, 4 };
     bool isPaused = false;
@@ -87,6 +97,31 @@ public class HUD : Singleton<HUD>
         gardenButton.SetActive(true);
     }
 
+    public void MoveToGargen()
+    {
+        // The shortcuts way
+        //transform.DOMove(new Vector3(2, 2, 2), 1);
+        // The generic way
+        //DOTween.To(() => transform.position, x => transform.position = x, new Vector3(2, 2, 2), 1);
+
+        DOTween.To(() => Camera.main.orthographicSize, x => Camera.main.orthographicSize = x, gardenCamera.orthographicSize, cameraMoveTime);
+        DOTween.To(() => Camera.main.transform.position, x => Camera.main.transform.position = x, gardenCamera.transform.position, cameraMoveTime);
+        treePanel.SetActive(false);
+        gardenPanel.SetActive(true);
+    }
+
+    public void MoveToTree()
+    {
+        // The shortcuts way
+﻿﻿﻿﻿﻿﻿﻿﻿//transform.DOMove(new Vector3(2, 2, 2), 1);
+﻿﻿﻿﻿﻿﻿﻿﻿// The generic way
+﻿﻿﻿﻿﻿﻿﻿﻿//DOTween.To(() => transform.position, x => transform.position = x, new Vector3(2, 2, 2), 1);
+
+        DOTween.To(() => Camera.main.orthographicSize, x => Camera.main.orthographicSize = x, treeCamera.orthographicSize, cameraMoveTime);
+        DOTween.To(() => Camera.main.transform.position, x => Camera.main.transform.position = x, treeCamera.transform.position, cameraMoveTime);
+        treePanel.SetActive(true);
+        gardenPanel.SetActive(false);
+    }
     public void HidePlantDetail()
     {
         plantDetailPanel.SetActive(false);
