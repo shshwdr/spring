@@ -50,6 +50,11 @@ public class MainTree : HelperPlant
         }
     }
 
+    public bool isFinished()
+    {
+        return fruitNumberFinished >= fruitNumberToFinish;
+    }
+
     public void createFruit()
     {
         fruitNumberFinished++;

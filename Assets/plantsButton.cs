@@ -45,7 +45,7 @@ public class PlantsButton : MonoBehaviour
 
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             PlantsManager.Instance.shadowCollider.gameObject.SetActive(true);
-            GameObject spawnInstance = Instantiate(spawnPlantPrefab, mousePosition,Quaternion.identity);
+            GameObject spawnInstance = Instantiate(spawnPlantPrefab, mousePosition,Quaternion.identity,PlantsManager.Instance.allInTreeGame);
         }
 
     }

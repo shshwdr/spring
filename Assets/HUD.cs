@@ -22,6 +22,8 @@ public class HUD : Singleton<HUD>
     public GameObject treePanel;
     public GameObject gardenPanel;
 
+    float previousSpeed;
+
     int currentSpeedId = 1;
     List<float> speedList = new List<float>() { 0.5f, 1, 2, 4 };
     bool isPaused = false;
@@ -104,10 +106,17 @@ public class HUD : Singleton<HUD>
         // The generic way
         //DOTween.To(() => transform.position, x => transform.position = x, new Vector3(2, 2, 2), 1);
 
-        DOTween.To(() => Camera.main.orthographicSize, x => Camera.main.orthographicSize = x, gardenCamera.orthographicSize, cameraMoveTime);
-        DOTween.To(() => Camera.main.transform.position, x => Camera.main.transform.position = x, gardenCamera.transform.position, cameraMoveTime);
+        if (PlantsManager.Instance.maintree.isFinished())
+        {
+            GardenManager.Instance.finishTree(PlantsManager.Instance.maintree.type);
+        }
+
+        DOTween.To(() => Camera.main.orthographicSize, x => Camera.main.orthographicSize = x, gardenCamera.orthographicSize, cameraMoveTime).SetUpdate(true);
+        DOTween.To(() => Camera.main.transform.position, x => Camera.main.transform.position = x, gardenCamera.transform.position, cameraMoveTime).SetUpdate(true);
         treePanel.SetActive(false);
         gardenPanel.SetActive(true);
+        previousSpeed = Time.timeScale;
+        Time.timeScale = 0;
     }
 
     public void MoveToTree()
@@ -117,10 +126,12 @@ public class HUD : Singleton<HUD>
 ﻿﻿﻿﻿﻿﻿﻿﻿// The generic way
 ﻿﻿﻿﻿﻿﻿﻿﻿//DOTween.To(() => transform.position, x => transform.position = x, new Vector3(2, 2, 2), 1);
 
-        DOTween.To(() => Camera.main.orthographicSize, x => Camera.main.orthographicSize = x, treeCamera.orthographicSize, cameraMoveTime);
-        DOTween.To(() => Camera.main.transform.position, x => Camera.main.transform.position = x, treeCamera.transform.position, cameraMoveTime);
+        DOTween.To(() => Camera.main.orthographicSize, x => Camera.main.orthographicSize = x, treeCamera.orthographicSize, cameraMoveTime).SetUpdate(true);
+        DOTween.To(() => Camera.main.transform.position, x => Camera.main.transform.position = x, treeCamera.transform.position, cameraMoveTime).SetUpdate(true);
         treePanel.SetActive(true);
         gardenPanel.SetActive(false);
+        Time.timeScale = previousSpeed;
+
     }
     public void HidePlantDetail()
     {

@@ -90,4 +90,9 @@ public class HelperPlant : HPObject
 
         }
     }
+
+    public void MoveToGarden()
+    {
+        Destroy(this);
+    }
 }

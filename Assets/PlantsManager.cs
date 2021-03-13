@@ -37,6 +37,8 @@ public class PlantsManager : Singleton<PlantsManager>
 
     List<HelperPlant> plantedPlant = new List<HelperPlant>();
     float currentTime = 0;
+
+    public Transform allInTreeGame;
     public List<Transform> plantsList()
     {
         List<Transform> res = new List<Transform>();
