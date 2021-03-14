@@ -44,14 +44,23 @@ public class HUD : Singleton<HUD>
             hudByProperty[pair.Key] = oneStatHud;
         }
         //init plant buttons
-        foreach (var go in plantManager.helperPlantList)
+        UpdatePlantButtons();
+    }
+
+    public void UpdatePlantButtons()
+    {
+        foreach (Transform go in plantsContent.transform)
         {
-            if (!plantManager.isPlantUnlocked.ContainsKey(go) || plantManager.isPlantUnlocked[go])
+            Destroy(go.gameObject);
+        }
+            foreach (var go in plantManager.helperPlantList)
+        {
+            if (!plantManager.isPlantUnlocked.ContainsKey(go.GetComponent<HelperPlant>().type) || plantManager.isPlantUnlocked[go.GetComponent<HelperPlant>().type])
             {
-                GameObject buttonInstance = Instantiate(plantButtonPrefab,plantsContent.transform);
+                GameObject buttonInstance = Instantiate(plantButtonPrefab, plantsContent.transform);
                 PlantsButton plantButtonInstance = buttonInstance.GetComponent<PlantsButton>();
-                plantButtonInstance.init(go,this);
-                
+                plantButtonInstance.init(go, this);
+
             }
         }
     }

@@ -33,7 +33,7 @@ public class PlantsManager : Singleton<PlantsManager>
     public int unlockedSlot = 2;
 
 
-    public Dictionary<GameObject, bool> isPlantUnlocked;
+    public Dictionary<HelperPlantType, bool> isPlantUnlocked;
     public List<GameObject> helperPlantList;
 
     List<HelperPlant> plantedPlant = new List<HelperPlant>();
@@ -59,7 +59,6 @@ public class PlantsManager : Singleton<PlantsManager>
     }
     void initValues()
     {
-        isPlantUnlocked = new Dictionary<GameObject, bool>();
         currentResourceRate = new Dictionary<PlantProperty, int>() {
         { PlantProperty.p, 0 },
         { PlantProperty.s,0 },
@@ -103,6 +102,10 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.pest, 0 },
 
     };
+
+
+        isPlantUnlocked = new Dictionary<HelperPlantType, bool>() {
+        { HelperPlantType.yellow,false }, };
         plantName = new Dictionary<HelperPlantType, string>() {
         { HelperPlantType.red, "Red Flower" },
         { HelperPlantType.yellow, "Yellow Flower" },
@@ -336,6 +339,18 @@ public class PlantsManager : Singleton<PlantsManager>
             currentResource[key] = baseResource[key];
         }
 
+    }
+
+    public void AddResource(Dictionary<PlantProperty, int> resource)
+    {
+        foreach (var pair in resource)
+            currentResource[pair.Key] += pair.Value;
+        
+    }
+    public void UnlockPlant(HelperPlantType type)
+    {
+        isPlantUnlocked[type] = true;
+        HUD.Instance.UpdatePlantButtons();
     }
 
     public void UpdateRate()
