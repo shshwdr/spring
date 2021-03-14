@@ -13,6 +13,8 @@ public class HUD : Singleton<HUD>
     public GameObject plantDetailPanel;
     public TMP_Text speedText;
     public GameObject gardenButton;
+    [Header("garden")]
+    public GameObject levelInfoPanel;
 
     [Header("camera")]
     public Camera treeCamera;
@@ -117,6 +119,19 @@ public class HUD : Singleton<HUD>
         gardenPanel.SetActive(true);
         previousSpeed = Time.timeScale;
         Time.timeScale = 0;
+    }
+
+    public void showLevelInfo(HelperPlantType type)
+    {
+        levelInfoPanel.SetActive(true);
+
+        levelInfoPanel.GetComponent<LevelInfo>().UpdateInfo(type);
+    }
+
+    public void hideLevelInfo()
+    {
+        levelInfoPanel.SetActive(false);
+
     }
 
     public void MoveToTree()

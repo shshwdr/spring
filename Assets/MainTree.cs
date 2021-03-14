@@ -16,6 +16,8 @@ public class MainTree : HelperPlant
     List<bool> isFlowerPositionUsed;
     int totalFlowerNumber;
     int currentFlowerNumber;
+
+    public HelperPlantType finishType { get { return upgradeList[upgradeList.Count-1]; } }
     // Start is called before the first frame update
     protected override void Start()
     {

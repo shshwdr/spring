@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4612926042656937930}
   - component: {fileID: 4612926042656937931}
   - component: {fileID: 4612926042656937925}
+  - component: {fileID: 8802351336485686776}
   m_Layer: 0
   m_Name: gardenSlot
   m_TagString: Untagged
@@ -98,6 +99,35 @@ MonoBehaviour:
   finishedTreeType: 6
   tree: {fileID: 0}
   allInTreeNode: {fileID: 4612926043295774538}
+--- !u!60 &8802351336485686776
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612926042656937928}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 8.6, y: 6}
+    newSize: {x: 8.6, y: 6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -4.2999997, y: 3}
+      - {x: -4.2999997, y: -3}
+      - {x: 4.2999997, y: -3}
+      - {x: 4.2999997, y: 3}
 --- !u!1 &4612926043295774539
 GameObject:
   m_ObjectHideFlags: 0

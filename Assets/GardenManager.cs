@@ -36,18 +36,20 @@ public class GardenManager : Singleton<GardenManager>
                     t.SetParent(slot.GetComponent<GardenSlot>().allInTreeNode);
                     t.localPosition = localP;
                     t.GetComponent<HelperPlant>().MoveToGarden();
-                    //allPlants.Add(t);
                 }
-                //foreach (Transform t in allPlants)
-                //{
-
-                //    var localP = t.localPosition;
-                //    t.SetParent(slot.GetComponent<GardenSlot>().allInTreeNode);
-                //    t.localPosition = localP;
-                //    t.GetComponent<HelperPlant>().MoveToGarden();
-                //}
             }
         }
+    }
+
+    public void StartTree(GardenSlot slot)
+    {
+        //move all tree from garden to tree mode
+        foreach (Transform child in PlantsManager.Instance.allInTreeGame)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        Instantiate(slot.tree, PlantsManager.Instance.allInTreeGame);
+        HUD.Instance.MoveToTree();
     }
 
     // Update is called once per frame

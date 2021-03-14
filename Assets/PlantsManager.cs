@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 public enum PlantProperty { s, p, n, water, bee, pest };
-public enum HelperPlantType { red, yellow, blue, purple, appleTree1, appleTree2, appleTree3 };
+public enum HelperPlantType { red, yellow, blue, purple, appleTree1, appleTree2, appleTree3, cherryTree1, cherryTree2, cherryTree3 };
 public class PlantsManager : Singleton<PlantsManager>
 {
     public bool ignoreResourcePlant = true;
@@ -13,6 +13,7 @@ public class PlantsManager : Singleton<PlantsManager>
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantProd;
 
     public Dictionary<PlantProperty, int> currentResource;
+    public Dictionary<PlantProperty, int> baseResource;
 
     public Dictionary<PlantProperty, string> resourceName;
 
@@ -75,16 +76,6 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.bee, 0 },
         { PlantProperty.pest, 0 },
     };
-        plantName = new Dictionary<HelperPlantType, string>() {
-        { HelperPlantType.red, "Red Flower" },
-        { HelperPlantType.yellow, "Yellow Flower" },
-        { HelperPlantType.blue, "Pond" },
-        { HelperPlantType.purple, "Purple Flower" },
-        { HelperPlantType.appleTree1, "Apple Tree - child" },
-        { HelperPlantType.appleTree2, "Apple Tree - middle" },
-        { HelperPlantType.appleTree3, "Apple Tree - flower" },
-
-    };
         resourceName = new Dictionary<PlantProperty, string>() {
         { PlantProperty.p, "calcium" },
         { PlantProperty.s, "Potassium"  },
@@ -94,6 +85,15 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.pest, "Pest Attrack" },
 
     };
+        baseResource = new Dictionary<PlantProperty, int>() {
+        { PlantProperty.p, 0 },
+        { PlantProperty.s, 0 },
+        { PlantProperty.n, 0 },
+        { PlantProperty.water, 200 },
+        { PlantProperty.bee, 0 },
+        { PlantProperty.pest, 0 },
+
+    };
         currentResource = new Dictionary<PlantProperty, int>() {
         { PlantProperty.p, 0 },
         { PlantProperty.s, 0 },
@@ -101,6 +101,19 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.water, 200 },
         { PlantProperty.bee, 0 },
         { PlantProperty.pest, 0 },
+
+    };
+        plantName = new Dictionary<HelperPlantType, string>() {
+        { HelperPlantType.red, "Red Flower" },
+        { HelperPlantType.yellow, "Yellow Flower" },
+        { HelperPlantType.blue, "Pond" },
+        { HelperPlantType.purple, "Purple Flower" },
+        { HelperPlantType.appleTree1, "Apple Tree - child" },
+        { HelperPlantType.appleTree2, "Apple Tree - middle" },
+        { HelperPlantType.appleTree3, "Apple Tree - flower" },
+        { HelperPlantType.cherryTree1, "Cherry Tree - child" },
+        { HelperPlantType.cherryTree2, "Cherry Tree - middle" },
+        { HelperPlantType.cherryTree3, "Cherry Tree - flower" },
 
     };
         helperPlantProd = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
@@ -114,6 +127,9 @@ public class PlantsManager : Singleton<PlantsManager>
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  } },
         {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { } },
         {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { } },
+        {HelperPlantType.cherryTree1,new Dictionary<PlantProperty, int>() {  } },
+        {HelperPlantType.cherryTree2,new Dictionary<PlantProperty, int>() { } },
+        {HelperPlantType.cherryTree3,new Dictionary<PlantProperty, int>() { } },
     }; 
         helperPlantKeepCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
@@ -124,6 +140,9 @@ public class PlantsManager : Singleton<PlantsManager>
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
         {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 2 }, { PlantProperty.n, 2 } } },
         {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 3 } , { PlantProperty.n, 3 } , { PlantProperty.s, 2 } } },
+        {HelperPlantType.cherryTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+        {HelperPlantType.cherryTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 2 }, { PlantProperty.n, 2 } } },
+        {HelperPlantType.cherryTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 3 } , { PlantProperty.n, 3 } , { PlantProperty.s, 2 } } },
     }; helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
         {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
@@ -133,6 +152,9 @@ public class PlantsManager : Singleton<PlantsManager>
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
         {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.n,10}, { PlantProperty.p, 10 } } },
         {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.s, 20 }, { PlantProperty.p, 50 } } },
+        {HelperPlantType.cherryTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
+        {HelperPlantType.cherryTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.n,10}, { PlantProperty.p, 10 } } },
+        {HelperPlantType.cherryTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.s, 20 }, { PlantProperty.p, 50 } } },
     };
     }
     // Start is called before the first frame update
@@ -301,6 +323,19 @@ public class PlantsManager : Singleton<PlantsManager>
             }
             PlantDetail.Instance.UpdateValue();
         }
+    }
+
+    public void ClearResource()
+    {
+        foreach (var key in currentResourceRate.Keys.ToArray<PlantProperty>())
+        {
+            currentResourceRate[key] = baseResourceRate[key];
+        }
+        foreach (var key in baseResource.Keys.ToArray<PlantProperty>())
+        {
+            currentResource[key] = baseResource[key];
+        }
+
     }
 
     public void UpdateRate()
