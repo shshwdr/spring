@@ -13,6 +13,7 @@ public class HUD : Singleton<HUD>
     public GameObject plantDetailPanel;
     public TMP_Text speedText;
     public GameObject gardenButton;
+    public List<Sprite> propertyImage;
     [Header("garden")]
     public GameObject levelInfoPanel;
 
@@ -168,7 +169,7 @@ public class HUD : Singleton<HUD>
         {
 
             OneStatHud oneStatHud = hudByProperty[pair.Key];
-            oneStatHud.init(plantManager.resourceName[pair.Key], pair.Value, plantManager.currentResourceRate[pair.Key]);
+            oneStatHud.init(plantManager.resourceName[pair.Key], propertyImage[(int)pair.Key], pair.Value, plantManager.currentResourceRate[pair.Key]);
         }
     }
 }

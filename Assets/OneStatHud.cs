@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class OneStatHud : MonoBehaviour
 {
     public TMP_Text name;
+    public Image image;
+
     public TMP_Text value;
     public TMP_Text rate;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +23,10 @@ public class OneStatHud : MonoBehaviour
 
     string AddResourcePrefix = "<color=#037610>";
     string InsufficientResourceSurfix = "</color>";
-    public void init(string n, float v, float r)
+    public void init(string n, Sprite t, float v, float r)
     {
         name.text = n;
+        image.sprite = t;
         value.text = v.ToString();
         rate.text = "";
         if (r > 0)
