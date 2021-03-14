@@ -75,6 +75,7 @@ public class MainTree : HelperPlant
         }
         currentLevel += 1;
         type = upgradeList[currentLevel];
+        BirdManager.Instance.startTreePlant(type);
         PlantsManager.Instance.unlockedSlot = slotCount[currentLevel];
         PlantsManager.Instance.ReduceCostForType(type);
 
