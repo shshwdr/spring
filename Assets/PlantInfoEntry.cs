@@ -7,6 +7,8 @@ public class PlantInfoEntry : MonoBehaviour
 {
     public TMP_Text title;
     public GameObject oneState;
+    public Transform statePanel;
+    public List<OneStatHud> stats;
     // Start is called before the first frame update
     void Start()
     {

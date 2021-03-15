@@ -90,7 +90,7 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.p, 0 },
         { PlantProperty.s, 0 },
         { PlantProperty.n, 0 },
-        { PlantProperty.water, 200 },
+        { PlantProperty.water, 300 },
         { PlantProperty.bee, 0 },
         { PlantProperty.pest, 0 },
 
@@ -125,22 +125,23 @@ public class PlantsManager : Singleton<PlantsManager>
     {
         {HelperPlantType.red,new Dictionary<PlantProperty, int>() {
             { PlantProperty.p, 8 },
-           // { PlantProperty.bee, 2 },
+            { PlantProperty.water, 5 },
             { PlantProperty.pest, 2 },
         }},
         {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() {
             { PlantProperty.s, 5 },
-           // { PlantProperty.bee, 2 },
+            { PlantProperty.water, 5 },
             { PlantProperty.pest, 2 },
         } },
         {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { 
             { PlantProperty.n, 5 },
-           // { PlantProperty.bee, 2 },
+            { PlantProperty.water, 5 },
             { PlantProperty.pest, 2 }, } },
         {HelperPlantType.purple,new Dictionary<PlantProperty, int>() {
             { PlantProperty.s, 5 }, 
             {PlantProperty.n, 2 } ,
             {PlantProperty.p, 2 },
+            { PlantProperty.water, 5 },
             { PlantProperty.bee, 3 },
             { PlantProperty.pest, 5 }, } },
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  } },

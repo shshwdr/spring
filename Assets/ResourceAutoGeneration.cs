@@ -12,7 +12,7 @@ public class ResourceAutoGeneration : MonoBehaviour
 
     Dictionary<PlantProperty, int> autoResrouce = new Dictionary<PlantProperty, int>
     {
-        {PlantProperty.water,10 },
+        {PlantProperty.water,20 },
 
     };
     void Harvest()

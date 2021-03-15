@@ -31,24 +31,29 @@ public class CllickToCollect : MonoBehaviour
         }
         GetComponent<SpriteRenderer>().sprite = HUD.Instance.propertyImage[(int)(maxP)];
     }
-    private void OnMouseDown()
-    {
-        if (!isClicked)
-        {
-            isClicked = true;
-        }
-        if (dropboxType == DropboxType.unlock)
-        {
-            PlantsManager.Instance.UnlockPlant(unlockPlant);
-            BirdManager.Instance.needToUnlock[unlockPlant] = true;
 
-            //CollectionManager.Instance.AddCoins(transform.position, resource);
-        }
-        else
+    private void OnMouseOver()
+    {
+        
+        if (Input.GetMouseButton(0))
         {
-            CollectionManager.Instance.AddCoins(transform.position, resource);
+            if (!isClicked)
+            {
+                isClicked = true;
+            }
+            if (dropboxType == DropboxType.unlock)
+            {
+                PlantsManager.Instance.UnlockPlant(unlockPlant);
+                BirdManager.Instance.needToUnlock[unlockPlant] = false;
+
+                //CollectionManager.Instance.AddCoins(transform.position, resource);
+            }
+            else
+            {
+                CollectionManager.Instance.AddCoins(transform.position, resource);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 
     void Update()

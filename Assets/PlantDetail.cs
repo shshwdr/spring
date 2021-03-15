@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class PlantDetail : Singleton<PlantDetail>
 {
-    public TMP_Text stats;
+    public TMP_Text plantName;
+    public List<GameObject> oneDetailEntrys;
+    public GameObject oneState;
     PlantsManager plantManager;
-    public TMP_Text actionText;
+
+    public GameObject actionUI;
     GameObject plant;
     // Start is called before the first frame update
     void Start()
@@ -23,33 +26,28 @@ public class PlantDetail : Singleton<PlantDetail>
         {
             return;
         }
-        stats.text = "";
+        oneDetailEntrys[0].SetActive(false);
+
+        oneDetailEntrys[1].SetActive(false);
         var plantButton = plant.GetComponent<PlantsButton>();
         if (plantButton)
         {
             //this is a plant button
             var helperPlant = plantButton.helperPlant;
-            stats.text += getName(helperPlant);
-            stats.text += getOnetimeCost(helperPlant);
+            plantName.text = getName(helperPlant);
+            getOnetimeCost(helperPlant);
+            //stats.text += getOnetimeCost(helperPlant);
             //stats.text += getDurationCost(helperPlant, true);
-            stats.text += getProduction(helperPlant);
-            if (!plantManager.hasSlot())
+            //stats.text += getProduction(helperPlant);
+            if (plantManager.IsPlantable(helperPlant.type))
             {
 
-                actionText.text = "Out of slots";
+                actionUI.GetComponent<TMP_Text>().text = Dialogues.PlantFlowerInst;
             }
             else
             {
-                if (plantManager.IsPlantable(helperPlant.type))
-                {
 
-                    actionText.text = "Click to plant";
-                }
-                else
-                {
-
-                    actionText.text = "Insufficient Resource";
-                }
+                actionUI.GetComponent<TMP_Text>().text = Dialogues.InsufficientResource;
             }
         }
         else
@@ -57,20 +55,22 @@ public class PlantDetail : Singleton<PlantDetail>
             var maintree = plant.GetComponent<MainTree>();
             if (maintree)
             {
-                stats.text += getName(maintree);
-               //stats.text += getDurationCost(maintree);
-                stats.text += getProduction(maintree);
-                stats.text += getUpgrade(maintree);
+                plantName.text = getName(maintree);
+                //stats.text += getDurationCost(maintree);
+                getProduction(maintree);
+                getUpgrade(maintree);
+                //stats.text += getProduction(maintree);
+                //stats.text += getUpgrade(maintree);
                 if (maintree.isAtMaxLevel())
                 {
                     if (maintree.isAtMaxFlower())
                     {
 
-                        actionText.text = "\nIs At Max Level. Attract bees and wait for fruit.";
+                        actionUI.GetComponent<TMP_Text>().text = Dialogues.AttactBeeInst;
                     }
                     else
                     {
-                        actionText.text = "\nClick to spawn flowers";
+                        actionUI.GetComponent<TMP_Text>().text = Dialogues.SpawnTreeFlowerInst;
                     }
                 }
                 else
@@ -78,12 +78,12 @@ public class PlantDetail : Singleton<PlantDetail>
                     if (maintree.upgradable())
                     {
 
-                        actionText.text = "Click to upgrade";
+                        actionUI.GetComponent<TMP_Text>().text = Dialogues.UpgradeTreeInst;
                     }
                     else
                     {
 
-                        actionText.text = "Can't Upgrade";
+                        actionUI.GetComponent<TMP_Text>().text = Dialogues.InsufficientResource;
                     }
                 }
             }
@@ -92,10 +92,10 @@ public class PlantDetail : Singleton<PlantDetail>
                 //this is planted plant
                 //stats.text += getOnetimeCost(helperPlant);
                 var helperPlant = plant.GetComponent<HelperPlant>();
-                stats.text += getName(helperPlant);
-                //stats.text += getDurationCost(helperPlant);
-                stats.text += getProduction(helperPlant);
-                actionText.text = "Click to remove";
+                plantName.text = getName(helperPlant);
+                getProduction(helperPlant);
+                //stats.text += getProduction(helperPlant);
+                actionUI.GetComponent<TMP_Text>().text = Dialogues.RemovePlantResource;
 
             }
         }
@@ -106,50 +106,66 @@ public class PlantDetail : Singleton<PlantDetail>
         UpdateValue();
     }
 
-    string getProduction(HelperPlant plant)
+    void updateEntry(string title, Dictionary<PlantProperty, int> dict,bool checkValue = false)
     {
-        var prodDictionary = plantManager.helperPlantProd[plant.type];
-        if (prodDictionary.Count == 0)
+        if (dict.Count == 0)
         {
-            return "";
+            return;
         }
-        string res = "\nProduce:\n"; 
-        foreach (var pair in prodDictionary)
+        var go = oneDetailEntrys[0].active ? oneDetailEntrys[1] : oneDetailEntrys[0];
+        go.SetActive(true);
+        var entry = go.GetComponent<PlantInfoEntry>();
+        entry.title.text = title;
+        int i = 0;
+        foreach (var pair in dict)
         {
-            res += plantManager.resourceName[pair.Key]+"\t"+ pair.Value.ToString();
-            res += "\n";
+            entry.stats[i].gameObject.SetActive(true);
+            //var goo = Instantiate(oneState, entry.statePanel);
+            var goo = entry.stats[i];
+            goo.image.sprite = HUD.Instance.propertyImage[(int)pair.Key];
+            goo.value.text = pair.Value.ToString();
+            if (checkValue)
+            {
+
+                bool isResourceAvailable = plantManager.IsResourceAvailable(pair.Key, pair.Value);
+                if (!isResourceAvailable)
+                {
+                    goo.value.color = Color.red;
+                }
+            }
+            i++;
         }
-        return res;
+        for (; i < 6; i++)
+        {
+            entry.stats[i].gameObject.SetActive(false);
+        }
     }
 
-    string InsufficientResourcePrefix = "<color=#FF0000>";
+    void getProduction(HelperPlant plant)
+    {
 
-    string InsufficientResourceRatePrefix = "<color=#FF6200>";
-    string InsufficientResourceSurfix = "</color>";
-    string getUpgrade(MainTree plant)
+        var prodDictionary = plantManager.helperPlantProd[plant.type];
+        updateEntry("Produce", prodDictionary);
+    }
+    void getUpgrade(MainTree plant)
     {
         if (plant.isAtMaxLevel())
         {
-            if (plant.isAtMaxFlower())
-            {
 
-                return "\n";
-            }
-
-            return "\n";
+            return;
 
         }
-
-        string res = "\nUpgrade Cost:\n";
-        var prodDictionary = plantManager.helperPlantCost[plant.nextLevelType()];
-        foreach (var pair in prodDictionary)
-        {
-            bool isResourceAvailable = plantManager.IsResourceAvailable(pair.Key, pair.Value);
-            res += isResourceAvailable ? "" : InsufficientResourcePrefix;
-            res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
-            res += isResourceAvailable ? "" : InsufficientResourceSurfix;
-            res += "\n";
-        }
+        updateEntry("Upgrade Cost", plantManager.helperPlantCost[plant.nextLevelType()],true);
+        //string res = "\nUpgrade Cost:\n";
+        //var prodDictionary = plantManager.helperPlantCost[plant.nextLevelType()];
+        //foreach (var pair in prodDictionary)
+        //{
+        //    bool isResourceAvailable = plantManager.IsResourceAvailable(pair.Key, pair.Value);
+        //    res += isResourceAvailable ? "" : InsufficientResourcePrefix;
+        //    res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
+        //    res += isResourceAvailable ? "" : InsufficientResourceSurfix;
+        //    res += "\n";
+        //}
         ////res += "\nNext Level Keep Cost:\n";
         ////var keepCostDictionary = plantManager.helperPlantKeepCost[plant.nextLevelType()];
         //foreach (var pair in keepCostDictionary)
@@ -161,7 +177,6 @@ public class PlantDetail : Singleton<PlantDetail>
         //    res += isResourceAvailable ? "" : InsufficientResourceSurfix;
         //    res += "\n";
         //}
-        return res;
     }
     string getName(HelperPlant plant)
     {
@@ -172,19 +187,24 @@ public class PlantDetail : Singleton<PlantDetail>
         }
         return plantManager.plantName[plant.type]+"\n";
     }
-    string getOnetimeCost(HelperPlant plant)
+    void getOnetimeCost(HelperPlant plant)
     {
-        string res = "\nOne Time Cost:\n";
-        var prodDictionary = plantManager.helperPlantCost[plant.type];
-        foreach (var pair in prodDictionary)
-        {
-            bool isResourceAvailable = plantManager.IsResourceAvailable(pair.Key, pair.Value);
-            res += isResourceAvailable ? "" : InsufficientResourcePrefix;
-            res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
-            res += isResourceAvailable ? "" : InsufficientResourceSurfix;
-            res += "\n";
-        }
-        return res;
+
+        updateEntry("Cost", plantManager.helperPlantCost[plant.type], true);
+
+        //Instantiate(oneDetailEntryPrefab, transform);
+
+        //string res = "\nOne Time Cost:\n";
+        //var prodDictionary = plantManager.helperPlantCost[plant.type];
+        //foreach (var pair in prodDictionary)
+        //{
+        //    bool isResourceAvailable = plantManager.IsResourceAvailable(pair.Key, pair.Value);
+        //    res += isResourceAvailable ? "" : InsufficientResourcePrefix;
+        //    res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
+        //    res += isResourceAvailable ? "" : InsufficientResourceSurfix;
+        //    res += "\n";
+        //}
+        //return res;
     }
 
     //string getDurationCost(HelperPlant plant,bool showInsufficient = false)
