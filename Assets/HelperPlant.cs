@@ -76,6 +76,7 @@ public class HelperPlant : HPObject
         {
             summons.clean();
         }
+        CollectionManager.Instance.RemoveCoins(transform.position, PlantsManager.Instance.helperPlantProd[type],true);
         base.die();
 
     }

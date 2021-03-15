@@ -95,11 +95,15 @@ public class CollectionManager : Singleton<CollectionManager>
 		}
 	}
 
-	public void RemoveCoins(Vector3 removedCoinPosition, Dictionary<PlantProperty, int> resource)
+	public void RemoveCoins(Vector3 removedCoinPosition, Dictionary<PlantProperty, int> resource, bool onlyForNonIncreasingResrouce = false)
     {
 		foreach (var pair in resource)
 		{
-			var amount = pair.Value;
+			if(onlyForNonIncreasingResrouce && PlantsManager.Instance.isIncreasingResource(pair.Key))
+            {
+				continue;
+            }
+				var amount = pair.Value;
 			//get target position
 			var target = HUD.Instance.hudByProperty[pair.Key].GetComponent<OneStatHud>().image.transform;
 			Vector3 screenPoint = target.position + new Vector3(0, 0, 5);  //the "+ new Vector3(0,0,5)" ensures that the object is so close to the camera you dont see it

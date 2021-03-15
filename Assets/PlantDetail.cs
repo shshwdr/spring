@@ -124,6 +124,7 @@ public class PlantDetail : Singleton<PlantDetail>
             var goo = entry.stats[i];
             goo.image.sprite = HUD.Instance.propertyImage[(int)pair.Key];
             goo.value.text = pair.Value.ToString();
+            goo.value.color = Color.black;
             if (checkValue)
             {
 
@@ -132,6 +133,10 @@ public class PlantDetail : Singleton<PlantDetail>
                 {
                     goo.value.color = Color.red;
                 }
+            }
+            else
+            {
+
             }
             i++;
         }
