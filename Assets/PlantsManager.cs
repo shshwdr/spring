@@ -9,7 +9,7 @@ public class PlantsManager : Singleton<PlantsManager>
     public bool ignoreResourcePlant = true;
     public MainTree maintree;
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantCost;
-    public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantKeepCost;
+    //public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantKeepCost;
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantProd;
 
     public Dictionary<PlantProperty, int> currentResource;
@@ -22,6 +22,8 @@ public class PlantsManager : Singleton<PlantsManager>
     public Dictionary<PlantProperty, int> currentResourceRate;
 
     public Dictionary<PlantProperty, int> baseResourceRate;
+
+    public GameObject ClickToCollect;
 
     public Collider2D groundCollider2;
     public Collider2D groundCollider1;
@@ -134,19 +136,20 @@ public class PlantsManager : Singleton<PlantsManager>
         {HelperPlantType.cherryTree2,new Dictionary<PlantProperty, int>() { } },
         {HelperPlantType.cherryTree3,new Dictionary<PlantProperty, int>() { } },
     }; 
-        helperPlantKeepCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
-    {
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() {  { PlantProperty.n, 1 } } },
-        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 2 }, { PlantProperty.n, 2 } } },
-        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 3 } , { PlantProperty.n, 3 } , { PlantProperty.s, 2 } } },
-        {HelperPlantType.cherryTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-        {HelperPlantType.cherryTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 2 }, { PlantProperty.n, 2 } } },
-        {HelperPlantType.cherryTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 3 } , { PlantProperty.n, 3 } , { PlantProperty.s, 2 } } },
-    }; helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
+    //    helperPlantKeepCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
+    //{
+    //    {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+    //    {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+    //    {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+    //    {HelperPlantType.purple,new Dictionary<PlantProperty, int>() {  { PlantProperty.n, 1 } } },
+    //    {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+    //    {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 2 }, { PlantProperty.n, 2 } } },
+    //    {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 3 } , { PlantProperty.n, 3 } , { PlantProperty.s, 2 } } },
+    //    {HelperPlantType.cherryTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
+    //    {HelperPlantType.cherryTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 2 }, { PlantProperty.n, 2 } } },
+    //    {HelperPlantType.cherryTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 3 } , { PlantProperty.n, 3 } , { PlantProperty.s, 2 } } },
+    //}; 
+        helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
         {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
         {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },

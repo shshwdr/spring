@@ -112,9 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017b38950711ed34b83a6f3c1e0b955a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   dropboxType: 1
   unlockPlant: 0
+  speed: 6
+  amplitude: 0.1
 --- !u!95 &7785298418078397546
 Animator:
   serializedVersion: 3

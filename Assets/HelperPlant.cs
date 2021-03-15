@@ -8,9 +8,12 @@ public class HelperPlant : HPObject
     [HideInInspector]
     public int slot;
     public Collider2D plantCollider;
-    public GameObject collictToCollect;
 
     protected bool isDragging = true;
+
+    public Transform resourcePositionsParent;
+    int currentResourcePositionId;
+    int resourcePositionCount;
 
     public float harvestTime = 10;
     float currentHarvestTimer;
@@ -18,6 +21,11 @@ public class HelperPlant : HPObject
     protected override void Start()
     {
         base.Start();
+        if (resourcePositionsParent)
+        {
+            resourcePositionCount = resourcePositionsParent.childCount;
+
+        }
     }
 
     private void OnMouseEnter()
@@ -95,7 +103,7 @@ public class HelperPlant : HPObject
         }
         else
         {
-            if (currentHarvestTimer > harvestTime)
+            if (resourcePositionsParent && currentHarvestTimer > harvestTime)
             {
                 currentHarvestTimer = 0;
                 Harvest();
@@ -110,12 +118,19 @@ public class HelperPlant : HPObject
 
     void Harvest()
     {
-        var go = Instantiate(collictToCollect, transform.position, Quaternion.identity);
+        Transform spawnTransform = resourcePositionsParent.GetChild(currentResourcePositionId);
+        currentResourcePositionId++;
+        if (currentResourcePositionId >= resourcePositionCount)
+        {
+            currentResourcePositionId = 0;
+        }
+        var go = Instantiate(PlantsManager.Instance.ClickToCollect, spawnTransform.position, Quaternion.identity);
         var box = go.GetComponent<CllickToCollect>();
         box.dropboxType = DropboxType.resource;
 
 
         box.resource = PlantsManager.Instance.helperPlantProd[type];
+        box.UpdateImage();
     }
 
     public void MoveToGarden()

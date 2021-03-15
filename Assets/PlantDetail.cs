@@ -31,7 +31,7 @@ public class PlantDetail : Singleton<PlantDetail>
             var helperPlant = plantButton.helperPlant;
             stats.text += getName(helperPlant);
             stats.text += getOnetimeCost(helperPlant);
-            stats.text += getDurationCost(helperPlant, true);
+            //stats.text += getDurationCost(helperPlant, true);
             stats.text += getProduction(helperPlant);
             if (!plantManager.hasSlot())
             {
@@ -58,7 +58,7 @@ public class PlantDetail : Singleton<PlantDetail>
             if (maintree)
             {
                 stats.text += getName(maintree);
-                stats.text += getDurationCost(maintree);
+               //stats.text += getDurationCost(maintree);
                 stats.text += getProduction(maintree);
                 stats.text += getUpgrade(maintree);
                 if (maintree.isAtMaxLevel())
@@ -93,7 +93,7 @@ public class PlantDetail : Singleton<PlantDetail>
                 //stats.text += getOnetimeCost(helperPlant);
                 var helperPlant = plant.GetComponent<HelperPlant>();
                 stats.text += getName(helperPlant);
-                stats.text += getDurationCost(helperPlant);
+                //stats.text += getDurationCost(helperPlant);
                 stats.text += getProduction(helperPlant);
                 actionText.text = "Click to remove";
 
@@ -150,17 +150,17 @@ public class PlantDetail : Singleton<PlantDetail>
             res += isResourceAvailable ? "" : InsufficientResourceSurfix;
             res += "\n";
         }
-        res += "\nNext Level Keep Cost:\n";
-        var keepCostDictionary = plantManager.helperPlantKeepCost[plant.nextLevelType()];
-        foreach (var pair in keepCostDictionary)
-        {
+        ////res += "\nNext Level Keep Cost:\n";
+        ////var keepCostDictionary = plantManager.helperPlantKeepCost[plant.nextLevelType()];
+        //foreach (var pair in keepCostDictionary)
+        //{
 
-            bool isResourceAvailable = plantManager.IsResourceRateAvailable(pair.Key, pair.Value);
-            res += isResourceAvailable ? "" : InsufficientResourceRatePrefix;
-            res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
-            res += isResourceAvailable ? "" : InsufficientResourceSurfix;
-            res += "\n";
-        }
+        //    bool isResourceAvailable = plantManager.IsResourceRateAvailable(pair.Key, pair.Value);
+        //    res += isResourceAvailable ? "" : InsufficientResourceRatePrefix;
+        //    res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
+        //    res += isResourceAvailable ? "" : InsufficientResourceSurfix;
+        //    res += "\n";
+        //}
         return res;
     }
     string getName(HelperPlant plant)
@@ -187,20 +187,20 @@ public class PlantDetail : Singleton<PlantDetail>
         return res;
     }
 
-    string getDurationCost(HelperPlant plant,bool showInsufficient = false)
-    {
-        string res = "\nDuration Cost\n";
-        var prodDictionary = plantManager.helperPlantKeepCost[plant.type];
-        foreach (var pair in prodDictionary)
-        {
-            bool isResourceAvailable = plantManager.IsResourceRateAvailable(pair.Key, pair.Value);
-            res += (!isResourceAvailable&&showInsufficient) ?  InsufficientResourceRatePrefix:"";
-            res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
-            res += (!isResourceAvailable && showInsufficient) ? InsufficientResourceSurfix:"";
-            res += "\n";
-        }
-        return res;
-    }
+    //string getDurationCost(HelperPlant plant,bool showInsufficient = false)
+    //{
+    //    string res = "\nDuration Cost\n";
+    //    //var prodDictionary = plantManager.helperPlantKeepCost[plant.type];
+    //    foreach (var pair in prodDictionary)
+    //    {
+    //        bool isResourceAvailable = plantManager.IsResourceRateAvailable(pair.Key, pair.Value);
+    //        res += (!isResourceAvailable&&showInsufficient) ?  InsufficientResourceRatePrefix:"";
+    //        res += plantManager.resourceName[pair.Key] + "\t" + pair.Value.ToString();
+    //        res += (!isResourceAvailable && showInsufficient) ? InsufficientResourceSurfix:"";
+    //        res += "\n";
+    //    }
+    //    return res;
+    //}
 
     // Update is called once per frame
     void Update()
