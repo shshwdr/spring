@@ -38,13 +38,20 @@ public class CollectionManager : Singleton<CollectionManager>
 		{
 			_c = value;
 			//update UI text whenever "Coins" variable is changed
-			coinUIText.text = Coins.ToString();
+			//coinUIText.text = Coins.ToString();
 		}
 	}
 
 	void Awake()
 	{
-		targetPosition = target.position;
+
+		Vector3 screenPoint = target.position + new Vector3(0, 0, 5);  //the "+ new Vector3(0,0,5)" ensures that the object is so close to the camera you dont see it
+
+		//find out where this is in world space
+		Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPoint);
+
+
+		targetPosition = worldPos;
 
 		//prepare pool
 		PrepareCoins();
@@ -62,7 +69,7 @@ public class CollectionManager : Singleton<CollectionManager>
 		}
 	}
 
-	void Animate(Vector3 collectedCoinPosition, int amount)
+	public void AddCoins(Vector3 collectedCoinPosition, PlantProperty property, int amount = 5)
 	{
 		for (int i = 0; i < amount; i++)
 		{
@@ -71,10 +78,23 @@ public class CollectionManager : Singleton<CollectionManager>
 			{
 				//extract a coin from the pool
 				GameObject coin = coinsQueue.Dequeue();
+				coin.GetComponent<SpriteRenderer>().sprite = HUD.Instance.propertyImage[(int)property];
 				coin.SetActive(true);
 
 				//move coin to the collected coin pos
 				coin.transform.position = collectedCoinPosition + new Vector3(Random.Range(-spread, spread), 0f, 0f);
+
+				//get target position
+				var target = HUD.Instance.hudByProperty[property].GetComponent<OneStatHud>().image.transform;
+				Vector3 screenPoint = target.position + new Vector3(0, 0, 5);  //the "+ new Vector3(0,0,5)" ensures that the object is so close to the camera you dont see it
+
+				//find out where this is in world space
+				Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPoint);
+
+
+				targetPosition = worldPos;
+				
+
 
 				//animate coin to target position
 				float duration = Random.Range(minAnimDuration, maxAnimDuration);
@@ -91,8 +111,4 @@ public class CollectionManager : Singleton<CollectionManager>
 		}
 	}
 
-	public void AddCoins(Vector3 collectedCoinPosition, int amount)
-	{
-		Animate(collectedCoinPosition, amount);
-	}
 }

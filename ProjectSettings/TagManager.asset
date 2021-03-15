@@ -53,6 +53,9 @@ TagManager:
   - name: treeFlower
     uniqueID: 4071786575
     locked: 0
+  - name: collect
+    uniqueID: 1377994735
+    locked: 0
   - name: animal
     uniqueID: 3640362995
     locked: 0

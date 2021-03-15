@@ -14,6 +14,7 @@ public class HUD : Singleton<HUD>
     public TMP_Text speedText;
     public GameObject gardenButton;
     public List<Sprite> propertyImage;
+    public List<Transform> propertyResourceTransform = new List<Transform>(6);
     [Header("garden")]
     public GameObject levelInfoPanel;
 
@@ -31,7 +32,7 @@ public class HUD : Singleton<HUD>
     List<float> speedList = new List<float>() { 0.5f, 1, 2, 4 };
     bool isPaused = false;
     PlantsManager plantManager;
-    Dictionary<PlantProperty, OneStatHud> hudByProperty;
+    public Dictionary<PlantProperty, OneStatHud> hudByProperty;
     // Start is called before the first frame update
     void Start()
     {
