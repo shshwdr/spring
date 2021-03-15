@@ -9,6 +9,9 @@ public class PestManager : Singleton<PestManager>
     public Transform pestSpawnParent;
 
     public GameObject pestPrefab;
+
+    float beeGenerateTime = -5;
+    float currentBeeGenerateTime = 0;
     // Start is called before the first frame update
 
     public List<Transform> pestsList()
@@ -56,9 +59,29 @@ public class PestManager : Singleton<PestManager>
         currentPests.Add(p);
     }
 
+    public void updateGenerateTime()
+    {
+        var beeValue = PlantsManager.Instance.currentResource[PlantProperty.pest];
+        if (beeValue == 0)
+        {
+            beeGenerateTime = -1;
+            return;
+        }
+        beeGenerateTime = Utils.SuperLerp(30, 10, 0, 20, beeValue);
+    }
     // Update is called once per frame
     void Update()
     {
-        
+        if(beeGenerateTime > 0)
+        {
+
+            currentBeeGenerateTime += Time.deltaTime;
+            if (currentBeeGenerateTime >= beeGenerateTime)
+            {
+                currentBeeGenerateTime = 0;
+                var trans = Utils.RandomTransform(pestSpawnParent);
+                Instantiate(pestPrefab, trans.position, Quaternion.identity);
+            }
+        }
     }
 }

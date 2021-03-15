@@ -40,6 +40,9 @@ public class CllickToCollect : MonoBehaviour
         if (dropboxType == DropboxType.unlock)
         {
             PlantsManager.Instance.UnlockPlant(unlockPlant);
+            BirdManager.Instance.needToUnlock[unlockPlant] = true;
+
+            //CollectionManager.Instance.AddCoins(transform.position, resource);
         }
         else
         {

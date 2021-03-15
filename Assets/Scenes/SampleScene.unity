@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed18a594cbf366541a10a88cfdcda76b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreResourcePlant: 1
+  ignoreResourcePlant: 0
   maintree: {fileID: 0}
   ClickToCollect: {fileID: 4418941831928530925, guid: 78dc610f33f8ada46aeca6464421562c,
     type: 3}
@@ -574,7 +574,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bee: {fileID: 1354706644008603653, guid: 49d39eb6bb9a30a498b2658a17bfc730, type: 3}
   beeSpawnPositionParent: {fileID: 543669081}
-  beeGenerateTime: 4
   currentBeeCount: 0
   maxBeeCount: 5
 --- !u!114 &204554938
@@ -2109,12 +2108,12 @@ PrefabInstance:
     - target: {fileID: 9133226179536723844, guid: 133afc42291ee254e8d4267a733b655d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.55
+      value: -5.25
       objectReference: {fileID: 0}
     - target: {fileID: 9133226179536723844, guid: 133afc42291ee254e8d4267a733b655d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 9133226179536723844, guid: 133afc42291ee254e8d4267a733b655d,
         type: 3}

@@ -16,10 +16,10 @@ public class BirdManager : Singleton<BirdManager>
 
     Dictionary<HelperPlantType, HelperPlantType> treeToUnlockFlower = new Dictionary<HelperPlantType, HelperPlantType>()
     {
-        {HelperPlantType.appleTree2, HelperPlantType.yellow }
+        {HelperPlantType.appleTree2, HelperPlantType.purple }
     };
 
-    Dictionary<HelperPlantType, bool> needToUnlock = new Dictionary<HelperPlantType, bool>();
+    public Dictionary<HelperPlantType, bool> needToUnlock = new Dictionary<HelperPlantType, bool>();
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +39,7 @@ public class BirdManager : Singleton<BirdManager>
             Vector3 position = new Vector3(spawnBirdHighest.position.x, Random.Range(spawnBirdLowest.position.y, spawnBirdHighest.position.y), -1f);
             //Instantiate(bird, position,Quaternion.identity);
             bird.transform.position = position;
+            bird.GetComponent<Bird>().isClicked = false;
             birdShowCurrentTime = 0;
         }
     }
@@ -47,7 +48,7 @@ public class BirdManager : Singleton<BirdManager>
     {
         if(treeToUnlockFlower.ContainsKey(type) && !needToUnlock.ContainsKey(type))
         {
-            needToUnlock[type] = true;
+            needToUnlock[treeToUnlockFlower[type]] = true;
         }
     }
 
@@ -57,9 +58,9 @@ public class BirdManager : Singleton<BirdManager>
         {
             if (needToUnlock[key] == true)
             {
-                needToUnlock[key] = false;
+                //needToUnlock[key] = false;
                 box.dropboxType = DropboxType.unlock;
-                box.unlockPlant = HelperPlantType.yellow;
+                box.unlockPlant = key;
                 return;
             }
         }
@@ -72,7 +73,7 @@ public class BirdManager : Singleton<BirdManager>
         var typeRandom = Random.Range(0, 3);
 
         box.resource = new Dictionary<PlantProperty, int>() {
-            {dropProperties[typeRandom], Random.Range(10, 20) },
+            {dropProperties[typeRandom], Random.Range(5, 10) },
         }; 
     }
 }

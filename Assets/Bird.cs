@@ -8,7 +8,7 @@ public class Bird : MonoBehaviour
     public float speed = 1f;
     public float verticalSpeed = 1f;
     public float amplitude = 1f;
-    bool isClicked = false;
+    public bool isClicked = false;
     // Start is called before the first frame update
     void Start()
     {

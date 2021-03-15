@@ -78,9 +78,9 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.pest, 0 },
     };
         resourceName = new Dictionary<PlantProperty, string>() {
-        { PlantProperty.p, "calcium" },
-        { PlantProperty.s, "Potassium"  },
-        { PlantProperty.n, "Nitrogen" },
+        { PlantProperty.p, "K" },
+        { PlantProperty.s, "P"  },
+        { PlantProperty.n, "N" },
         { PlantProperty.water, "Water" },
         { PlantProperty.bee, "Bee Attrack" },
         { PlantProperty.pest, "Pest Attrack" },
@@ -107,7 +107,7 @@ public class PlantsManager : Singleton<PlantsManager>
 
 
         isPlantUnlocked = new Dictionary<HelperPlantType, bool>() {
-        { HelperPlantType.yellow,false }, };
+        { HelperPlantType.purple,false }, };
         plantName = new Dictionary<HelperPlantType, string>() {
         { HelperPlantType.red, "Red Flower" },
         { HelperPlantType.yellow, "Yellow Flower" },
@@ -125,10 +125,24 @@ public class PlantsManager : Singleton<PlantsManager>
     {
         {HelperPlantType.red,new Dictionary<PlantProperty, int>() {
             { PlantProperty.p, 8 },
+           // { PlantProperty.bee, 2 },
+            { PlantProperty.pest, 2 },
         }},
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.s, 5 } } },
-        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 5 } } },
-        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.s, 5 }, {PlantProperty.n, 2 } } },
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() {
+            { PlantProperty.s, 5 },
+           // { PlantProperty.bee, 2 },
+            { PlantProperty.pest, 2 },
+        } },
+        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { 
+            { PlantProperty.n, 5 },
+           // { PlantProperty.bee, 2 },
+            { PlantProperty.pest, 2 }, } },
+        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() {
+            { PlantProperty.s, 5 }, 
+            {PlantProperty.n, 2 } ,
+            {PlantProperty.p, 2 },
+            { PlantProperty.bee, 3 },
+            { PlantProperty.pest, 5 }, } },
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  } },
         {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { } },
         {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { } },
@@ -151,9 +165,9 @@ public class PlantsManager : Singleton<PlantsManager>
     //}; 
         helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
+        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
+        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
         {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.n, 5 }, { PlantProperty.p, 5 } } },
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
         {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.n,10}, { PlantProperty.p, 10 } } },
@@ -392,4 +406,9 @@ public class PlantsManager : Singleton<PlantsManager>
     //        currentResourceRate[pairI.Key] -= pairI.Value;
     //    }
     //}
+
+    public bool isIncreasingResource(PlantProperty p)
+    {
+        return !(p == PlantProperty.bee || p == PlantProperty.pest);
+    }
 }

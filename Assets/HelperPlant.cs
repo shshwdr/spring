@@ -44,6 +44,7 @@ public class HelperPlant : HPObject
         {
             PlantsManager.Instance.Purchase(gameObject);
             PlantsManager.Instance.AddPlant(this);
+            CollectionManager.Instance.AddCoins(transform.position,PlantsManager.Instance.helperPlantProd[type],false);
         }
         else
         {

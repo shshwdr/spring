@@ -7,7 +7,7 @@ public class BeeManager : Singleton<BeeManager>
     public GameObject bee;
     public Transform beeSpawnPositionParent;
     List<Transform> beeSpawnPositions = new List<Transform>();
-    public float beeGenerateTime = 5;
+     float beeGenerateTime = -5;
     float currentBeeGenerateTime = 0;
     [HideInInspector]
     public int currentBeeCount = 0;
@@ -36,15 +36,30 @@ public class BeeManager : Singleton<BeeManager>
         }
     }
 
+    public void updateGenerateTime()
+    {
+        var beeValue = PlantsManager.Instance.currentResource[PlantProperty.bee];
+        if(beeValue == 0)
+        {
+            beeGenerateTime = -1;
+            return;
+        }
+        beeGenerateTime = Utils.SuperLerp(20, 3, 0, 10, beeValue);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        currentBeeGenerateTime += Time.deltaTime;
-        if(currentBeeGenerateTime>=beeGenerateTime && currentBeeCount< maxBeeCount)
+        if(beeGenerateTime > 0)
         {
-            currentBeeGenerateTime = 0;
-            currentBeeCount++;
-            Instantiate(bee, Utils.RandomTransform(beeSpawnPositionParent).position,Quaternion.identity);
+
+            currentBeeGenerateTime += Time.deltaTime;
+            if (currentBeeGenerateTime >= beeGenerateTime && currentBeeCount < maxBeeCount)
+            {
+                currentBeeGenerateTime = 0;
+                currentBeeCount++;
+                Instantiate(bee, Utils.RandomTransform(beeSpawnPositionParent).position, Quaternion.identity);
+            }
         }
     }
 }

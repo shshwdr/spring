@@ -69,10 +69,14 @@ public class CollectionManager : Singleton<CollectionManager>
 		}
 	}
 
-	public void AddCoins(Vector3 collectedCoinPosition, Dictionary<PlantProperty, int> resource)
+	public void AddCoins(Vector3 collectedCoinPosition, Dictionary<PlantProperty, int> resource, bool isIncreasingResource = true)
 	{
 		foreach (var pair in resource)
         {
+            if (PlantsManager.Instance. isIncreasingResource(pair.Key) != isIncreasingResource)
+            {
+				continue;
+            }
 			var amount = pair.Value;
 			//get target position
 			var target = HUD.Instance.hudByProperty[pair.Key].GetComponent<OneStatHud>().image.transform;
@@ -110,6 +114,8 @@ public class CollectionManager : Singleton<CollectionManager>
 						coinsQueue.Enqueue(coin);
 
 						PlantsManager.Instance.currentResource[pair.Key] += 1;
+						BeeManager.Instance.updateGenerateTime();
+						PestManager.Instance.updateGenerateTime();
 					});
 				}
 			}
