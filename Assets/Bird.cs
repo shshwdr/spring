@@ -6,6 +6,8 @@ public class Bird : MonoBehaviour
 {
     public GameObject dropbox;
     public float speed = 1f;
+    public float verticalSpeed = 1f;
+    public float amplitude = 1f;
     bool isClicked = false;
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,7 @@ public class Bird : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.left * speed*Time.deltaTime;
+        var verticalMove = Mathf.Sin(Time.realtimeSinceStartup * verticalSpeed ) * amplitude * Vector3.up * Time.deltaTime;
+        transform.position += Vector3.left * speed*Time.deltaTime + verticalMove;
     }
 }

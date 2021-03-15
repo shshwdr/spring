@@ -37,7 +37,8 @@ public class BirdManager : Singleton<BirdManager>
         {
             updateShowTimer();
             Vector3 position = new Vector3(spawnBirdHighest.position.x, Random.Range(spawnBirdLowest.position.y, spawnBirdHighest.position.y), -1f);
-            Instantiate(bird, position,Quaternion.identity);
+            //Instantiate(bird, position,Quaternion.identity);
+            bird.transform.position = position;
             birdShowCurrentTime = 0;
         }
     }
