@@ -69,46 +69,52 @@ public class CollectionManager : Singleton<CollectionManager>
 		}
 	}
 
-	public void AddCoins(Vector3 collectedCoinPosition, PlantProperty property, int amount = 5)
+	public void AddCoins(Vector3 collectedCoinPosition, Dictionary<PlantProperty, int> resource)
 	{
-		for (int i = 0; i < amount; i++)
-		{
-			//check if there's coins in the pool
-			if (coinsQueue.Count > 0)
+		foreach (var pair in resource)
+        {
+			var amount = pair.Value;
+			//get target position
+			var target = HUD.Instance.hudByProperty[pair.Key].GetComponent<OneStatHud>().image.transform;
+			Vector3 screenPoint = target.position + new Vector3(0, 0, 5);  //the "+ new Vector3(0,0,5)" ensures that the object is so close to the camera you dont see it
+
+			//find out where this is in world space
+			Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPoint);
+
+
+			targetPosition = worldPos;
+			for (int i = 0; i < amount; i++)
 			{
-				//extract a coin from the pool
-				GameObject coin = coinsQueue.Dequeue();
-				coin.GetComponent<SpriteRenderer>().sprite = HUD.Instance.propertyImage[(int)property];
-				coin.SetActive(true);
+				//check if there's coins in the pool
+				if (coinsQueue.Count > 0)
+				{
+					//extract a coin from the pool
+					GameObject coin = coinsQueue.Dequeue();
+					coin.GetComponent<SpriteRenderer>().sprite = HUD.Instance.propertyImage[(int)(pair.Key)];
+					coin.SetActive(true);
 
-				//move coin to the collected coin pos
-				coin.transform.position = collectedCoinPosition + new Vector3(Random.Range(-spread, spread), 0f, 0f);
-
-				//get target position
-				var target = HUD.Instance.hudByProperty[property].GetComponent<OneStatHud>().image.transform;
-				Vector3 screenPoint = target.position + new Vector3(0, 0, 5);  //the "+ new Vector3(0,0,5)" ensures that the object is so close to the camera you dont see it
-
-				//find out where this is in world space
-				Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPoint);
+					//move coin to the collected coin pos
+					coin.transform.position = collectedCoinPosition + new Vector3(Random.Range(-spread, spread), 0f, 0f);
 
 
-				targetPosition = worldPos;
-				
 
 
-				//animate coin to target position
-				float duration = Random.Range(minAnimDuration, maxAnimDuration);
-				coin.transform.DOMove(targetPosition, duration)
-				.SetEase(easeType)
-				.OnComplete(() => {
+					//animate coin to target position
+					float duration = Random.Range(minAnimDuration, maxAnimDuration);
+					coin.transform.DOMove(targetPosition, duration)
+					.SetEase(easeType)
+					.OnComplete(() =>
+					{
 					//executes whenever coin reach target position
 					coin.SetActive(false);
-					coinsQueue.Enqueue(coin);
+						coinsQueue.Enqueue(coin);
 
-					Coins++;
-				});
+						PlantsManager.Instance.currentResource[pair.Key] += 1;
+					});
+				}
 			}
 		}
+			
 	}
 
 }

@@ -115,7 +115,7 @@ public class MainTree : HelperPlant
     {
         return currentFlowerNumber >= totalFlowerNumber;
     }
-    protected override void OnMouseDown()
+    void OnMouseDown()
     {
         if (isAtMaxLevel())
         {

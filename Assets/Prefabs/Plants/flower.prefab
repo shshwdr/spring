@@ -101,6 +101,9 @@ MonoBehaviour:
   type: 0
   slot: 0
   plantCollider: {fileID: 5718688822822655125}
+  collictToCollect: {fileID: 4418941831928530925, guid: 78dc610f33f8ada46aeca6464421562c,
+    type: 3}
+  harvestTime: 10
 --- !u!58 &-921209966145195351
 CircleCollider2D:
   m_ObjectHideFlags: 0

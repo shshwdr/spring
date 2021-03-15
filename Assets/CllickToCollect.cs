@@ -26,9 +26,8 @@ public class CllickToCollect : MonoBehaviour
         }
         else
         {
-            //PlantsManager.Instance.AddResource(resource);
+            CollectionManager.Instance.AddCoins(transform.position, resource);
         }
-        CollectionManager.Instance.AddCoins(transform.position, PlantProperty.bee, 10);
         //Destroy(gameObject);
     }
 }

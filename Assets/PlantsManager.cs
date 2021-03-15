@@ -122,11 +122,11 @@ public class PlantsManager : Singleton<PlantsManager>
         helperPlantProd = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
         {HelperPlantType.red,new Dictionary<PlantProperty, int>() {
-            { PlantProperty.p, 1 },
+            { PlantProperty.p, 8 },
         }},
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.s, 1 } } },
-        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 1 } } },
-        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.bee, 1 }, { PlantProperty.s, 1 } } },
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.s, 5 } } },
+        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 5 } } },
+        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.s, 5 }, {PlantProperty.n, 2 } } },
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  } },
         {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { } },
         {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { } },
@@ -172,7 +172,7 @@ public class PlantsManager : Singleton<PlantsManager>
     }
     void Start()
     {
-        UpdateRate();
+        //UpdateRate();
     }
 
     public int firstAvailableSlot()
@@ -295,7 +295,7 @@ public class PlantsManager : Singleton<PlantsManager>
     {
         ReduceResource(currentResource, helperPlantCost[type]);
 
-        PlantsManager.Instance.UpdateRate();
+       // PlantsManager.Instance.UpdateRate();
     }
 
     public void Remove(GameObject plantPrefab)
@@ -305,12 +305,12 @@ public class PlantsManager : Singleton<PlantsManager>
         //Destroy(plantPrefab);
 
         plantSlots[slotId].isAvailable = true;
-        UpdateRate();
+        //UpdateRate();
     }
 
     public void AddPlant(HelperPlant newPlant)
     {
-        UpdateRate();
+        //UpdateRate();
     }
 
     // Update is called once per frame
@@ -353,40 +353,40 @@ public class PlantsManager : Singleton<PlantsManager>
         HUD.Instance.UpdatePlantButtons();
     }
 
-    public void UpdateRate()
-    {
-        foreach (var key in currentResourceRate.Keys.ToArray<PlantProperty>())
-        {
-            currentResourceRate[key] = baseResourceRate[key];
-        }
-        foreach (var plant in plantedPlant)
-        {
-            if (plant && plant.isAlive)
-            {
-                UpdateOneTypeRate(plant.type);
-            }
-        }
-        if (maintree)
-        {
+    //public void UpdateRate()
+    //{
+    //    foreach (var key in currentResourceRate.Keys.ToArray<PlantProperty>())
+    //    {
+    //        currentResourceRate[key] = baseResourceRate[key];
+    //    }
+    //    foreach (var plant in plantedPlant)
+    //    {
+    //        if (plant && plant.isAlive)
+    //        {
+    //            UpdateOneTypeRate(plant.type);
+    //        }
+    //    }
+    //    if (maintree)
+    //    {
 
-            UpdateOneTypeRate(maintree.type);
-        }
+    //        UpdateOneTypeRate(maintree.type);
+    //    }
 
-        PlantDetail.Instance.UpdateValue();
-    }
+    //    PlantDetail.Instance.UpdateValue();
+    //}
 
-    void UpdateOneTypeRate(HelperPlantType type)
-    {
-        var prodDictionary = helperPlantProd[type];
-        foreach (var pairI in prodDictionary)
-        {
-            currentResourceRate[pairI.Key] += pairI.Value;
-        }
+    //void UpdateOneTypeRate(HelperPlantType type)
+    //{
+    //    var prodDictionary = helperPlantProd[type];
+    //    foreach (var pairI in prodDictionary)
+    //    {
+    //        currentResourceRate[pairI.Key] += pairI.Value;
+    //    }
 
-        var keepCostDictionary = helperPlantKeepCost[type];
-        foreach (var pairI in keepCostDictionary)
-        {
-            currentResourceRate[pairI.Key] -= pairI.Value;
-        }
-    }
+    //    var keepCostDictionary = helperPlantKeepCost[type];
+    //    foreach (var pairI in keepCostDictionary)
+    //    {
+    //        currentResourceRate[pairI.Key] -= pairI.Value;
+    //    }
+    //}
 }
