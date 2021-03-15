@@ -35,7 +35,7 @@ public class CllickToCollect : MonoBehaviour
     private void OnMouseOver()
     {
         
-        if (Input.GetMouseButton(0))
+        //if (Input.GetMouseButton(0))
         {
             if (!isClicked)
             {

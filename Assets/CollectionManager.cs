@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using System.Collections.Generic;
+using System;
+using Random = UnityEngine.Random;
 
 public class CollectionManager : Singleton<CollectionManager>
 {
@@ -10,7 +12,6 @@ public class CollectionManager : Singleton<CollectionManager>
 	[Header("UI references")]
 	[SerializeField] TMP_Text coinUIText;
 	[SerializeField] GameObject animatedCoinPrefab;
-	[SerializeField] Transform target;
 
 	[Space]
 	[Header("Available coins : (coins to pool)")]
@@ -26,7 +27,6 @@ public class CollectionManager : Singleton<CollectionManager>
 	[SerializeField] Ease easeType;
 	[SerializeField] float spread;
 
-	Vector3 targetPosition;
 
 
 	private int _c = 0;
@@ -45,13 +45,6 @@ public class CollectionManager : Singleton<CollectionManager>
 	void Awake()
 	{
 
-		Vector3 screenPoint = target.position + new Vector3(0, 0, 5);  //the "+ new Vector3(0,0,5)" ensures that the object is so close to the camera you dont see it
-
-		//find out where this is in world space
-		Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPoint);
-
-
-		targetPosition = worldPos;
 
 		//prepare pool
 		PrepareCoins();
@@ -66,6 +59,63 @@ public class CollectionManager : Singleton<CollectionManager>
 			coin.transform.parent = transform;
 			coin.SetActive(false);
 			coinsQueue.Enqueue(coin);
+		}
+	}
+
+	void MoveSource(Vector3 start,Vector3 end, PlantProperty property, int amount, Action action)
+    {
+		for (int i = 0; i < amount; i++)
+		{
+			//check if there's coins in the pool
+			if (coinsQueue.Count > 0)
+			{
+				//extract a coin from the pool
+				GameObject coin = coinsQueue.Dequeue();
+				coin.GetComponent<SpriteRenderer>().sprite = HUD.Instance.propertyImage[(int)(property)];
+				coin.SetActive(true);
+
+				//move coin to the collected coin pos
+				coin.transform.position = start + new Vector3(Random.Range(-spread, spread), 0f, 0f);
+
+
+
+
+				//animate coin to target position
+				float duration = Random.Range(minAnimDuration, maxAnimDuration);
+				coin.transform.DOMove(end, duration)
+				.SetEase(easeType)
+				.OnComplete(() =>
+				{
+					//executes whenever coin reach target position
+					coin.SetActive(false);
+					coinsQueue.Enqueue(coin);
+					action();
+				});
+			}
+		}
+	}
+
+	public void RemoveCoins(Vector3 removedCoinPosition, Dictionary<PlantProperty, int> resource)
+    {
+		foreach (var pair in resource)
+		{
+			var amount = pair.Value;
+			//get target position
+			var target = HUD.Instance.hudByProperty[pair.Key].GetComponent<OneStatHud>().image.transform;
+			Vector3 screenPoint = target.position + new Vector3(0, 0, 5);  //the "+ new Vector3(0,0,5)" ensures that the object is so close to the camera you dont see it
+
+			//find out where this is in world space
+			Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPoint);
+
+
+
+
+			MoveSource(worldPos, removedCoinPosition, pair.Key, pair.Value, () =>
+			{
+				PlantsManager.Instance.currentResource[pair.Key] -= 1;
+				BeeManager.Instance.updateGenerateTime();
+				PestManager.Instance.updateGenerateTime();
+			});
 		}
 	}
 
@@ -86,39 +136,14 @@ public class CollectionManager : Singleton<CollectionManager>
 			Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPoint);
 
 
-			targetPosition = worldPos;
-			for (int i = 0; i < amount; i++)
+
+
+			MoveSource(collectedCoinPosition, worldPos, pair.Key, pair.Value, () =>
 			{
-				//check if there's coins in the pool
-				if (coinsQueue.Count > 0)
-				{
-					//extract a coin from the pool
-					GameObject coin = coinsQueue.Dequeue();
-					coin.GetComponent<SpriteRenderer>().sprite = HUD.Instance.propertyImage[(int)(pair.Key)];
-					coin.SetActive(true);
-
-					//move coin to the collected coin pos
-					coin.transform.position = collectedCoinPosition + new Vector3(Random.Range(-spread, spread), 0f, 0f);
-
-
-
-
-					//animate coin to target position
-					float duration = Random.Range(minAnimDuration, maxAnimDuration);
-					coin.transform.DOMove(targetPosition, duration)
-					.SetEase(easeType)
-					.OnComplete(() =>
-					{
-					//executes whenever coin reach target position
-					coin.SetActive(false);
-						coinsQueue.Enqueue(coin);
-
-						PlantsManager.Instance.currentResource[pair.Key] += 1;
-						BeeManager.Instance.updateGenerateTime();
-						PestManager.Instance.updateGenerateTime();
-					});
-				}
-			}
+				PlantsManager.Instance.currentResource[pair.Key] += 1;
+				BeeManager.Instance.updateGenerateTime();
+				PestManager.Instance.updateGenerateTime();
+			});
 		}
 			
 	}

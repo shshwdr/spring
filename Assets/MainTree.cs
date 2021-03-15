@@ -46,6 +46,8 @@ public class MainTree : HelperPlant
             {
                 var go = Instantiate(treeFlowerPrefab, flowerGeneratedPositions[i].position, flowerGeneratedPositions[i].rotation);
                 go.GetComponent<TreeFlower>().tree = this;
+
+                CollectionManager.Instance.RemoveCoins(go.transform.position, PlantsManager.Instance.helperPlantCost[flowerPlantType]);
                 isFlowerPositionUsed[i] = true;
                 break;
             }
@@ -77,8 +79,8 @@ public class MainTree : HelperPlant
         type = upgradeList[currentLevel];
         BirdManager.Instance.startTreePlant(type);
         PlantsManager.Instance.unlockedSlot = slotCount[currentLevel];
-        PlantsManager.Instance.ReduceCostForType(type);
-
+        //PlantsManager.Instance.ReduceCostForType(type);
+        CollectionManager.Instance.RemoveCoins(transform.position, PlantsManager.Instance.helperPlantCost[type]);
         HUD.Instance.ShowPlantDetail(gameObject);
     }
 

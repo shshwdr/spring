@@ -292,6 +292,7 @@ public class PlantsManager : Singleton<PlantsManager>
         {
             origin[pair.Key] -= pair.Value;
         }
+       // CollectionManager.Instance.RemoveCoins()
     }
 
     public void Purchase(GameObject plant)
@@ -300,7 +301,8 @@ public class PlantsManager : Singleton<PlantsManager>
        // if (slotId != -1)
         {
             //var slot = plantSlots[slotId];
-            ReduceCostForType(plant.GetComponent<HelperPlant>().type);
+            CollectionManager.Instance.RemoveCoins(plant.transform.position, PlantsManager.Instance.helperPlantCost[plant.GetComponent<HelperPlant>().type]);
+            //ReduceCostForType(plant.GetComponent<HelperPlant>().type);
             plantedPlant.Add(plant.GetComponent<HelperPlant>());
             //GameObject spawnInstance = Instantiate(plantPrefab, slot.transform);
             //slot.isAvailable = false;
