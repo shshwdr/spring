@@ -15,6 +15,8 @@ public class HUD : Singleton<HUD>
     public GameObject gardenButton;
     public List<Sprite> propertyImage;
     public List<Transform> propertyResourceTransform = new List<Transform>(6);
+    public bool isGameover;
+    public GameObject gameoverPanel;
     [Header("garden")]
     public GameObject levelInfoPanel;
 
@@ -94,6 +96,10 @@ public class HUD : Singleton<HUD>
 
     public void togglePause()
     {
+        if (isGameover)
+        {
+            return;
+        }
         isPaused = !isPaused;
         if (isPaused)
         {
@@ -145,6 +151,34 @@ public class HUD : Singleton<HUD>
 
     }
 
+    public void clearLevel()
+    {
+        foreach (Transform tt in PlantsManager.Instance.allInTreeGame)
+        {
+
+            Destroy(tt.gameObject);
+
+        }
+        PlantsManager.Instance.ClearResource();
+        BirdManager.Instance.ResetBird();
+        PestManager.Instance.Clear();
+        BeeManager.Instance.Clear();
+        ResourceAutoGeneration.Instance.Clear();
+        Instantiate(PlantsManager.Instance.mainTreePrefab, PlantsManager.Instance.allInTreeGame);
+        gameoverPanel.SetActive(false);
+
+        isGameover = false;
+
+        togglePause();
+    }
+
+    public void Gameover()
+    {
+        gameoverPanel.SetActive(true);
+        togglePause();
+        isGameover = true;
+    }
+
     public void MoveToTree()
     {
         // The shortcuts way
@@ -170,7 +204,7 @@ public class HUD : Singleton<HUD>
         {
 
             OneStatHud oneStatHud = hudByProperty[pair.Key];
-            oneStatHud.init(plantManager.resourceName[pair.Key], propertyImage[(int)pair.Key], pair.Value, plantManager.currentResourceRate[pair.Key]);
+            oneStatHud.init(plantManager.resourceName[pair.Key], propertyImage[(int)pair.Key], pair.Value);
         }
     }
 }

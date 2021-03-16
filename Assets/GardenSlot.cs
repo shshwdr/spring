@@ -21,7 +21,12 @@ public class GardenSlot : MonoBehaviour
 
     private void OnMouseDown()
     {
-        GardenManager.Instance.StartTree(this);
+        Popup.Instance.Init(Dialogues.StartTreeConfirm, () =>
+        {
+
+            GardenManager.Instance.StartTree(this);
+            PlantsManager.Instance.ClearResource();
+        });
     }
 
     // Start is called before the first frame update

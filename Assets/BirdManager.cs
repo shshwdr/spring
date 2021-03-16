@@ -5,6 +5,7 @@ using UnityEngine;
 public class BirdManager : Singleton<BirdManager>
 {
     public GameObject bird;
+    Vector3 originPosition;
 
     public float birdShowtimeMin = 5f;
     public float birdShowtimeMax = 10f;
@@ -23,11 +24,18 @@ public class BirdManager : Singleton<BirdManager>
     // Start is called before the first frame update
     void Start()
     {
+        originPosition = bird.transform.position;
         updateShowTimer();
     }
     void updateShowTimer()
     {
         birdShowTimer = Random.Range(birdShowtimeMin, birdShowtimeMax);
+    }
+
+    public void ResetBird()
+    {
+        birdShowCurrentTime = 0;
+        bird.transform.position = originPosition;
     }
     // Update is called once per frame
     void Update()

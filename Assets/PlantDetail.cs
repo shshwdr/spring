@@ -35,7 +35,8 @@ public class PlantDetail : Singleton<PlantDetail>
             //this is a plant button
             var helperPlant = plantButton.helperPlant;
             plantName.text = getName(helperPlant);
-            getOnetimeCost(helperPlant);
+            getOnetimeCost(helperPlant); 
+            getProduction(helperPlant);
             //stats.text += getOnetimeCost(helperPlant);
             //stats.text += getDurationCost(helperPlant, true);
             //stats.text += getProduction(helperPlant);

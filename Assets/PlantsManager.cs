@@ -8,6 +8,7 @@ public class PlantsManager : Singleton<PlantsManager>
 {
     public bool ignoreResourcePlant = true;
     public MainTree maintree;
+    public GameObject mainTreePrefab;
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantCost;
     //public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantKeepCost;
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantProd;
@@ -134,9 +135,10 @@ public class PlantsManager : Singleton<PlantsManager>
             { PlantProperty.pest, 2 },
         } },
         {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { 
-            { PlantProperty.n, 5 },
-            { PlantProperty.water, 5 },
-            { PlantProperty.pest, 2 }, } },
+            { PlantProperty.n, 3 },
+            { PlantProperty.water, 10 },
+            //{ PlantProperty.pest, 2 },
+        } },
         {HelperPlantType.purple,new Dictionary<PlantProperty, int>() {
             { PlantProperty.s, 5 }, 
             {PlantProperty.n, 2 } ,
@@ -166,11 +168,11 @@ public class PlantsManager : Singleton<PlantsManager>
     //}; 
         helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
+        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 30 } } },
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 30 } } },
         {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
-        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.n, 5 }, { PlantProperty.p, 5 } } },
-        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
+        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 }, { PlantProperty.n, 5 }, { PlantProperty.p, 5 } } },
+        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
         {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.n,10}, { PlantProperty.p, 10 } } },
         {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.s, 20 }, { PlantProperty.p, 50 } } },
         {HelperPlantType.cherryTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
@@ -215,10 +217,6 @@ public class PlantsManager : Singleton<PlantsManager>
         return currentResource[property] >= value;
     }
 
-    public bool IsResourceRateAvailable(PlantProperty property, int value)
-    {
-        return currentResourceRate[property] >= value;
-    }
     [System.Obsolete("Method is obsolete.", false)]
     public bool IsPlantable(HelperPlantType type, bool ignoreSlot = false)
     {
@@ -318,15 +316,7 @@ public class PlantsManager : Singleton<PlantsManager>
        // PlantsManager.Instance.UpdateRate();
     }
 
-    public void Remove(GameObject plantPrefab)
-    {
-        int slotId = plantPrefab.GetComponent<HelperPlant>().slot;
-        plantedPlant[slotId] = null;
-        //Destroy(plantPrefab);
-
-        plantSlots[slotId].isAvailable = true;
-        //UpdateRate();
-    }
+    
 
     public void AddPlant(HelperPlant newPlant)
     {
@@ -336,16 +326,7 @@ public class PlantsManager : Singleton<PlantsManager>
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;
-        if (currentTime >= 1)
-        {
-            currentTime -= 1;
-            foreach (var pair in currentResourceRate)
-            {
-                currentResource[pair.Key] += pair.Value;
-            }
-            PlantDetail.Instance.UpdateValue();
-        }
+
     }
 
     public void ClearResource()
@@ -358,7 +339,6 @@ public class PlantsManager : Singleton<PlantsManager>
         {
             currentResource[key] = baseResource[key];
         }
-
     }
 
     public void AddResource(Dictionary<PlantProperty, int> resource)

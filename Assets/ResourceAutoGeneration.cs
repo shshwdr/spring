@@ -2,13 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceAutoGeneration : MonoBehaviour
+public class ResourceAutoGeneration : Singleton<ResourceAutoGeneration>
 {
     public float harvestTime = 10;
     float currentHarvestTimer;
     public Transform spawnPositionParent;
-
+    public Transform pestParent;
     List<Transform> transforms;
+
+    public void Clear()
+    {
+        foreach (Transform t in pestParent)
+        {
+            Destroy(t.gameObject);
+        }
+        currentHarvestTimer = 0;
+    }
 
     Dictionary<PlantProperty, int> autoResrouce = new Dictionary<PlantProperty, int>
     {
@@ -19,12 +28,19 @@ public class ResourceAutoGeneration : MonoBehaviour
     {
 
         var t = Utils.RandomTransform(spawnPositionParent);
-        var go = Instantiate(PlantsManager.Instance.ClickToCollect, t.position, Quaternion.identity);
+        var go = Instantiate(PlantsManager.Instance.ClickToCollect, t.position, Quaternion.identity, pestParent);
         var box = go.GetComponent<CllickToCollect>();
+        PlantProperty[] dropProperties = new PlantProperty[]{
+            PlantProperty.n, PlantProperty.s, PlantProperty.p, PlantProperty.water
+        };
+        var typeRandom = Random.Range(0, 4);
+
+        box.resource = new Dictionary<PlantProperty, int>() {
+            {dropProperties[typeRandom], Random.Range(5, 10)  },
+        };
         box.dropboxType = DropboxType.resource;
 
 
-        box.resource = autoResrouce;
         box.UpdateImage();
     }
     // Start is called before the first frame update

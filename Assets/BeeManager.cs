@@ -13,6 +13,8 @@ public class BeeManager : Singleton<BeeManager>
     public int currentBeeCount = 0;
     public int maxBeeCount = 5;
 
+    public Transform beeParent;
+
     public Transform getClosestSpawnTransform(Vector3 pos)
     {
         float dis = 1000;
@@ -46,7 +48,15 @@ public class BeeManager : Singleton<BeeManager>
         }
         beeGenerateTime = Utils.SuperLerp(20, 3, 0, 10, beeValue);
     }
-
+    public void Clear()
+    {
+        foreach (Transform t in beeParent)
+        {
+            Destroy(t.gameObject);
+        }
+        currentBeeCount = 0;
+        currentBeeGenerateTime = 0;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -58,7 +68,7 @@ public class BeeManager : Singleton<BeeManager>
             {
                 currentBeeGenerateTime = 0;
                 currentBeeCount++;
-                Instantiate(bee, Utils.RandomTransform(beeSpawnPositionParent).position, Quaternion.identity);
+                Instantiate(bee, Utils.RandomTransform(beeSpawnPositionParent).position, Quaternion.identity, beeParent);
             }
         }
     }

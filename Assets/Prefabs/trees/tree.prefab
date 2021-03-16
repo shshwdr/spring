@@ -162,7 +162,10 @@ MonoBehaviour:
   type: 4
   slot: 0
   plantCollider: {fileID: 0}
+  resourcePositionsParent: {fileID: 0}
+  harvestTime: 10
   fruitNumberToFinish: 2
+  prefab: {fileID: 4874449614502067322}
   upgradeList: 040000000500000006000000
   flowerPlantType: 0
   slotCount: 020000000400000006000000

@@ -8,12 +8,22 @@ public class PestManager : Singleton<PestManager>
     public List<Pest> currentPests = new List<Pest>();
     public Transform pestSpawnParent;
 
+    public Transform pestParent;
+
     public GameObject pestPrefab;
 
     float beeGenerateTime = -5;
     float currentBeeGenerateTime = 0;
     // Start is called before the first frame update
 
+    public void Clear()
+    {
+        foreach(Transform t in pestParent)
+        {
+            Destroy(t.gameObject);
+        }
+        currentBeeGenerateTime = 0;
+    }
     public List<Transform> pestsList()
     {
         List<Transform> res = new List<Transform>();
@@ -80,7 +90,7 @@ public class PestManager : Singleton<PestManager>
             {
                 currentBeeGenerateTime = 0;
                 var trans = Utils.RandomTransform(pestSpawnParent);
-                Instantiate(pestPrefab, trans.position, Quaternion.identity);
+                Instantiate(pestPrefab, trans.position, Quaternion.identity, pestParent);
             }
         }
     }

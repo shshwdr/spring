@@ -61,12 +61,15 @@ public class HelperPlant : HPObject
             HUD.Instance.HidePlantDetail();
         }
     }
-    protected virtual void RemovePlant()
+
+    private void remove()
     {
-        
-        PlantsManager.Instance.Remove(gameObject);
         die();
         HUD.Instance.HidePlantDetail();
+    }
+    protected virtual void RemovePlant()
+    {
+        Popup.Instance.Init(Dialogues.RemovePlantConfirm, remove);
     }
 
     public override void die()
@@ -78,7 +81,6 @@ public class HelperPlant : HPObject
         }
         CollectionManager.Instance.RemoveCoins(transform.position, PlantsManager.Instance.helperPlantProd[type],true);
         base.die();
-
     }
     bool canPlant()
     {
@@ -126,7 +128,7 @@ public class HelperPlant : HPObject
         {
             currentResourcePositionId = 0;
         }
-        var go = Instantiate(PlantsManager.Instance.ClickToCollect, spawnTransform.position, Quaternion.identity);
+        var go = Instantiate(PlantsManager.Instance.ClickToCollect, spawnTransform.position, Quaternion.identity,transform);
         var box = go.GetComponent<CllickToCollect>();
         box.dropboxType = DropboxType.resource;
 
