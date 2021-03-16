@@ -62,6 +62,14 @@ public class HelperPlant : HPObject
         }
     }
 
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            RemovePlant();
+        }
+    }
+
     private void remove()
     {
         die();
@@ -113,10 +121,6 @@ public class HelperPlant : HPObject
                 Harvest();
             }
             currentHarvestTimer += Time.deltaTime;
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            RemovePlant();
         }
     }
 

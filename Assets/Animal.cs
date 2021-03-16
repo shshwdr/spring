@@ -22,7 +22,7 @@ public class Animal : HPObject
 
     protected bool isCloseToTarget()
     {
-        return (targetPosition() - transform.position).magnitude <= attackRadius;
+        return ((Vector2)(targetPosition() - transform.position)).magnitude <= attackRadius;
     }
 
     protected virtual void attack()

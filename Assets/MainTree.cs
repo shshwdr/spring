@@ -5,7 +5,6 @@ using UnityEngine;
 public class MainTree : HelperPlant
 {
     public int fruitNumberToFinish;
-    public GameObject prefab;
     int fruitNumberFinished;
     public List<HelperPlantType> upgradeList;
     public HelperPlantType flowerPlantType;
@@ -23,7 +22,6 @@ public class MainTree : HelperPlant
     protected override void Start()
     {
         PlantsManager.Instance.maintree = this;
-        PlantsManager.Instance.mainTreePrefab = prefab;
         PlantsManager.Instance.unlockedSlot = slotCount[currentLevel];
         type = upgradeList[currentLevel];
         base.Start();

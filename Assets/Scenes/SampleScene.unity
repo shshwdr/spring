@@ -616,6 +616,7 @@ GameObject:
   - component: {fileID: 204554937}
   - component: {fileID: 204554938}
   - component: {fileID: 204554939}
+  - component: {fileID: 204554940}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -655,7 +656,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoreResourcePlant: 0
   maintree: {fileID: 0}
-  mainTreePrefab: {fileID: 0}
+  mainTreePrefab: {fileID: 4874449614502067322, guid: 725cfdcee35a9a2469b8887c91d4f29d,
+    type: 3}
   ClickToCollect: {fileID: 4418941831928530925, guid: 78dc610f33f8ada46aeca6464421562c,
     type: 3}
   groundCollider2: {fileID: 1459423074}
@@ -686,6 +688,7 @@ MonoBehaviour:
   pestParent: {fileID: 894366326}
   pestPrefab: {fileID: 1881286037005167963, guid: 0b5ce2060bebbdd4db9e0089b995a160,
     type: 3}
+  lotsPest: 0
 --- !u!114 &204554936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,6 +756,18 @@ MonoBehaviour:
   maxAnimDuration: 2
   easeType: 28
   spread: 0.2
+--- !u!114 &204554940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204554932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1221af476a2cce438b5d285880a1419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &210852912
 GameObject:
   m_ObjectHideFlags: 0
@@ -6579,12 +6594,12 @@ GameObject:
   - component: {fileID: 1846246490}
   - component: {fileID: 1846246489}
   m_Layer: 5
-  m_Name: DialogPanel (1)
+  m_Name: GameOver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1846246488
 RectTransform:
   m_ObjectHideFlags: 0
