@@ -19,10 +19,6 @@ public class OneStatHud : MonoBehaviour
         
     }
 
-    string minusResourcePrefix = "<color=#B90018>";
-
-    string AddResourcePrefix = "<color=#037610>";
-    string InsufficientResourceSurfix = "</color>";
     public void init(string n, Sprite t, float v)
     {
         name.text = n;

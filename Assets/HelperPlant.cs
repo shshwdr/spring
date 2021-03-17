@@ -9,13 +9,15 @@ public class HelperPlant : HPObject
     public int slot;
     public Collider2D plantCollider;
 
+    public bool isWater = false;
+
     protected bool isDragging = true;
 
     public Transform resourcePositionsParent;
     int currentResourcePositionId;
     int resourcePositionCount;
 
-    public float harvestTime = 10;
+    float harvestTime;
     float currentHarvestTimer;
     // Start is called before the first frame update
     protected override void Start()
@@ -26,6 +28,7 @@ public class HelperPlant : HPObject
             resourcePositionCount = resourcePositionsParent.childCount;
 
         }
+        harvestTime = PlantsManager.Instance.helperPlantProdTime[type];
     }
 
     private void OnMouseEnter()
@@ -45,6 +48,8 @@ public class HelperPlant : HPObject
             PlantsManager.Instance.Purchase(gameObject);
             PlantsManager.Instance.AddPlant(this);
             CollectionManager.Instance.AddCoins(transform.position,PlantsManager.Instance.helperPlantProd[type],false);
+
+            PlantsManager.Instance.startTreePlant(type);
         }
         else
         {
@@ -115,7 +120,7 @@ public class HelperPlant : HPObject
         }
         else
         {
-            if (resourcePositionsParent && currentHarvestTimer > harvestTime)
+            if (resourcePositionsParent && harvestTime<100 && currentHarvestTimer > harvestTime)
             {
                 currentHarvestTimer = 0;
                 Harvest();

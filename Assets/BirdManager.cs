@@ -14,6 +14,7 @@ public class BirdManager : Singleton<BirdManager>
     public Transform spawnBirdLowest;
     float birdShowTimer = -1;
     float birdShowCurrentTime;
+    public bool autoResrouceStart;
 
     Dictionary<HelperPlantType, HelperPlantType> treeToUnlockFlower = new Dictionary<HelperPlantType, HelperPlantType>()
     {
@@ -40,6 +41,10 @@ public class BirdManager : Singleton<BirdManager>
     // Update is called once per frame
     void Update()
     {
+        if (!autoResrouceStart)
+        {
+            return;
+        }
         birdShowCurrentTime += Time.deltaTime;
         if (birdShowCurrentTime >= birdShowTimer)
         {

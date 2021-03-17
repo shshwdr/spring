@@ -204,6 +204,15 @@ public class HUD : Singleton<HUD>
         {
 
             OneStatHud oneStatHud = hudByProperty[pair.Key];
+            if(!plantManager.isResourceUnlocked.ContainsKey(pair.Key))
+            {
+                oneStatHud.gameObject.SetActive(false);
+            }
+            else
+            {
+
+                oneStatHud.gameObject.SetActive(true);
+            }
             oneStatHud.init(plantManager.resourceName[pair.Key], propertyImage[(int)pair.Key], pair.Value);
         }
     }

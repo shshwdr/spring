@@ -29,7 +29,7 @@ public class HelperInsectManager : Singleton<HelperInsectManager>
         List<Transform> res = new List<Transform>();
         foreach (var helperInsect in helperInsects)
         {
-            if (!helperInsect.target)
+            if (helperInsect && !helperInsect.target)
             {
                 res.Add(helperInsect.transform);
             }

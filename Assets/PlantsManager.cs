@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-public enum PlantProperty { s, p, n, water, bee, pest };
-public enum HelperPlantType { red, yellow, blue, purple, appleTree1, appleTree2, appleTree3, cherryTree1, cherryTree2, cherryTree3 };
+public enum PlantProperty { s, p, n, water, bee, pest, frog };
+public enum HelperPlantType { red, yellow, blue, purple, appleTree1, appleTree2, appleTree3, appleTree4, appleTreeFlower, waterlily, lupin, zinnia, stawberry };
 public class PlantsManager : Singleton<PlantsManager>
 {
     public bool ignoreResourcePlant = true;
@@ -12,6 +12,26 @@ public class PlantsManager : Singleton<PlantsManager>
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantCost;
     //public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantKeepCost;
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantProd;
+
+    public Dictionary<HelperPlantType, float> helperPlantProdTime;
+
+    Dictionary<HelperPlantType, HelperPlantType> treeToUnlockFlower = new Dictionary<HelperPlantType, HelperPlantType>()
+    {
+        {HelperPlantType.blue, HelperPlantType.waterlily },
+        {HelperPlantType.waterlily, HelperPlantType.red },
+        {HelperPlantType.red, HelperPlantType.purple },
+        {HelperPlantType.purple, HelperPlantType.yellow },
+    };
+
+    //Dictionary<HelperPlantType, PlantProperty> treeToUnlockResource = new Dictionary<HelperPlantType, PlantProperty>()
+    //{
+    //    {HelperPlantType.blue, PlantProperty.water },
+    //    {HelperPlantType.waterlily, PlantProperty.frog },
+    //    {HelperPlantType.red, PlantProperty.n },
+    //    {HelperPlantType.purple, PlantProperty.p },
+    //    {HelperPlantType.yellow, PlantProperty.bee },
+    //    {HelperPlantType.purple, PlantProperty.p },
+    //};
 
     public Dictionary<PlantProperty, int> currentResource;
     public Dictionary<PlantProperty, int> baseResource;
@@ -36,7 +56,8 @@ public class PlantsManager : Singleton<PlantsManager>
     public int unlockedSlot = 2;
 
 
-    public Dictionary<HelperPlantType, bool> isPlantUnlocked;
+    public Dictionary<HelperPlantType, bool> isPlantUnlocked; 
+    public Dictionary<PlantProperty, bool> isResourceUnlocked = new Dictionary<PlantProperty, bool>();
     public List<GameObject> helperPlantList;
 
     List<HelperPlant> plantedPlant = new List<HelperPlant>();
@@ -69,115 +90,117 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.water, 0 },
         { PlantProperty.bee, 0 },
         { PlantProperty.pest, 0 },
+        { PlantProperty.frog, 0 },
     };
         baseResourceRate = new Dictionary<PlantProperty, int>() {
-        { PlantProperty.p, 0 },
-        { PlantProperty.s, 0 },
-        { PlantProperty.n, 0 },
-        { PlantProperty.water, 10 },
-        { PlantProperty.bee, 0 },
-        { PlantProperty.pest, 0 },
-    };
-        resourceName = new Dictionary<PlantProperty, string>() {
-        { PlantProperty.p, "K" },
-        { PlantProperty.s, "P"  },
-        { PlantProperty.n, "N" },
-        { PlantProperty.water, "Water" },
-        { PlantProperty.bee, "Bee Attrack" },
-        { PlantProperty.pest, "Pest Attrack" },
-
-    };
-        baseResource = new Dictionary<PlantProperty, int>() {
-        { PlantProperty.p, 0 },
-        { PlantProperty.s, 0 },
-        { PlantProperty.n, 0 },
-        { PlantProperty.water, 300 },
-        { PlantProperty.bee, 0 },
-        { PlantProperty.pest, 0 },
-
-    };
-        currentResource = new Dictionary<PlantProperty, int>() {
         { PlantProperty.p, 0 },
         { PlantProperty.s, 0 },
         { PlantProperty.n, 0 },
         { PlantProperty.water, 200 },
         { PlantProperty.bee, 0 },
         { PlantProperty.pest, 0 },
+        { PlantProperty.frog, 0 },
+    };
+        resourceName = new Dictionary<PlantProperty, string>() {
+        { PlantProperty.s, "K" },
+        { PlantProperty.p, "P"  },
+        { PlantProperty.n, "N" },
+        { PlantProperty.water, "Water" },
+        { PlantProperty.bee, "Bee Attrack" },
+        { PlantProperty.pest, "Pest Attrack" },
+        { PlantProperty.frog, "Frog Count" },
+
+    };
+        baseResource = new Dictionary<PlantProperty, int>() {
+        { PlantProperty.p, 0 },
+        { PlantProperty.s, 0 },
+        { PlantProperty.n, 0 },
+        { PlantProperty.water, 200 },
+        { PlantProperty.bee, 0 },
+        { PlantProperty.pest, 0 },
+        { PlantProperty.frog, 0 },
+
+    };
+        currentResource = new Dictionary<PlantProperty, int>() {
+        { PlantProperty.p, 0 },
+        { PlantProperty.s, 0 },
+        { PlantProperty.n, 0 },
+        { PlantProperty.water, 0 },
+        { PlantProperty.bee, 0 },
+        { PlantProperty.pest, 0 },
+        { PlantProperty.frog, 0 },
 
     };
 
 
         isPlantUnlocked = new Dictionary<HelperPlantType, bool>() {
-        { HelperPlantType.purple,false }, };
+        { HelperPlantType.purple,false },
+        { HelperPlantType.waterlily,false },
+        { HelperPlantType.red,false },
+        { HelperPlantType.yellow,false },
+        { HelperPlantType.lupin,false },
+        { HelperPlantType.zinnia,false },
+        { HelperPlantType.stawberry,false },
+        };
         plantName = new Dictionary<HelperPlantType, string>() {
-        { HelperPlantType.red, "Red Flower" },
-        { HelperPlantType.yellow, "Yellow Flower" },
+        { HelperPlantType.red, "Crimon Clover" },
+        { HelperPlantType.yellow, "Marigold" },
         { HelperPlantType.blue, "Pond" },
-        { HelperPlantType.purple, "Purple Flower" },
-        { HelperPlantType.appleTree1, "Apple Tree - child" },
-        { HelperPlantType.appleTree2, "Apple Tree - middle" },
-        { HelperPlantType.appleTree3, "Apple Tree - flower" },
-        { HelperPlantType.cherryTree1, "Cherry Tree - child" },
-        { HelperPlantType.cherryTree2, "Cherry Tree - middle" },
-        { HelperPlantType.cherryTree3, "Cherry Tree - flower" },
+        { HelperPlantType.purple, "Lavender" },
+        { HelperPlantType.appleTree1, "Apple Tree - Sprout" },
+        { HelperPlantType.appleTree2, "Apple Tree - Sapling" },
+        { HelperPlantType.appleTree3, "Apple Tree - Juvenile" },
+        { HelperPlantType.appleTree4, "Apple Tree - Adult" },
+        { HelperPlantType.appleTreeFlower, "Apple Tree - flower" },
+
+        { HelperPlantType.waterlily, "Water Lily" },
+        { HelperPlantType.lupin, "Lupin" },
+        { HelperPlantType.zinnia, "Zinnia" },
+        { HelperPlantType.stawberry, "Stawberry" },
 
     };
+        helperPlantProdTime = new Dictionary<HelperPlantType, float>() {
+            {HelperPlantType.red, 6},
+            {HelperPlantType.purple, 4},
+            {HelperPlantType.blue, 8},
+            {HelperPlantType.waterlily, 100000},
+            {HelperPlantType.yellow, 100000},
+        };
+
         helperPlantProd = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
         {HelperPlantType.red,new Dictionary<PlantProperty, int>() {
-            { PlantProperty.p, 8 },
-            { PlantProperty.water, 5 },
+            { PlantProperty.n, 8 },
             { PlantProperty.pest, 2 },
         }},
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() {
-            { PlantProperty.s, 5 },
-            { PlantProperty.water, 5 },
+        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() {
+            { PlantProperty.p, 6 },
             { PlantProperty.pest, 2 },
         } },
-        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { 
-            { PlantProperty.n, 3 },
-            { PlantProperty.water, 10 },
-            //{ PlantProperty.pest, 2 },
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() {
+            { PlantProperty.bee, 2 },
+            { PlantProperty.pest, 2 },
         } },
-        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() {
-            { PlantProperty.s, 5 }, 
-            {PlantProperty.n, 2 } ,
-            {PlantProperty.p, 2 },
-            { PlantProperty.water, 5 },
-            { PlantProperty.bee, 3 },
-            { PlantProperty.pest, 5 }, } },
+        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() {
+            { PlantProperty.water, 10 },
+        } },
+        {HelperPlantType.waterlily,new Dictionary<PlantProperty, int>() {
+            { PlantProperty.frog, 1 },
+        } },
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  } },
         {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { } },
         {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { } },
-        {HelperPlantType.cherryTree1,new Dictionary<PlantProperty, int>() {  } },
-        {HelperPlantType.cherryTree2,new Dictionary<PlantProperty, int>() { } },
-        {HelperPlantType.cherryTree3,new Dictionary<PlantProperty, int>() { } },
     }; 
-    //    helperPlantKeepCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
-    //{
-    //    {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-    //    {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-    //    {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-    //    {HelperPlantType.purple,new Dictionary<PlantProperty, int>() {  { PlantProperty.n, 1 } } },
-    //    {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-    //    {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 2 }, { PlantProperty.n, 2 } } },
-    //    {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 3 } , { PlantProperty.n, 3 } , { PlantProperty.s, 2 } } },
-    //    {HelperPlantType.cherryTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 1 } } },
-    //    {HelperPlantType.cherryTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 2 }, { PlantProperty.n, 2 } } },
-    //    {HelperPlantType.cherryTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 3 } , { PlantProperty.n, 3 } , { PlantProperty.s, 2 } } },
-    //}; 
         helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 30 } } },
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 30 } } },
-        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
-        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 }, { PlantProperty.n, 5 }, { PlantProperty.p, 5 } } },
-        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
-        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.n,10}, { PlantProperty.p, 10 } } },
-        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.s, 20 }, { PlantProperty.p, 50 } } },
-        {HelperPlantType.cherryTree1,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 } } },
-        {HelperPlantType.cherryTree2,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.n,10}, { PlantProperty.p, 10 } } },
-        {HelperPlantType.cherryTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.s, 20 }, { PlantProperty.p, 50 } } },
+        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 0 } } },
+        {HelperPlantType.waterlily,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
+        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 20 } } },
+        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 8 } ,{ PlantProperty.water, 10 } } },
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 10 }, { PlantProperty.n, 8 }, { PlantProperty.p, 8 } } },
+        {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  { PlantProperty.n,20}, { PlantProperty.p, 15 }  } },
+        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() {  { PlantProperty.n,40}, { PlantProperty.p, 25 } } },
+        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 80 }, { PlantProperty.p, 60 } } },
     };
     }
     // Start is called before the first frame update
@@ -193,6 +216,7 @@ public class PlantsManager : Singleton<PlantsManager>
     void Start()
     {
         //UpdateRate();
+        ClearResource();
     }
 
     public int firstAvailableSlot()
@@ -207,7 +231,18 @@ public class PlantsManager : Singleton<PlantsManager>
         }
         return -1;
     }
+    public void startTreePlant(HelperPlantType type)
+    {
+        if(treeToUnlockFlower.ContainsKey(type))
+        {
+            UnlockPlant(treeToUnlockFlower[type]);
+        }
 
+        foreach(var product in helperPlantProd[type].Keys)
+        {
+            UnlockResource(product);
+        }
+    }
     public bool hasSlot()
     {
         return firstAvailableSlot() != -1;
@@ -298,6 +333,7 @@ public class PlantsManager : Singleton<PlantsManager>
         //var slotId = firstAvailableSlot();
        // if (slotId != -1)
         {
+
             //var slot = plantSlots[slotId];
             CollectionManager.Instance.RemoveCoins(plant.transform.position, PlantsManager.Instance.helperPlantCost[plant.GetComponent<HelperPlant>().type]);
             //ReduceCostForType(plant.GetComponent<HelperPlant>().type);
@@ -331,10 +367,6 @@ public class PlantsManager : Singleton<PlantsManager>
 
     public void ClearResource()
     {
-        foreach (var key in currentResourceRate.Keys.ToArray<PlantProperty>())
-        {
-            currentResourceRate[key] = baseResourceRate[key];
-        }
         foreach (var key in baseResource.Keys.ToArray<PlantProperty>())
         {
             currentResource[key] = baseResource[key];
@@ -352,46 +384,15 @@ public class PlantsManager : Singleton<PlantsManager>
         isPlantUnlocked[type] = true;
         HUD.Instance.UpdatePlantButtons();
     }
+    public void UnlockResource(PlantProperty type)
+    {
+        isResourceUnlocked[type] = true;
+    }
+    
 
-    //public void UpdateRate()
-    //{
-    //    foreach (var key in currentResourceRate.Keys.ToArray<PlantProperty>())
-    //    {
-    //        currentResourceRate[key] = baseResourceRate[key];
-    //    }
-    //    foreach (var plant in plantedPlant)
-    //    {
-    //        if (plant && plant.isAlive)
-    //        {
-    //            UpdateOneTypeRate(plant.type);
-    //        }
-    //    }
-    //    if (maintree)
-    //    {
-
-    //        UpdateOneTypeRate(maintree.type);
-    //    }
-
-    //    PlantDetail.Instance.UpdateValue();
-    //}
-
-    //void UpdateOneTypeRate(HelperPlantType type)
-    //{
-    //    var prodDictionary = helperPlantProd[type];
-    //    foreach (var pairI in prodDictionary)
-    //    {
-    //        currentResourceRate[pairI.Key] += pairI.Value;
-    //    }
-
-    //    var keepCostDictionary = helperPlantKeepCost[type];
-    //    foreach (var pairI in keepCostDictionary)
-    //    {
-    //        currentResourceRate[pairI.Key] -= pairI.Value;
-    //    }
-    //}
 
     public bool isIncreasingResource(PlantProperty p)
     {
-        return !(p == PlantProperty.bee || p == PlantProperty.pest);
+        return !(p == PlantProperty.bee || p == PlantProperty.pest || p == PlantProperty.frog);
     }
 }

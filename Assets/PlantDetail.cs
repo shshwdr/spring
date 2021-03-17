@@ -96,7 +96,7 @@ public class PlantDetail : Singleton<PlantDetail>
                 //this is planted plant
                 //stats.text += getOnetimeCost(helperPlant);
                 var helperPlant = plant.GetComponent<HelperPlant>();
-                UpdateHealth(helperPlant);
+                UpdateStaticHealth(helperPlant);
                 plantName.text = getName(helperPlant);
                 getProduction(helperPlant);
                 //stats.text += getProduction(helperPlant);

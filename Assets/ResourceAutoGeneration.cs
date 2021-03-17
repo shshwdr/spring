@@ -9,7 +9,7 @@ public class ResourceAutoGeneration : Singleton<ResourceAutoGeneration>
     public Transform spawnPositionParent;
     public Transform pestParent;
     List<Transform> transforms;
-
+    public bool autoResrouceStart = false;
     public void Clear()
     {
         foreach (Transform t in pestParent)
@@ -52,6 +52,10 @@ public class ResourceAutoGeneration : Singleton<ResourceAutoGeneration>
     // Update is called once per frame
     void Update()
     {
+        if (!autoResrouceStart)
+        {
+            return;
+        }
         if (currentHarvestTimer > harvestTime)
         {
             currentHarvestTimer = 0;

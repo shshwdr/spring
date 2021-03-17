@@ -16,6 +16,8 @@ public class PestManager : Singleton<PestManager>
     float currentBeeGenerateTime = 0;
 
     public bool lotsPest = false;
+
+    public bool startGenerate;
     // Start is called before the first frame update
 
     public void Clear()
@@ -84,6 +86,10 @@ public class PestManager : Singleton<PestManager>
     // Update is called once per frame
     void Update()
     {
+        //if (!startGenerate)
+        //{
+        //    return;
+        //}
         if (lotsPest)
         {
             beeGenerateTime = 1;
