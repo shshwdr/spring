@@ -10,6 +10,7 @@ public class PlantDetail : Singleton<PlantDetail>
     public List<GameObject> oneDetailEntrys;
     public GameObject oneState;
     PlantsManager plantManager;
+    public TMP_Text healthText;
 
     public GameObject actionUI;
     GameObject plant;
@@ -35,6 +36,7 @@ public class PlantDetail : Singleton<PlantDetail>
             //this is a plant button
             var helperPlant = plantButton.helperPlant;
             plantName.text = getName(helperPlant);
+            UpdateHealth(helperPlant);
             getOnetimeCost(helperPlant); 
             getProduction(helperPlant);
             //stats.text += getOnetimeCost(helperPlant);
@@ -57,6 +59,7 @@ public class PlantDetail : Singleton<PlantDetail>
             if (maintree)
             {
                 plantName.text = getName(maintree);
+                UpdateHealth(maintree);
                 //stats.text += getDurationCost(maintree);
                 getProduction(maintree);
                 getUpgrade(maintree);
@@ -93,6 +96,7 @@ public class PlantDetail : Singleton<PlantDetail>
                 //this is planted plant
                 //stats.text += getOnetimeCost(helperPlant);
                 var helperPlant = plant.GetComponent<HelperPlant>();
+                UpdateHealth(helperPlant);
                 plantName.text = getName(helperPlant);
                 getProduction(helperPlant);
                 //stats.text += getProduction(helperPlant);
@@ -101,10 +105,21 @@ public class PlantDetail : Singleton<PlantDetail>
             }
         }
     }
+
     public void updateValue(GameObject p)
     {
         plant = p;
         UpdateValue();
+    }
+
+    void UpdateHealth(HelperPlant plant)
+    {
+        healthText.text = "Health: "+plant.getCurrentHp() + "/" + plant.maxHP;
+    }
+
+    void UpdateStaticHealth(HelperPlant plant)
+    {
+        healthText.text = "Health: " + plant.maxHP;
     }
 
     void updateEntry(string title, Dictionary<PlantProperty, int> dict,bool checkValue = false)

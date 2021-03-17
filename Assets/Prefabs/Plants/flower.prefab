@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlive: 1
-  maxHP: 1
+  maxHP: 3
   type: 0
   slot: 0
   plantCollider: {fileID: 5718688822822655125}

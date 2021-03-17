@@ -6,6 +6,7 @@ public class HPObject : MonoBehaviour
 {
     public bool isAlive = true;
     public int maxHP = 1;
+    public int getCurrentHp() { return hp; }
     int hp;
     // Start is called before the first frame update
     protected virtual void Start()
