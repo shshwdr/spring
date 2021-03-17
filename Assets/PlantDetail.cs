@@ -36,7 +36,7 @@ public class PlantDetail : Singleton<PlantDetail>
             //this is a plant button
             var helperPlant = plantButton.helperPlant;
             plantName.text = getName(helperPlant);
-            UpdateHealth(helperPlant);
+            UpdateStaticHealth(helperPlant);
             getOnetimeCost(helperPlant); 
             getProduction(helperPlant);
             //stats.text += getOnetimeCost(helperPlant);
@@ -96,7 +96,7 @@ public class PlantDetail : Singleton<PlantDetail>
                 //this is planted plant
                 //stats.text += getOnetimeCost(helperPlant);
                 var helperPlant = plant.GetComponent<HelperPlant>();
-                UpdateStaticHealth(helperPlant);
+                UpdateHealth(helperPlant);
                 plantName.text = getName(helperPlant);
                 getProduction(helperPlant);
                 //stats.text += getProduction(helperPlant);

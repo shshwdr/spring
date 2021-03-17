@@ -1,5 +1,68 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &690072092256142738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5031111694281736943}
+  - component: {fileID: 5263965876669884949}
+  m_Layer: 0
+  m_Name: pondwater
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5031111694281736943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690072092256142738}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7671502119766076082}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &5263965876669884949
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690072092256142738}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.28448895, y: 0.103825755}
+      - {x: -0.365586, y: 0.041650042}
+      - {x: -0.7322788, y: -0.11751187}
+      - {x: -0.3264539, y: -0.22492872}
+      - {x: 0.48893166, y: -0.22134374}
+      - {x: 0.8309948, y: -0.16628349}
+      - {x: 0.8065628, y: 0.00970896}
 --- !u!60 &2166517600443803984
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -316,6 +379,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 627519308935557595, guid: 1cf300ff3d2f0a74da9a1df645c06dee,
         type: 3}
+    - target: {fileID: -8976927348431448734, guid: a8a1250397108d844a42a91938184908,
+        type: 3}
+      propertyPath: summonAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1072396907640421440, guid: a8a1250397108d844a42a91938184908,
         type: 3}
       propertyPath: m_Sprite
@@ -465,6 +533,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4162409400496757835, guid: a8a1250397108d844a42a91938184908, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a8a1250397108d844a42a91938184908, type: 3}
+--- !u!4 &7671502119766076082 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1072396907640421471, guid: a8a1250397108d844a42a91938184908,
+    type: 3}
+  m_PrefabInstance: {fileID: 7248347638418003693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7797624300943272685 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 622046757288623104, guid: a8a1250397108d844a42a91938184908,

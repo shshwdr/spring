@@ -28,7 +28,7 @@ public class HelperPlant : HPObject
             resourcePositionCount = resourcePositionsParent.childCount;
 
         }
-        harvestTime = PlantsManager.Instance.helperPlantProdTime[type];
+        harvestTime = PlantsManager.Instance.helperPlantProdTime.ContainsKey(type)? PlantsManager.Instance.helperPlantProdTime[type]:10000;
     }
 
     private void OnMouseEnter()
@@ -97,7 +97,7 @@ public class HelperPlant : HPObject
     }
     bool canPlant()
     {
-        return PlantsManager.Instance.IsPlantable(type, plantCollider);
+        return PlantsManager.Instance.IsPlantable(type, plantCollider,isWater);
     }
     // Update is called once per frame
     protected override void Update()

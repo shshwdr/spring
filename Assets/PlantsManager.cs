@@ -268,7 +268,7 @@ public class PlantsManager : Singleton<PlantsManager>
         }
         return ignoreSlot || hasSlot();
     }
-    bool IsPositionValid(Collider2D col)
+    bool IsPositionValid(Collider2D col, bool isWaterPlant = false)
     {
         if (!shadowCollider.OverlapPoint(col.transform.position))
         {
@@ -280,6 +280,7 @@ public class PlantsManager : Singleton<PlantsManager>
         bool collideGround = true;
         bool collideShadow = false;
         bool collideOtherPlant = false;
+        bool colliderWater = !isWaterPlant;
         foreach(var collided in colliders)
         {
             if (!collided)
@@ -289,7 +290,7 @@ public class PlantsManager : Singleton<PlantsManager>
             if (collided == groundCollider1 || collided == groundCollider2)
             {
                 collideGround = false;
-                break;
+                //break;
             }
             if (collided == shadowCollider)
             {
@@ -297,13 +298,27 @@ public class PlantsManager : Singleton<PlantsManager>
             }
             if(collided.name == "plant" && collided.GetComponentInParent<HelperPlant>())
             {
+                if (isWaterPlant)
+                {
+                    if (collided.GetComponentInParent<HelperPlant>().type == HelperPlantType.blue)
+                    {
+                        continue;
+                    }
+                }
                 collideOtherPlant = true;
-                break;
+               // break;
+            }
+            if(collided.name == "pondwater")
+            {
+                colliderWater = true;
             }
         }
-        return collideGround&& collideShadow && !collideOtherPlant;
+
+
+
+        return collideGround&& collideShadow && !collideOtherPlant && colliderWater;
     }
-    public bool IsPlantable(HelperPlantType type, Collider2D pos)
+    public bool IsPlantable(HelperPlantType type, Collider2D pos, bool isWaterPlant = false)
     {
         if (!ignoreResourcePlant)
         {
@@ -316,7 +331,7 @@ public class PlantsManager : Singleton<PlantsManager>
                 }
             }
         }
-        return IsPositionValid(pos);
+        return IsPositionValid(pos, isWaterPlant);
     }
 
     void ReduceResource(Dictionary<PlantProperty, int> origin, Dictionary<PlantProperty, int> reduce)

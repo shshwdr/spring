@@ -667,7 +667,7 @@ MonoBehaviour:
   unlockedSlot: 2
   helperPlantList:
   - {fileID: 7671502119766076076, guid: 2e7964e1996ed6c40984b2743fbb0d39, type: 3}
-  - {fileID: 4192339320268949701, guid: 6b76a407463f36d4ca7ef976eb2d5663, type: 3}
+  - {fileID: 2852217078021426635, guid: 329b32fd9bdf3ea4bad61687d704eba1, type: 3}
   - {fileID: 6652149665147289357, guid: 12b7dc363bab7e04ca68c90be626029d, type: 3}
   - {fileID: 2858529316436187061, guid: 6225d9974f288cd4da8fa468512ba9ee, type: 3}
   - {fileID: 6483634848677096600, guid: bb0c5df08992b8a40b51c3f436e4ca5e, type: 3}
@@ -690,6 +690,7 @@ MonoBehaviour:
   pestPrefab: {fileID: 1881286037005167963, guid: 0b5ce2060bebbdd4db9e0089b995a160,
     type: 3}
   lotsPest: 0
+  startGenerate: 0
 --- !u!114 &204554936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,6 +738,7 @@ MonoBehaviour:
   birdShowtimeMax: 40
   spawnBirdHighest: {fileID: 1768030042}
   spawnBirdLowest: {fileID: 2009882304}
+  autoResrouceStart: 0
 --- !u!114 &204554939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6065,6 +6067,7 @@ MonoBehaviour:
   harvestTime: 10
   spawnPositionParent: {fileID: 1128002739}
   pestParent: {fileID: 672367350}
+  autoResrouceStart: 0
 --- !u!1 &1646452818
 GameObject:
   m_ObjectHideFlags: 0
