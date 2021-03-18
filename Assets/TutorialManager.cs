@@ -11,11 +11,11 @@ public class TutorialManager : Singleton<TutorialManager>
     };
 
     Dictionary<HelperPlantType, string> finishPlantToStartDialog = new Dictionary<HelperPlantType, string>() {
-        {HelperPlantType.blue,Dialogues.FinishPlantPond },
+        {HelperPlantType.pond,Dialogues.FinishPlantPond },
         {HelperPlantType.waterlily,Dialogues.FinishPlantWaterLily },
-        {HelperPlantType.red,Dialogues.FinishPlantCrimson },
-        {HelperPlantType.purple,Dialogues.FinishPlantLavender },
-        {HelperPlantType.yellow,Dialogues.FinishPlantMarigold },
+        {HelperPlantType.crimson,Dialogues.FinishPlantCrimson },
+        {HelperPlantType.lavender,Dialogues.FinishPlantLavender },
+        {HelperPlantType.marigold,Dialogues.FinishPlantMarigold },
         {HelperPlantType.appleTree2,Dialogues.FinishUpgradeTree1 },
         
 
@@ -25,8 +25,8 @@ public class TutorialManager : Singleton<TutorialManager>
     Dictionary<HelperPlantType, string> enoughResourceToStartDialog = new Dictionary<HelperPlantType, string>() {
         
         {HelperPlantType.waterlily,Dialogues.FinishCollectForWaterLily },
-        {HelperPlantType.red,Dialogues.FinishCollectForCrimson },
-        {HelperPlantType.purple,Dialogues.FinishCollectForLavender },
+        {HelperPlantType.crimson,Dialogues.FinishCollectForCrimson },
+        {HelperPlantType.lavender,Dialogues.FinishCollectForLavender },
 
     };
 

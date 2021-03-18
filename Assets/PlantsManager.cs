@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 public enum PlantProperty { s, p, n, water, bee, pest, frog };
-public enum HelperPlantType { red, yellow, blue, purple, appleTree1, appleTree2, appleTree3, appleTree4, appleTreeFlower, waterlily, lupin, zinnia, stawberry };
+public enum HelperPlantType { crimson, marigold, pond, lavender, appleTree1, appleTree2, appleTree3, appleTree4, appleTreeFlower, waterlily, lupin, zinnia, stawberry };
 public class PlantsManager : Singleton<PlantsManager>
 {
     public bool ignoreResourcePlant = true;
@@ -17,20 +17,20 @@ public class PlantsManager : Singleton<PlantsManager>
 
     Dictionary<HelperPlantType, HelperPlantType> treeToUnlockFlower = new Dictionary<HelperPlantType, HelperPlantType>()
     {
-        {HelperPlantType.blue, HelperPlantType.waterlily },
-        {HelperPlantType.waterlily, HelperPlantType.red },
-        {HelperPlantType.red, HelperPlantType.purple },
-        {HelperPlantType.purple, HelperPlantType.yellow },
+        {HelperPlantType.pond, HelperPlantType.waterlily },
+        {HelperPlantType.waterlily, HelperPlantType.crimson },
+        {HelperPlantType.crimson, HelperPlantType.lavender },
+        {HelperPlantType.lavender, HelperPlantType.marigold },
     };
 
     //Dictionary<HelperPlantType, PlantProperty> treeToUnlockResource = new Dictionary<HelperPlantType, PlantProperty>()
     //{
-    //    {HelperPlantType.blue, PlantProperty.water },
+    //    {HelperPlantType.pond, PlantProperty.water },
     //    {HelperPlantType.waterlily, PlantProperty.frog },
-    //    {HelperPlantType.red, PlantProperty.n },
-    //    {HelperPlantType.purple, PlantProperty.p },
-    //    {HelperPlantType.yellow, PlantProperty.bee },
-    //    {HelperPlantType.purple, PlantProperty.p },
+    //    {HelperPlantType.crimson, PlantProperty.n },
+    //    {HelperPlantType.lavender, PlantProperty.p },
+    //    {HelperPlantType.marigold, PlantProperty.bee },
+    //    {HelperPlantType.lavender, PlantProperty.p },
     //};
 
     public Dictionary<PlantProperty, int> currentResource;
@@ -103,19 +103,19 @@ public class PlantsManager : Singleton<PlantsManager>
 
 
         isPlantUnlocked = new Dictionary<HelperPlantType, bool>() {
-        { HelperPlantType.purple,false },
+        { HelperPlantType.lavender,false },
         { HelperPlantType.waterlily,false },
-        { HelperPlantType.red,false },
-        { HelperPlantType.yellow,false },
+        { HelperPlantType.crimson,false },
+        { HelperPlantType.marigold,false },
         { HelperPlantType.lupin,false },
         { HelperPlantType.zinnia,false },
         { HelperPlantType.stawberry,false },
         };
         plantName = new Dictionary<HelperPlantType, string>() {
-        { HelperPlantType.red, "Crimon Clover" },
-        { HelperPlantType.yellow, "Marigold" },
-        { HelperPlantType.blue, "Pond" },
-        { HelperPlantType.purple, "Lavender" },
+        { HelperPlantType.crimson, "Crimon Clover" },
+        { HelperPlantType.marigold, "Marigold" },
+        { HelperPlantType.pond, "Pond" },
+        { HelperPlantType.lavender, "Lavender" },
         { HelperPlantType.appleTree1, "Apple Tree - Sprout" },
         { HelperPlantType.appleTree2, "Apple Tree - Sapling" },
         { HelperPlantType.appleTree3, "Apple Tree - Juvenile" },
@@ -129,28 +129,28 @@ public class PlantsManager : Singleton<PlantsManager>
 
     };
         helperPlantProdTime = new Dictionary<HelperPlantType, float>() {
-            {HelperPlantType.red, 8},
-            {HelperPlantType.purple, 9},
-            {HelperPlantType.blue, 10},
+            {HelperPlantType.crimson, 8},
+            {HelperPlantType.lavender, 9},
+            {HelperPlantType.pond, 10},
             {HelperPlantType.waterlily, 100000},
-            {HelperPlantType.yellow, 100000},
+            {HelperPlantType.marigold, 100000},
         };
 
         helperPlantProd = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() {
+        {HelperPlantType.crimson,new Dictionary<PlantProperty, int>() {
             { PlantProperty.n, 8 },
             { PlantProperty.pest, 2 },
         }},
-        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() {
+        {HelperPlantType.lavender,new Dictionary<PlantProperty, int>() {
             { PlantProperty.p, 6 },
             { PlantProperty.pest, 2 },
         } },
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() {
+        {HelperPlantType.marigold,new Dictionary<PlantProperty, int>() {
             { PlantProperty.bee, 2 },
             { PlantProperty.pest, 2 },
         } },
-        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() {
+        {HelperPlantType.pond,new Dictionary<PlantProperty, int>() {
             { PlantProperty.water, 10 },
         } },
         {HelperPlantType.waterlily,new Dictionary<PlantProperty, int>() {
@@ -163,11 +163,11 @@ public class PlantsManager : Singleton<PlantsManager>
     }; 
         helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
-        {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 0 } } },
+        {HelperPlantType.pond,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 0 } } },
         {HelperPlantType.waterlily,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 40 } } },
-        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 16 } ,{ PlantProperty.water, 20 } } },
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 20 }, { PlantProperty.n, 24 }, { PlantProperty.p, 20 } } },
+        {HelperPlantType.crimson,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 40 } } },
+        {HelperPlantType.lavender,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 16 } ,{ PlantProperty.water, 20 } } },
+        {HelperPlantType.marigold,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 20 }, { PlantProperty.n, 24 }, { PlantProperty.p, 20 } } },
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  { PlantProperty.n,20}, { PlantProperty.p, 15 }  } },
         {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() {  { PlantProperty.n,40}, { PlantProperty.p, 25 } } },
         {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 80 }, { PlantProperty.p, 60 } } },
@@ -284,7 +284,7 @@ public class PlantsManager : Singleton<PlantsManager>
             {
                 if (isWaterPlant)
                 {
-                    if (collided.GetComponentInParent<HelperPlant>().type == HelperPlantType.blue)
+                    if (collided.GetComponentInParent<HelperPlant>().type == HelperPlantType.pond)
                     {
                         continue;
                     }
