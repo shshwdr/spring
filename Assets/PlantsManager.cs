@@ -40,10 +40,6 @@ public class PlantsManager : Singleton<PlantsManager>
 
     public Dictionary<HelperPlantType, string> plantName;
 
-    public Dictionary<PlantProperty, int> currentResourceRate;
-
-    public Dictionary<PlantProperty, int> baseResourceRate;
-
     public GameObject ClickToCollect;
 
     public Collider2D groundCollider2;
@@ -83,24 +79,6 @@ public class PlantsManager : Singleton<PlantsManager>
     }
     void initValues()
     {
-        currentResourceRate = new Dictionary<PlantProperty, int>() {
-        { PlantProperty.p, 0 },
-        { PlantProperty.s,0 },
-        { PlantProperty.n, 0 },
-        { PlantProperty.water, 0 },
-        { PlantProperty.bee, 0 },
-        { PlantProperty.pest, 0 },
-        { PlantProperty.frog, 0 },
-    };
-        baseResourceRate = new Dictionary<PlantProperty, int>() {
-        { PlantProperty.p, 0 },
-        { PlantProperty.s, 0 },
-        { PlantProperty.n, 0 },
-        { PlantProperty.water, 200 },
-        { PlantProperty.bee, 0 },
-        { PlantProperty.pest, 0 },
-        { PlantProperty.frog, 0 },
-    };
         resourceName = new Dictionary<PlantProperty, string>() {
         { PlantProperty.s, "K" },
         { PlantProperty.p, "P"  },
@@ -109,7 +87,6 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.bee, "Bee Attrack" },
         { PlantProperty.pest, "Pest Attrack" },
         { PlantProperty.frog, "Frog Count" },
-
     };
         baseResource = new Dictionary<PlantProperty, int>() {
         { PlantProperty.p, 0 },
@@ -119,17 +96,6 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.bee, 0 },
         { PlantProperty.pest, 0 },
         { PlantProperty.frog, 0 },
-
-    };
-        currentResource = new Dictionary<PlantProperty, int>() {
-        { PlantProperty.p, 0 },
-        { PlantProperty.s, 0 },
-        { PlantProperty.n, 0 },
-        { PlantProperty.water, 0 },
-        { PlantProperty.bee, 0 },
-        { PlantProperty.pest, 0 },
-        { PlantProperty.frog, 0 },
-
     };
 
 
@@ -160,9 +126,9 @@ public class PlantsManager : Singleton<PlantsManager>
 
     };
         helperPlantProdTime = new Dictionary<HelperPlantType, float>() {
-            {HelperPlantType.red, 6},
-            {HelperPlantType.purple, 4},
-            {HelperPlantType.blue, 8},
+            {HelperPlantType.red, 8},
+            {HelperPlantType.purple, 9},
+            {HelperPlantType.blue, 10},
             {HelperPlantType.waterlily, 100000},
             {HelperPlantType.yellow, 100000},
         };
@@ -190,17 +156,31 @@ public class PlantsManager : Singleton<PlantsManager>
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  } },
         {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() { } },
         {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { } },
+        {HelperPlantType.appleTree4,new Dictionary<PlantProperty, int>() { } },
     }; 
         helperPlantCost = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
     {
         {HelperPlantType.blue,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 0 } } },
         {HelperPlantType.waterlily,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
-        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 20 } } },
-        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 8 } ,{ PlantProperty.water, 10 } } },
-        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 10 }, { PlantProperty.n, 8 }, { PlantProperty.p, 8 } } },
+        {HelperPlantType.red,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 40 } } },
+        {HelperPlantType.purple,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 16 } ,{ PlantProperty.water, 20 } } },
+        {HelperPlantType.yellow,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 20 }, { PlantProperty.n, 24 }, { PlantProperty.p, 20 } } },
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  { PlantProperty.n,20}, { PlantProperty.p, 15 }  } },
         {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() {  { PlantProperty.n,40}, { PlantProperty.p, 25 } } },
         {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 80 }, { PlantProperty.p, 60 } } },
+        {HelperPlantType.appleTree4,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 100 }, { PlantProperty.p, 80 } } },
+        {HelperPlantType.appleTreeFlower,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 40 }, { PlantProperty.p, 40 } } },
+    };
+
+
+        currentResource = new Dictionary<PlantProperty, int>() {
+        { PlantProperty.p, 0 },
+        { PlantProperty.s, 0 },
+        { PlantProperty.n, 0 },
+        { PlantProperty.water, 0 },
+        { PlantProperty.bee, 0 },
+        { PlantProperty.pest, 0 },
+        { PlantProperty.frog, 0 },
     };
     }
     // Start is called before the first frame update

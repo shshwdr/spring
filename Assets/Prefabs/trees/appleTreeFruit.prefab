@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 723263778911436276}
   - component: {fileID: 3843647396006832038}
   m_Layer: 0
-  m_Name: treeFruit
+  m_Name: appleTreeFruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: -223180721
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8fbfa2755f1156d4ea58cd6e2066aad7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 587f9627c5d863d4fa5a9391d80b3594, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

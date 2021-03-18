@@ -617,6 +617,7 @@ GameObject:
   - component: {fileID: 204554938}
   - component: {fileID: 204554939}
   - component: {fileID: 204554940}
+  - component: {fileID: 204554941}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -654,7 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed18a594cbf366541a10a88cfdcda76b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreResourcePlant: 1
+  ignoreResourcePlant: 0
   maintree: {fileID: 0}
   mainTreePrefab: {fileID: 6984865398421117964, guid: ec275effd023f264abcea41a25a7b042,
     type: 3}
@@ -770,6 +771,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1221af476a2cce438b5d285880a1419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &204554941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204554932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2893c352e85beca4588fab88e71d55d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &210852912
@@ -7958,6 +7971,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6984865398421117967, guid: ec275effd023f264abcea41a25a7b042,
+        type: 3}
+      propertyPath: flowerPlantType
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6984865398421117967, guid: ec275effd023f264abcea41a25a7b042,
         type: 3}

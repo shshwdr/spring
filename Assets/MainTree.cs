@@ -84,8 +84,7 @@ public class MainTree : HelperPlant
         type = upgradeList[currentLevel];
         BirdManager.Instance.startTreePlant(type);
         PlantsManager.Instance.startTreePlant(type);
-        PlantsManager.Instance.unlockedSlot = slotCount[currentLevel];
-        //PlantsManager.Instance.ReduceCostForType(type);
+        //PlantsManager.Instance.unlockedSlot = slotCount[currentLevel];
         CollectionManager.Instance.RemoveCoins(transform.position, PlantsManager.Instance.helperPlantCost[type]);
         HUD.Instance.ShowPlantDetail(gameObject);
         GetComponent<Animator>().SetTrigger("grow");
@@ -96,7 +95,6 @@ public class MainTree : HelperPlant
         if (canPurchaseFlower())
         {
 
-            PlantsManager.Instance.ReduceCostForType(flowerPlantType);
             SpawnFlower();
 
             HUD.Instance.ShowPlantDetail(gameObject);
