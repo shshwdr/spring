@@ -22,7 +22,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 79e9916aed6c2b740a1e6a02e1dbf20c,
+      objectReference: {fileID: 21300000, guid: 9516e811111b06c438b9bd1fd6e85598,
         type: 3}
     - target: {fileID: 1072396907640421440, guid: a8a1250397108d844a42a91938184908,
         type: 3}
@@ -47,7 +47,7 @@ PrefabInstance:
     - target: {fileID: 1072396907640421441, guid: a8a1250397108d844a42a91938184908,
         type: 3}
       propertyPath: m_Name
-      value: WaterLily
+      value: waterLily
       objectReference: {fileID: 0}
     - target: {fileID: 1072396907640421470, guid: a8a1250397108d844a42a91938184908,
         type: 3}

@@ -13,6 +13,7 @@ public class BeeManager : Singleton<BeeManager>
     public int currentBeeCount = 0;
     public int maxBeeCount = 5;
 
+    public bool lotsPest = false;
     public Transform beeParent;
 
     public Transform getClosestSpawnTransform(Vector3 pos)
@@ -60,7 +61,11 @@ public class BeeManager : Singleton<BeeManager>
     // Update is called once per frame
     void Update()
     {
-        if(beeGenerateTime > 0)
+        if (lotsPest)
+        {
+            beeGenerateTime = 1;
+        }
+        if (beeGenerateTime > 0)
         {
 
             currentBeeGenerateTime += Time.deltaTime;

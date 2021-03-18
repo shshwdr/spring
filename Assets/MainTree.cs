@@ -88,6 +88,7 @@ public class MainTree : HelperPlant
         //PlantsManager.Instance.ReduceCostForType(type);
         CollectionManager.Instance.RemoveCoins(transform.position, PlantsManager.Instance.helperPlantCost[type]);
         HUD.Instance.ShowPlantDetail(gameObject);
+        GetComponent<Animator>().SetTrigger("grow");
     }
 
     public void PurchaseFlower()

@@ -115,7 +115,7 @@ public class PlantsManager : Singleton<PlantsManager>
         { PlantProperty.p, 0 },
         { PlantProperty.s, 0 },
         { PlantProperty.n, 0 },
-        { PlantProperty.water, 200 },
+        { PlantProperty.water, 40 },
         { PlantProperty.bee, 0 },
         { PlantProperty.pest, 0 },
         { PlantProperty.frog, 0 },
