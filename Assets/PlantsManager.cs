@@ -225,6 +225,7 @@ public class PlantsManager : Singleton<PlantsManager>
         {
             UnlockResource(product);
         }
+        TutorialManager.Instance.finishPlant(type);
     }
     public bool hasSlot()
     {

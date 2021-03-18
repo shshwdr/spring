@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5576695975979789706}
   - component: {fileID: 5576695975979789707}
   - component: {fileID: -8258473446315905428}
-  - component: {fileID: -4196281683846494907}
+  - component: {fileID: 7729941256849587594}
   m_Layer: 0
   m_Name: Snail 1
   m_TagString: Untagged
@@ -76,8 +76,8 @@ MonoBehaviour:
   isFacingRight: 0
   hasTargetP: 0
   targetP: {x: 0, y: 0, z: 0}
---- !u!58 &-4196281683846494907
-CircleCollider2D:
+--- !u!70 &7729941256849587594
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -86,12 +86,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.017980292, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.1572101
+  m_Offset: {x: -0.2882975, y: -0.1627496}
+  m_Size: {x: 0.82330793, y: 0.5257083}
+  m_Direction: 1
 --- !u!1 &5576695977455883371
 GameObject:
   m_ObjectHideFlags: 0

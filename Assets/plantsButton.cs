@@ -14,6 +14,7 @@ public class PlantsButton : MonoBehaviour
     [HideInInspector]
     public HelperPlant helperPlant;
     HUD hud;
+    bool previousPlantableState = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,13 +62,20 @@ public class PlantsButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlantsManager.Instance.IsPlantable(helperPlant.type))
+        var currentPlantableState = PlantsManager.Instance.IsPlantable(helperPlant.type);
+        if (currentPlantableState)
         {
             GetComponent<Button>().interactable = true;
+            if (!previousPlantableState)
+            {
+
+                TutorialManager.Instance.canPurchasePlant(helperPlant.type);
+            }
         }
         else
         {
             GetComponent<Button>().interactable = false;
         }
+        previousPlantableState = currentPlantableState;
     }
 }
