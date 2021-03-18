@@ -81,6 +81,7 @@ public class MainTree : HelperPlant
             return;
         }
         currentLevel += 1;
+        PlantsManager.Instance.increaseShadowSize();
         type = upgradeList[currentLevel];
         BirdManager.Instance.startTreePlant(type);
         PlantsManager.Instance.startTreePlant(type);

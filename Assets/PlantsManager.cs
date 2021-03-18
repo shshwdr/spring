@@ -46,6 +46,9 @@ public class PlantsManager : Singleton<PlantsManager>
     public Collider2D groundCollider1;
     public Collider2D shadowCollider;
 
+    int currentShadowSizeId = 0;
+    float[] shadowColliderSize = new float[] { 30, 37, 43, 50 };
+
     public Transform plantsSlotParent;
     List<PlantSlot> plantSlots;
 
@@ -360,8 +363,24 @@ public class PlantsManager : Singleton<PlantsManager>
 
     }
 
+    public void increaseShadowSize()
+    {
+        currentShadowSizeId++;
+        if(currentShadowSizeId >= shadowColliderSize.Length)
+        {
+            currentShadowSizeId = shadowColliderSize.Length - 1;
+        }
+        UpdateShadow();
+    }
+    void UpdateShadow()
+    {
+        var size = shadowColliderSize[currentShadowSizeId];
+        shadowCollider.gameObject.transform.localScale = new Vector3(size, size, 1);
+    }
     public void ClearResource()
     {
+        currentShadowSizeId = 0;
+        UpdateShadow();
         foreach (var key in baseResource.Keys.ToArray<PlantProperty>())
         {
             currentResource[key] = baseResource[key];
