@@ -59,7 +59,7 @@ public class CllickToCollect : MonoBehaviour
         {
             PlantsManager.Instance.UnlockPlant(unlockPlant);
             BirdManager.Instance.needToUnlock[unlockPlant] = false;
-
+            TutorialManager.Instance.firstSeeSomething("unlock");
             //CollectionManager.Instance.AddCoins(transform.position, resource);
         }
         else

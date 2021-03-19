@@ -135,6 +135,8 @@ public class PlantsManager : Singleton<PlantsManager>
             {HelperPlantType.pond, 10},
             {HelperPlantType.waterlily, 100000},
             {HelperPlantType.marigold, 100000},
+            {HelperPlantType.stawberry, 13},
+            {HelperPlantType.zinnia, 100000},
         };
 
         helperPlantProd = new Dictionary<HelperPlantType, Dictionary<PlantProperty, int>>()
@@ -142,6 +144,14 @@ public class PlantsManager : Singleton<PlantsManager>
         {HelperPlantType.crimson,new Dictionary<PlantProperty, int>() {
             { PlantProperty.n, 8 },
             { PlantProperty.pest, 2 },
+        }},
+            {HelperPlantType.stawberry,new Dictionary<PlantProperty, int>() {
+            { PlantProperty.p, 20 },
+            { PlantProperty.pest, 4 },
+        }},
+        {HelperPlantType.zinnia,new Dictionary<PlantProperty, int>() {
+            { PlantProperty.bee, 5 },
+            { PlantProperty.pest, 5 },
         }},
         {HelperPlantType.lavender,new Dictionary<PlantProperty, int>() {
             { PlantProperty.p, 6 },
@@ -167,12 +177,14 @@ public class PlantsManager : Singleton<PlantsManager>
         {HelperPlantType.pond,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 0 } } },
         {HelperPlantType.waterlily,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
         {HelperPlantType.crimson,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 40 } } },
+        {HelperPlantType.stawberry,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 80 }, { PlantProperty.p, 20 } } },
+        {HelperPlantType.zinnia,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 20 }, { PlantProperty.n, 24 }, { PlantProperty.p, 30 } } },
         {HelperPlantType.lavender,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 16 } ,{ PlantProperty.water, 20 } } },
-        {HelperPlantType.marigold,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 20 }, { PlantProperty.n, 24 }, { PlantProperty.p, 20 } } },
+        {HelperPlantType.marigold,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 20 }, { PlantProperty.n, 20 }, { PlantProperty.p, 20 } } },
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  { PlantProperty.n,20}, { PlantProperty.p, 15 }  } },
-        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() {  { PlantProperty.n,40}, { PlantProperty.p, 25 } } },
-        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 80 }, { PlantProperty.p, 60 } } },
-        {HelperPlantType.appleTree4,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 100 }, { PlantProperty.p, 80 } } },
+        {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() {  { PlantProperty.n,50}, { PlantProperty.p, 30 } } },
+        {HelperPlantType.appleTree3,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 100 }, { PlantProperty.p, 80 } } },
+        {HelperPlantType.appleTree4,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 150 }, { PlantProperty.p, 100 } } },
         {HelperPlantType.appleTreeFlower,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 40 }, { PlantProperty.p, 40 } } },
     };
 

@@ -18,7 +18,9 @@ public class BirdManager : Singleton<BirdManager>
 
     Dictionary<HelperPlantType, HelperPlantType> treeToUnlockFlower = new Dictionary<HelperPlantType, HelperPlantType>()
     {
-        {HelperPlantType.appleTree2, HelperPlantType.lavender }
+        {HelperPlantType.appleTree2, HelperPlantType.stawberry },
+
+        {HelperPlantType.appleTree3, HelperPlantType.zinnia },
     };
 
     public Dictionary<HelperPlantType, bool> needToUnlock = new Dictionary<HelperPlantType, bool>();

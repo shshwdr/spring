@@ -41,6 +41,7 @@ public class Dialogues : MonoBehaviour
     static public string SeeBird = "Sometimes the bird will fly to your place. click them and they will surprise you!";
     static public string SeePest = "Snail shows up! click them and the frog will go to eat them.";
     static public string SeeBee = "Bee shows up! You can drag from the flower to the bee to attact bees to your flowers.";
+    static public string SeeUnlock = "You Unlocked a new plants from the bird! what a surprise! try it!";
 
 
     static public string GetFlowerTree = "Your tree is at its max size, you should keep upgrade to get flowers on it, and plant Marigold to attact bees.";

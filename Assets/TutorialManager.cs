@@ -14,6 +14,7 @@ public class TutorialManager : Singleton<TutorialManager>
         {"bird",Dialogues.SeeBird },
         {"pest",Dialogues.SeePest },
         {"bee",Dialogues.SeeBee },
+        {"unlock",Dialogues.SeeUnlock },
 
     };
 

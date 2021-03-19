@@ -28,6 +28,7 @@ public class CheatManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             PlantsManager.Instance.unlockAllFlowers = true;
+            HUD.Instance.UpdatePlantButtons();
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
