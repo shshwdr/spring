@@ -70,6 +70,7 @@ public class MainTree : HelperPlant
         if (fruitNumberFinished >= fruitNumberToFinish)
         {
             HUD.Instance.showGardenButton();
+            TutorialManager.Instance.finishTree(type);
         }
 
     }

@@ -54,7 +54,14 @@ public class BirdManager : Singleton<BirdManager>
             bird.transform.position = position;
             bird.GetComponent<Bird>().isClicked = false;
             birdShowCurrentTime = 0;
+            StartCoroutine(delayShow());
         }
+    }
+
+    IEnumerator delayShow()
+    {
+        yield return new WaitForSeconds(1);
+        TutorialManager.Instance.firstSeeSomething("bird");
     }
 
     public void startTreePlant(HelperPlantType type)

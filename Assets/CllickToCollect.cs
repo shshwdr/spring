@@ -10,6 +10,7 @@ public class CllickToCollect : MonoBehaviour
     public HelperPlantType unlockPlant;
     public float speed = 1f;
     public float amplitude = 1f;
+    public bool needClick;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,28 +33,40 @@ public class CllickToCollect : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = HUD.Instance.propertyImage[(int)(maxP)];
     }
 
+    private void OnMouseDown()
+    {
+        collect();
+    }
+
     private void OnMouseOver()
     {
         
-        //if (Input.GetMouseButton(0))
+        if (!needClick )
         {
-            if (!isClicked)
-            {
-                isClicked = true;
-            }
-            if (dropboxType == DropboxType.unlock)
-            {
-                PlantsManager.Instance.UnlockPlant(unlockPlant);
-                BirdManager.Instance.needToUnlock[unlockPlant] = false;
+            collect();
 
-                //CollectionManager.Instance.AddCoins(transform.position, resource);
-            }
-            else
-            {
-                CollectionManager.Instance.AddCoins(transform.position, resource);
-            }
-            Destroy(gameObject);
+
         }
+    }
+
+    void collect()
+    {
+        if (!isClicked)
+        {
+            isClicked = true;
+        }
+        if (dropboxType == DropboxType.unlock)
+        {
+            PlantsManager.Instance.UnlockPlant(unlockPlant);
+            BirdManager.Instance.needToUnlock[unlockPlant] = false;
+
+            //CollectionManager.Instance.AddCoins(transform.position, resource);
+        }
+        else
+        {
+            CollectionManager.Instance.AddCoins(transform.position, resource);
+        }
+        Destroy(gameObject);
     }
 
     void Update()

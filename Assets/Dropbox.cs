@@ -5,7 +5,7 @@ public enum DropboxType { unlock, resource}
 public class Dropbox : CllickToCollect
 {
     
-
+    
     // Update is called once per frame
     void Update()
     {

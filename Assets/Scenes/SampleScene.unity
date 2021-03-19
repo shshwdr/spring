@@ -976,7 +976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreResourcePlant: 1
-  unlockAllFlowers: 1
+  unlockAllFlowers: 0
   maintree: {fileID: 0}
   mainTreePrefab: {fileID: 6984865398421117964, guid: ec275effd023f264abcea41a25a7b042,
     type: 3}
@@ -1118,7 +1118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f32e7c92d485d4a99826648958171a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipTutorial: 1
+  skipTutorial: 0
 --- !u!1 &210852912
 GameObject:
   m_ObjectHideFlags: 0
@@ -8047,12 +8047,12 @@ PrefabInstance:
     - target: {fileID: 8735304184877534781, guid: 4901da991dd6d6e468ade6562218aa9c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.27
+      value: -5.59
       objectReference: {fileID: 0}
     - target: {fileID: 8735304184877534781, guid: 4901da991dd6d6e468ade6562218aa9c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.99
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 8735304184877534781, guid: 4901da991dd6d6e468ade6562218aa9c,
         type: 3}

@@ -79,6 +79,9 @@ public class Animal : HPObject
                         }
                         currentAttackCooldown = 0;
                     }
+
+                    if (GetComponent<Animator>())
+                        GetComponent<Animator>().SetFloat("speed", 0);
                 }
                 else
                 {
@@ -95,6 +98,12 @@ public class Animal : HPObject
                     if (GetComponent<Animator>())
                         GetComponent<Animator>().SetFloat("speed", 1);
                 }
+            }
+            else
+            {
+
+                if (GetComponent<Animator>())
+                    GetComponent<Animator>().SetFloat("speed", 0);
             }
         }
     }

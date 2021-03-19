@@ -140,13 +140,12 @@ public class CollectionManager : Singleton<CollectionManager>
 			Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPoint);
 
 
-
-
 			MoveSource(collectedCoinPosition, worldPos, pair.Key, pair.Value, () =>
 			{
-				PlantsManager.Instance.currentResource[pair.Key] += 1;
-				BeeManager.Instance.updateGenerateTime();
-				PestManager.Instance.updateGenerateTime();
+			PlantsManager.Instance.currentResource[pair.Key] += 1;
+			BeeManager.Instance.updateGenerateTime();
+			PestManager.Instance.updateGenerateTime();
+			TutorialManager.Instance.collectResource(pair.Key);
 			});
 		}
 			

@@ -10,6 +10,13 @@ public class TutorialManager : Singleton<TutorialManager>
 
     };
 
+    Dictionary<string, string> firstSeeSomethingToStartDialog = new Dictionary<string, string>() {
+        {"bird",Dialogues.SeeBird },
+        {"pest",Dialogues.SeePest },
+        {"bee",Dialogues.SeeBee },
+
+    };
+
     Dictionary<HelperPlantType, string> finishPlantToStartDialog = new Dictionary<HelperPlantType, string>() {
         {HelperPlantType.pond,Dialogues.FinishPlantPond },
         {HelperPlantType.waterlily,Dialogues.FinishPlantWaterLily },
@@ -17,7 +24,8 @@ public class TutorialManager : Singleton<TutorialManager>
         {HelperPlantType.lavender,Dialogues.FinishPlantLavender },
         {HelperPlantType.marigold,Dialogues.FinishPlantMarigold },
         {HelperPlantType.appleTree2,Dialogues.FinishUpgradeTree1 },
-        
+        {HelperPlantType.appleTree4,Dialogues.GetFlowerTree },
+
 
 
     };
@@ -27,6 +35,13 @@ public class TutorialManager : Singleton<TutorialManager>
         {HelperPlantType.waterlily,Dialogues.FinishCollectForWaterLily },
         {HelperPlantType.crimson,Dialogues.FinishCollectForCrimson },
         {HelperPlantType.lavender,Dialogues.FinishCollectForLavender },
+
+    };
+
+    Dictionary<PlantProperty, string> collectResourceToStartDialog = new Dictionary<PlantProperty, string>() {
+
+        {PlantProperty.bee,Dialogues.GetBeeValue },
+        {PlantProperty.pest,Dialogues.GetPestValue },
 
     };
 
@@ -47,6 +62,47 @@ public class TutorialManager : Singleton<TutorialManager>
         if (finishDialogToStartDialog.ContainsKey(key))
         {
             TutorialPanel.Instance.Init(finishDialogToStartDialog[key]);
+        }
+
+        if(key == Dialogues.FinishUpgradeTree1)
+        {
+            BirdManager.Instance.autoResrouceStart = true;
+        }
+    }
+
+    public void finishTree(HelperPlantType treeType)
+    {
+        var value = Dialogues.FinishFirstTree;
+        if (!hadDialog.ContainsKey(value))
+        {
+            hadDialog[value] = true;
+            TutorialPanel.Instance.Init(value);
+        }
+    }
+
+    public void firstSeeSomething(string something)
+    {
+        if (firstSeeSomethingToStartDialog.ContainsKey(something))
+        {
+            var value = firstSeeSomethingToStartDialog[something];
+            if (!hadDialog.ContainsKey(value))
+            {
+                hadDialog[value] = true;
+                TutorialPanel.Instance.Init(value);
+            }
+        }
+    }
+
+    public void collectResource(PlantProperty something)
+    {
+        if (collectResourceToStartDialog.ContainsKey(something))
+        {
+            var value = collectResourceToStartDialog[something];
+            if (!hadDialog.ContainsKey(value))
+            {
+                hadDialog[value] = true;
+                TutorialPanel.Instance.Init(value);
+            }
         }
     }
 

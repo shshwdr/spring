@@ -74,7 +74,14 @@ public class BeeManager : Singleton<BeeManager>
                 currentBeeGenerateTime = 0;
                 currentBeeCount++;
                 Instantiate(bee, Utils.RandomTransform(beeSpawnPositionParent).position, Quaternion.identity, beeParent);
+                StartCoroutine(delayShow());
             }
         }
+    }
+
+    IEnumerator delayShow()
+    {
+        yield return new WaitForSeconds(2);
+        TutorialManager.Instance.firstSeeSomething("bee");
     }
 }

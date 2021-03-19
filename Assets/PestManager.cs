@@ -103,7 +103,15 @@ public class PestManager : Singleton<PestManager>
                 currentBeeGenerateTime = 0;
                 var trans = Utils.RandomTransform(pestSpawnParent);
                 Instantiate(pestPrefab, trans.position, Quaternion.identity, pestParent);
+
+                StartCoroutine(delayShow());
             }
         }
+    }
+
+    IEnumerator delayShow()
+    {
+        yield return new WaitForSeconds(3);
+        TutorialManager.Instance.firstSeeSomething("pest");
     }
 }
