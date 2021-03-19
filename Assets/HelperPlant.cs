@@ -9,6 +9,8 @@ public class HelperPlant : HPObject
     public int slot;
     public Collider2D plantCollider;
 
+    public Sprite iconSprite;
+
     public bool isWater = false;
 
     protected bool isDragging = true;

@@ -26,7 +26,9 @@ public class Popup : Singleton<Popup>
         group.alpha = 1;
         text.text = t;
         clearButton();
-        yesButton.onClick.AddListener(delegate { y(); Hide(); });
+        yesButton.onClick.AddListener(delegate { 
+            y(); Hide();
+        });
         noButton.onClick.AddListener(delegate { Hide();  });
     }
 

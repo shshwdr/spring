@@ -12,6 +12,12 @@ PrefabInstance:
       propertyPath: type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8682640099129570432, guid: 9332ecff35b325048a9701cd272249cc,
+        type: 3}
+      propertyPath: iconSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d910e5757edfb3645a25d39aa2b5a5d4,
+        type: 3}
     - target: {fileID: 8682640099129570433, guid: 9332ecff35b325048a9701cd272249cc,
         type: 3}
       propertyPath: m_RootOrder

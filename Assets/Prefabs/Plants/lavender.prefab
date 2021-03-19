@@ -12,6 +12,12 @@ PrefabInstance:
       propertyPath: type
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8682640099129570432, guid: 9332ecff35b325048a9701cd272249cc,
+        type: 3}
+      propertyPath: iconSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9258f279641dbfc4a9f2988d8b1089af,
+        type: 3}
     - target: {fileID: 8682640099129570433, guid: 9332ecff35b325048a9701cd272249cc,
         type: 3}
       propertyPath: m_RootOrder
@@ -91,7 +97,7 @@ PrefabInstance:
     - target: {fileID: 8682640099129570463, guid: 9332ecff35b325048a9701cd272249cc,
         type: 3}
       propertyPath: m_Name
-      value: flowerPurple
+      value: lavender
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9332ecff35b325048a9701cd272249cc, type: 3}

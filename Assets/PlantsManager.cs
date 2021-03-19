@@ -271,6 +271,7 @@ public class PlantsManager : Singleton<PlantsManager>
             {
                 break;
             }
+            Debug.Log(collided);
             if (collided == groundCollider1 || collided == groundCollider2)
             {
                 collideGround = false;
@@ -297,7 +298,6 @@ public class PlantsManager : Singleton<PlantsManager>
                 colliderWater = true;
             }
         }
-
 
 
         return collideGround&& collideShadow && !collideOtherPlant && colliderWater;

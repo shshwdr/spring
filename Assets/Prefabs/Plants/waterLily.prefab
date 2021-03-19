@@ -11,7 +11,7 @@ PrefabInstance:
         type: 3}
       propertyPath: summonObj
       value: 
-      objectReference: {fileID: 627519308935557595, guid: 1cf300ff3d2f0a74da9a1df645c06dee,
+      objectReference: {fileID: 1074549629194744771, guid: 73ead658ff35d524d92ee4f120045072,
         type: 3}
     - target: {fileID: -8976927348431448734, guid: a8a1250397108d844a42a91938184908,
         type: 3}
@@ -59,6 +59,12 @@ PrefabInstance:
       propertyPath: isWater
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1072396907640421470, guid: a8a1250397108d844a42a91938184908,
+        type: 3}
+      propertyPath: iconSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c628648b44dd8e0449e69ef6407beb27,
+        type: 3}
     - target: {fileID: 1072396907640421471, guid: a8a1250397108d844a42a91938184908,
         type: 3}
       propertyPath: m_RootOrder

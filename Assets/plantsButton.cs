@@ -26,7 +26,7 @@ public class PlantsButton : MonoBehaviour
         spawnPlantPrefab = plant;
         helperPlant = plant.GetComponent<HelperPlant>();
         name.text = PlantsManager.Instance.plantName[helperPlant.type];
-        image.sprite = plant.GetComponent<SpriteRenderer>().sprite;
+        image.sprite = plant.GetComponent<HelperPlant>().iconSprite;
         image.color = plant.GetComponent<SpriteRenderer>().color;
         hud = h;
 
