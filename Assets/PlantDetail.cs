@@ -156,7 +156,7 @@ public class PlantDetail : Singleton<PlantDetail>
             }
             i++;
         }
-        for (; i < 6; i++)
+        for (; i < entry.stats.Count; i++)
         {
             entry.stats[i].gameObject.SetActive(false);
         }
