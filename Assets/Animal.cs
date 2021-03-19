@@ -28,6 +28,7 @@ public class Animal : HPObject
     protected virtual void attack()
     {
         target.GetComponent<HPObject>().beAttacked(atk);
+
     }
 
     public Transform getClosestTransform(List<Transform> list)
@@ -71,6 +72,11 @@ public class Animal : HPObject
                     {
 
                         attack();
+                        if(GetComponent<Animator>())
+                        {
+
+                            GetComponent<Animator>().SetTrigger("attack");
+                        }
                         currentAttackCooldown = 0;
                     }
                 }
@@ -86,7 +92,8 @@ public class Animal : HPObject
                         flip();
                     }
                     transform.position += direction * walkSpeed * Time.deltaTime;
-
+                    if (GetComponent<Animator>())
+                        GetComponent<Animator>().SetFloat("speed", 1);
                 }
             }
         }
