@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TutorialManager : Singleton<TutorialManager>
 {
-
+    public bool skipTutorial = true;
     Dictionary<string, string> finishDialogToStartDialog = new Dictionary<string, string>() {
         {Dialogues.Welcome,Dialogues.PlantPond },
 
@@ -35,7 +35,11 @@ public class TutorialManager : Singleton<TutorialManager>
     // Start is called before the first frame update
     void Start()
     {
-        TutorialPanel.Instance.Init(Dialogues.Welcome);
+        //if (!skipTutorial)
+        {
+
+            TutorialPanel.Instance.Init(Dialogues.Welcome);
+        }
 
     }
     public void finishPopup(string key)

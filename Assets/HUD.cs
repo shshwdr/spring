@@ -59,7 +59,7 @@ public class HUD : Singleton<HUD>
         }
             foreach (var go in plantManager.helperPlantList)
         {
-            if (!plantManager.isPlantUnlocked.ContainsKey(go.GetComponent<HelperPlant>().type) || plantManager.isPlantUnlocked[go.GetComponent<HelperPlant>().type])
+            if ((!plantManager.isPlantUnlocked.ContainsKey(go.GetComponent<HelperPlant>().type) || plantManager.isPlantUnlocked[go.GetComponent<HelperPlant>().type]) || plantManager.unlockAllFlowers)
             {
                 GameObject buttonInstance = Instantiate(plantButtonPrefab, plantsContent.transform);
                 PlantsButton plantButtonInstance = buttonInstance.GetComponent<PlantsButton>();
@@ -207,6 +207,7 @@ public class HUD : Singleton<HUD>
             if(!plantManager.isResourceUnlocked.ContainsKey(pair.Key))
             {
                 oneStatHud.gameObject.SetActive(false);
+                oneStatHud.transform.position = statsContent.transform.position;
             }
             else
             {

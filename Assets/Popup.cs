@@ -24,6 +24,8 @@ public class Popup : Singleton<Popup>
     public void Init(string t, Action y)
     {
         group.alpha = 1;
+        group.interactable = true;
+        group.blocksRaycasts = true;
         text.text = t;
         clearButton();
         yesButton.onClick.AddListener(delegate { 
@@ -45,6 +47,9 @@ public class Popup : Singleton<Popup>
     public void Hide()
     {
         group.alpha = 0;
+        HUD.Instance.togglePause();
+        group.interactable = false;
+        group.blocksRaycasts = false;
     }
     // Update is called once per frame
     void Update()

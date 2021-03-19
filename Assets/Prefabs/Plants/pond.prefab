@@ -65,6 +65,78 @@ PolygonCollider2D:
       - {x: 0.29070783, y: -0.08185281}
       - {x: 0.4272051, y: -0.04881738}
       - {x: 0.4247979, y: 0.0023673363}
+--- !u!60 &5925538696994856834
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7671502119766076076}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.09, y: 1.37}
+    newSize: {x: 0.2, y: 0.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.565, y: -0.685}
+      - {x: 0.66499996, y: -0.685}
+      - {x: 0.765, y: -0.635}
+      - {x: 0.92499995, y: -0.565}
+      - {x: 1.175, y: -0.53499997}
+      - {x: 1.275, y: -0.475}
+      - {x: 1.4549999, y: -0.305}
+      - {x: 1.545, y: -0.205}
+      - {x: 1.545, y: -0.044999998}
+      - {x: 1.375, y: 0.195}
+      - {x: 1.185, y: 0.36499998}
+      - {x: 1.0649999, y: 0.39499998}
+      - {x: 0.885, y: 0.505}
+      - {x: 0.715, y: 0.565}
+      - {x: 0.555, y: 0.555}
+      - {x: 0.305, y: 0.625}
+      - {x: 0.095, y: 0.685}
+      - {x: -0.105, y: 0.685}
+      - {x: -0.21499999, y: 0.645}
+      - {x: -0.305, y: 0.685}
+      - {x: -0.36499998, y: 0.685}
+      - {x: -0.545, y: 0.565}
+      - {x: -0.705, y: 0.655}
+      - {x: -0.755, y: 0.655}
+      - {x: -0.92499995, y: 0.565}
+      - {x: -1.0749999, y: 0.465}
+      - {x: -1.235, y: 0.295}
+      - {x: -1.385, y: 0.21499999}
+      - {x: -1.515, y: 0.035}
+      - {x: -1.545, y: -0.024999999}
+      - {x: -1.545, y: -0.085}
+      - {x: -1.485, y: -0.185}
+      - {x: -1.435, y: -0.21499999}
+      - {x: -1.4549999, y: -0.33499998}
+      - {x: -1.385, y: -0.385}
+      - {x: -1.285, y: -0.415}
+      - {x: -1.0649999, y: -0.435}
+      - {x: -0.955, y: -0.505}
+      - {x: -0.85499996, y: -0.59499997}
+      - {x: -0.565, y: -0.645}
+      - {x: -0.385, y: -0.685}
+      - {x: -0.16499999, y: -0.645}
+      - {x: -0.055, y: -0.685}
+      - {x: 0.155, y: -0.685}
+      - {x: 0.235, y: -0.645}
+      - {x: 0.405, y: -0.59499997}
+      - {x: 0.465, y: -0.66499996}
 --- !u!60 &2166517600443803984
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -386,6 +458,21 @@ PrefabInstance:
       propertyPath: summonAmount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 407628603020409463, guid: a8a1250397108d844a42a91938184908,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.74412906
+      objectReference: {fileID: 0}
+    - target: {fileID: 407628603020409463, guid: a8a1250397108d844a42a91938184908,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.49412906
+      objectReference: {fileID: 0}
+    - target: {fileID: 407628603020409463, guid: a8a1250397108d844a42a91938184908,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.19999993
+      objectReference: {fileID: 0}
     - target: {fileID: 1072396907640421440, guid: a8a1250397108d844a42a91938184908,
         type: 3}
       propertyPath: m_Sprite
@@ -418,6 +505,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 139ce8784dc3f8743a4d5bfabd555f9d,
         type: 3}
+    - target: {fileID: 1072396907640421470, guid: a8a1250397108d844a42a91938184908,
+        type: 3}
+      propertyPath: ignorePest
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1072396907640421470, guid: a8a1250397108d844a42a91938184908,
         type: 3}
       propertyPath: plantCollider
@@ -540,7 +632,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4162409400496757835, guid: a8a1250397108d844a42a91938184908, type: 3}
+    - {fileID: 407628603020409463, guid: a8a1250397108d844a42a91938184908, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a8a1250397108d844a42a91938184908, type: 3}
+--- !u!1 &7671502119766076076 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1072396907640421441, guid: a8a1250397108d844a42a91938184908,
+    type: 3}
+  m_PrefabInstance: {fileID: 7248347638418003693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7671502119766076082 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1072396907640421471, guid: a8a1250397108d844a42a91938184908,

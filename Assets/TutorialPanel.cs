@@ -24,6 +24,9 @@ public class TutorialPanel : Singleton<TutorialPanel>
     public void Init(string t, Action y = null)
     {
         group.alpha = 1;
+
+        group.interactable = true;
+        group.blocksRaycasts = true;
         text.text = t;
         clearButton();
         yesButton.onClick.AddListener(delegate { 
@@ -34,6 +37,11 @@ public class TutorialPanel : Singleton<TutorialPanel>
         });
         HUD.Instance.togglePause();
         isShowing = true;
+        if (TutorialManager.Instance.skipTutorial)
+        {
+            Hide();
+            TutorialManager.Instance.finishPopup(t);
+        }
     }
 
     public bool canGeneratePanel()
@@ -55,6 +63,9 @@ public class TutorialPanel : Singleton<TutorialPanel>
         group.alpha = 0;
         HUD.Instance.togglePause();
         isShowing = false;
+
+        group.interactable = false;
+        group.blocksRaycasts = false;
     }
     // Update is called once per frame
     void Update()

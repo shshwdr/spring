@@ -318,9 +318,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6984865398421117964}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02, y: -0.89, z: -0.4664551}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.02, y: -0.3, z: -0.4664551}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 112367385957393852}
   - {fileID: 6984865398376063496}
@@ -367,11 +367,13 @@ MonoBehaviour:
   type: 4
   slot: 0
   plantCollider: {fileID: 0}
+  iconSprite: {fileID: 0}
   isWater: 0
+  ignorePest: 0
   resourcePositionsParent: {fileID: 0}
   fruitNumberToFinish: 2
   upgradeList: 04000000050000000600000007000000
-  flowerPlantType: 0
+  flowerPlantType: 8
   slotCount: 020000000400000006000000
   treeFlowerPrefab: {fileID: 8642666184622232475, guid: e457f7363358d6a43ba158381bfa39ae,
     type: 3}

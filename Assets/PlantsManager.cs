@@ -7,6 +7,7 @@ public enum HelperPlantType { crimson, marigold, pond, lavender, appleTree1, app
 public class PlantsManager : Singleton<PlantsManager>
 {
     public bool ignoreResourcePlant = true;
+    public bool unlockAllFlowers = true;
     public MainTree maintree;
     public GameObject mainTreePrefab;
     public Dictionary<HelperPlantType, Dictionary<PlantProperty, int>> helperPlantCost;
@@ -68,7 +69,7 @@ public class PlantsManager : Singleton<PlantsManager>
         List<Transform> res = new List<Transform>();
         foreach(var plantValue in plantedPlant)
         {
-            if(plantValue && plantValue.isAlive)
+            if(plantValue && plantValue.isAlive && !plantValue.ignorePest)
             {
                 res.Add(plantValue.transform);
 
@@ -254,15 +255,15 @@ public class PlantsManager : Singleton<PlantsManager>
     }
     bool IsPositionValid(Collider2D col, bool isWaterPlant = false)
     {
-        if (!shadowCollider.OverlapPoint(col.transform.position))
-        {
-            return false;
-        }
+        //if (!shadowCollider.OverlapPoint(col.transform.position))
+        //{
+        //    return false;
+        //}
         Collider2D[] colliders = new Collider2D[20];
         ContactFilter2D contactFilter = new ContactFilter2D();
         col.OverlapCollider(contactFilter, colliders);
         bool collideGround = true;
-        bool collideShadow = false;
+        bool collideShadow = true;
         bool collideOtherPlant = false;
         bool colliderWater = !isWaterPlant;
         foreach(var collided in colliders)
@@ -271,7 +272,7 @@ public class PlantsManager : Singleton<PlantsManager>
             {
                 break;
             }
-            Debug.Log(collided);
+            //Debug.Log(collided);
             if (collided == groundCollider1 || collided == groundCollider2)
             {
                 collideGround = false;
@@ -299,7 +300,7 @@ public class PlantsManager : Singleton<PlantsManager>
             }
         }
 
-
+        
         return collideGround&& collideShadow && !collideOtherPlant && colliderWater;
     }
     public bool IsPlantable(HelperPlantType type, Collider2D pos, bool isWaterPlant = false)

@@ -25,5 +25,13 @@ public class CheatManager : MonoBehaviour
         {
             BeeManager.Instance.lotsPest = true;
         }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            PlantsManager.Instance.unlockAllFlowers = true;
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            TutorialManager.Instance.skipTutorial = true;
+        }
     }
 }

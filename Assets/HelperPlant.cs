@@ -13,6 +13,8 @@ public class HelperPlant : HPObject
 
     public bool isWater = false;
 
+    public bool ignorePest = false;
+
     protected bool isDragging = true;
 
     public Transform resourcePositionsParent;
@@ -42,23 +44,28 @@ public class HelperPlant : HPObject
         }
     }
 
+    IEnumerator delayAddCoin()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
+        CollectionManager.Instance.AddCoins(transform.position, PlantsManager.Instance.helperPlantProd[type], false);
+    }
+
     private void Plant()
     {
         isDragging = false;
         if (canPlant())
         {
+            PlantsManager.Instance.startTreePlant(type);
             PlantsManager.Instance.Purchase(gameObject);
             PlantsManager.Instance.AddPlant(this);
-            CollectionManager.Instance.AddCoins(transform.position,PlantsManager.Instance.helperPlantProd[type],false);
-
-            PlantsManager.Instance.startTreePlant(type);
+            StartCoroutine(delayAddCoin());
         }
         else
         {
             Destroy(gameObject);
         }
 
-        PlantsManager.Instance.shadowCollider.gameObject.SetActive(false);
+        //PlantsManager.Instance.shadowCollider.gameObject.SetActive(false);
     }
 
     private void OnMouseExit()

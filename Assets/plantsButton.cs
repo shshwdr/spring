@@ -35,7 +35,7 @@ public class PlantsButton : MonoBehaviour
     private void OnMouseDown()
     {
         SpawnPlant();
-        PlantsManager.Instance.shadowCollider.gameObject.SetActive(true);
+       // PlantsManager.Instance.shadowCollider.gameObject.SetActive(true);
     }
     public void SpawnPlant()
     {
@@ -45,7 +45,7 @@ public class PlantsButton : MonoBehaviour
             //PlantsManager.Instance.Purchase(spawnPlantPrefab);
 
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            PlantsManager.Instance.shadowCollider.gameObject.SetActive(true);
+            //PlantsManager.Instance.shadowCollider.gameObject.SetActive(true);
             GameObject spawnInstance = Instantiate(spawnPlantPrefab, mousePosition,Quaternion.identity,PlantsManager.Instance.allInTreeGame);
         }
 
