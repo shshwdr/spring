@@ -156,7 +156,7 @@ RectTransform:
   m_Children:
   - {fileID: 465189242}
   m_Father: {fileID: 1714186546}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1527,7 +1527,7 @@ RectTransform:
   - {fileID: 1846246488}
   - {fileID: 253199994}
   m_Father: {fileID: 1714186546}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2031,7 +2031,7 @@ RectTransform:
   - {fileID: 1489040481}
   - {fileID: 988970550}
   m_Father: {fileID: 1714186546}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -9044,9 +9044,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 14066160}
   - {fileID: 228216787}
   - {fileID: 414492992}
+  - {fileID: 14066160}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9085,6 +9085,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d771a90feb534ce45968b1e4089c2880, type: 3}
   - {fileID: 21300000, guid: 3ff2701d3405afd449a1ddfb7048f1dd, type: 3}
   - {fileID: 21300000, guid: 5106561e800461d459d458e8ebac7222, type: 3}
+  isInGarden: 0
   propertyResourceTransform: []
   isGameover: 0
   gameoverPanel: {fileID: 1846246487}

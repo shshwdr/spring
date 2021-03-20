@@ -40,12 +40,19 @@ public class HelperPlant : HPObject
 
     private void OnMouseEnter()
     {
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         if (!isDragging)
         {
 
             HUD.Instance.ShowPlantDetail(gameObject);
+            if (GetComponent<UnityChan.RandomWind>())
+            {
 
-            GetComponent<UnityChan.RandomWind>().interact();
+                GetComponent<UnityChan.RandomWind>().interact();
+            }
         }
     }
 

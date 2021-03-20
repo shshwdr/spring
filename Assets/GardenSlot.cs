@@ -11,6 +11,10 @@ public class GardenSlot : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         HUD.Instance.showLevelInfo(tree.GetComponent<MainTree>().type);
     }
 
@@ -21,6 +25,11 @@ public class GardenSlot : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         Popup.Instance.Init(Dialogues.StartTreeConfirm, () =>
         {
             Debug.Log(tree);

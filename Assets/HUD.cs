@@ -90,7 +90,10 @@ public class HUD : Singleton<HUD>
 
     public void resumeSpeed()
     {
-
+        if (isInGarden)
+        {
+            return;
+        }
         var speed = speedList[currentSpeedId];
         Time.timeScale = speed;
         speedText.text = speed + "x speed";
@@ -99,6 +102,10 @@ public class HUD : Singleton<HUD>
 
     public void togglePause()
     {
+        if (isInGarden)
+        {
+            return;
+        }
         if (isGameover)
         {
             return;
@@ -141,6 +148,7 @@ public class HUD : Singleton<HUD>
         gardenPanel.SetActive(true);
         previousSpeed = Time.timeScale;
         Time.timeScale = 0;
+        isInGarden = true;
     }
 
 
@@ -198,8 +206,8 @@ public class HUD : Singleton<HUD>
         treePanel.SetActive(true);
         gardenPanel.SetActive(false);
 
+        isInGarden = false;
         resumeSpeed();
-
     }
     public void HidePlantDetail()
     {

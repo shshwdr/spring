@@ -16,6 +16,10 @@ public class LevelInfo : MonoBehaviour
 
     public void UpdateInfo(HelperPlantType treeType)
     {
+        if(!plantManager || !plantManager.plantName.ContainsKey(treeType))
+        {
+            return;
+        }
         levelInfoText.text = "This is a " + plantManager.plantName[treeType];
 
         levelInfoText.text += "\n";
