@@ -19,7 +19,7 @@ namespace UnityChan
         public Transform child;
 
         //ボーンの向き
-        public Vector3 boneAxis = new Vector3(-1.0f, 0.0f, 0.0f);
+        public Vector3 boneAxis = new Vector3(1.0f, -1.0f, 0.0f);
         public float radius = 0.05f;
 
         //各SpringBoneに設定されているstiffnessForceとdragForceを使用するか？
