@@ -46,6 +46,8 @@ public class PlantsManager : Singleton<PlantsManager>
     public Collider2D groundCollider1;
     public Collider2D shadowCollider;
 
+    public Transform resourceParent;
+
     int currentShadowSizeId = 0;
     float[] shadowColliderSize = new float[] { 30, 37, 43, 50 };
 
@@ -173,11 +175,11 @@ public class PlantsManager : Singleton<PlantsManager>
             { PlantProperty.pest, 2 },
         }},
             {HelperPlantType.stawberry,new Dictionary<PlantProperty, int>() {
-            { PlantProperty.p, 10 },
+            { PlantProperty.p, 8 },
             { PlantProperty.pest, 4 },
         }},
         {HelperPlantType.zinnia,new Dictionary<PlantProperty, int>() {
-            { PlantProperty.bee, 5 },
+            { PlantProperty.bee, 3 },
             { PlantProperty.pest, 5 },
         }},
         {HelperPlantType.lavender,new Dictionary<PlantProperty, int>() {
@@ -185,7 +187,7 @@ public class PlantsManager : Singleton<PlantsManager>
             { PlantProperty.pest, 2 },
         } },
         {HelperPlantType.marigold,new Dictionary<PlantProperty, int>() {
-            { PlantProperty.bee, 2 },
+            { PlantProperty.bee, 1 },
             { PlantProperty.pest, 2 },
         } },
         {HelperPlantType.pond,new Dictionary<PlantProperty, int>() {
@@ -204,10 +206,10 @@ public class PlantsManager : Singleton<PlantsManager>
         {HelperPlantType.pond,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 0 } } },
         {HelperPlantType.waterlily,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 } } },
         {HelperPlantType.crimson,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 40 } } },
-        {HelperPlantType.stawberry,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 80 }, { PlantProperty.p, 20 } } },
-        {HelperPlantType.zinnia,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 20 }, { PlantProperty.n, 24 }, { PlantProperty.p, 30 } } },
-        {HelperPlantType.lavender,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 16 } ,{ PlantProperty.water, 20 } } },
-        {HelperPlantType.marigold,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 20 }, { PlantProperty.n, 20 }, { PlantProperty.p, 20 } } },
+        {HelperPlantType.stawberry,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 100 }, { PlantProperty.p, 20 } } },
+        {HelperPlantType.zinnia,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 50 }, { PlantProperty.n, 24 }, { PlantProperty.p, 30 } } },
+        {HelperPlantType.lavender,new Dictionary<PlantProperty, int>() { { PlantProperty.n, 16 } ,{ PlantProperty.water, 50 } } },
+        {HelperPlantType.marigold,new Dictionary<PlantProperty, int>() { { PlantProperty.water, 80 }, { PlantProperty.n, 20 }, { PlantProperty.p, 20 } } },
 
         {HelperPlantType.appleTree1,new Dictionary<PlantProperty, int>() {  { PlantProperty.n,20}, { PlantProperty.p, 15 }  } },
         {HelperPlantType.appleTree2,new Dictionary<PlantProperty, int>() {  { PlantProperty.n,50}, { PlantProperty.p, 30 } } },
@@ -449,6 +451,10 @@ public class PlantsManager : Singleton<PlantsManager>
         foreach (var key in baseResource.Keys.ToArray<PlantProperty>())
         {
             currentResource[key] = baseResource[key];
+        }
+        foreach(Transform child in resourceParent)
+        {
+            Destroy(child.gameObject);
         }
         
     }

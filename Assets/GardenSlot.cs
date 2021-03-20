@@ -36,7 +36,7 @@ public class GardenSlot : MonoBehaviour
             GardenManager.Instance.StartTree(this);
 
             PlantsManager.Instance.background.sprite = tree.GetComponent<MainTree>().background;
-                PlantsManager.Instance.ClearResource();
+            HUD.Instance.clearLevel();
         });
     }
 

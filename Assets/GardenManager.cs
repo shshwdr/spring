@@ -36,6 +36,22 @@ public class GardenManager : Singleton<GardenManager>
                     var localP = t.localPosition;
                     t.SetParent(slot.GetComponent<GardenSlot>().allInTreeNode);
                     t.localPosition = localP;
+                    foreach(Transform c in t)
+                    {
+                        foreach (Transform c2 in c)
+                        {
+                            foreach (Transform c3 in c2)
+                            {
+                                //foreach (Transform c4 in c)
+                                {
+                                    if (c3.GetComponent<HelperInsect>())
+                                    {
+                                        Destroy(c3.gameObject);
+                                    }
+                                }
+                            }
+                        }
+                    }
                     t.GetComponent<HelperPlant>().MoveToGarden();
                 }
             }

@@ -96,6 +96,7 @@ public class HUD : Singleton<HUD>
         }
         var speed = speedList[currentSpeedId];
         Time.timeScale = speed;
+        isPaused = false;
         speedText.text = speed + "x speed";
         pauseText.text = "Pause";
     }
@@ -132,10 +133,6 @@ public class HUD : Singleton<HUD>
 
     public void MoveToGargen()
     {
-        // The shortcuts way
-        //transform.DOMove(new Vector3(2, 2, 2), 1);
-        // The generic way
-        //DOTween.To(() => transform.position, x => transform.position = x, new Vector3(2, 2, 2), 1);
         
         if (PlantsManager.Instance.maintree.isFinished() || GardenManager.Instance.alwaysUpdateTree)
         {
@@ -184,7 +181,7 @@ public class HUD : Singleton<HUD>
 
         isGameover = false;
 
-        togglePause();
+        resumeSpeed();
     }
 
     public void Gameover()

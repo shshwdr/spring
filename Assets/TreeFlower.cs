@@ -32,7 +32,7 @@ public class TreeFlower : MonoBehaviour
             return;
         }
         isPollinated = true;
-        Instantiate(fruitPrefab, transform.position, Quaternion.identity);
+        Instantiate(fruitPrefab, transform.position, Quaternion.identity,transform.parent);
         tree.createFruit();
         Destroy(gameObject);
     }

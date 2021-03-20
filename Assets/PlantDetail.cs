@@ -172,7 +172,11 @@ public class PlantDetail : Singleton<PlantDetail>
     {
         if (plant.isAtMaxLevel())
         {
+            if (!plant.isAtMaxFlower())
+            {
 
+                updateEntry("Flower Cost", plantManager.helperPlantCost[plant.flowerPlantType], true);
+            }
             return;
 
         }

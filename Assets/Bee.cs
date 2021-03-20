@@ -54,6 +54,7 @@ public class Bee : Animal
         }
     }
 
+
     public  override void die()
     {
         BeeManager.Instance.currentBeeCount -= 1;

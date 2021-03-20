@@ -405,9 +405,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWindActive: 1
-  speed: 0.002
+  speed: 0.001
   strongerScale: 4
-  windTime: 1
+  windTime: 0.5
 --- !u!114 &1359968094571028419
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -139,6 +139,10 @@ public class MainTree : HelperPlant
     }
     void OnMouseDown()
     {
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         if (isAtMaxLevel())
         {
 

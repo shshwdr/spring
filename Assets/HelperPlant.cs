@@ -99,7 +99,7 @@ public class HelperPlant : HPObject
 
     protected void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (!isDragging&& Input.GetMouseButtonDown(1))
         {
             RemovePlant();
         }
@@ -169,7 +169,7 @@ public class HelperPlant : HPObject
         {
             currentResourcePositionId = 0;
         }
-        var go = Instantiate(PlantsManager.Instance.ClickToCollect, spawnTransform.position, Quaternion.identity,transform);
+        var go = Instantiate(PlantsManager.Instance.ClickToCollect, spawnTransform.position, Quaternion.identity,PlantsManager.Instance.resourceParent);
         var box = go.GetComponent<CllickToCollect>();
         box.dropboxType = DropboxType.resource;
 
