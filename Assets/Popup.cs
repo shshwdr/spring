@@ -30,8 +30,8 @@ public class Popup : Singleton<Popup>
 
         HUD.Instance.togglePause();
         clearButton();
-        yesButton.onClick.AddListener(delegate { 
-            y(); Hide();
+        yesButton.onClick.AddListener(delegate {
+            Hide(); y(); 
         });
         noButton.onClick.AddListener(delegate { Hide();  });
     }

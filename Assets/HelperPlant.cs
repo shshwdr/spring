@@ -44,6 +44,8 @@ public class HelperPlant : HPObject
         {
 
             HUD.Instance.ShowPlantDetail(gameObject);
+
+            GetComponent<UnityChan.RandomWind>().interact();
         }
     }
 
@@ -71,12 +73,13 @@ public class HelperPlant : HPObject
         }
 
         //PlantsManager.Instance.shadowCollider.gameObject.SetActive(false);
+
     }
 
     private void OnMouseDown()
     {
 
-        GetComponent<UnityChan.RandomWind>().interact();
+       // GetComponent<UnityChan.RandomWind>().interact();
     }
 
     private void OnMouseExit()

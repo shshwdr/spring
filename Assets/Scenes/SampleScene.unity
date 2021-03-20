@@ -1208,8 +1208,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bird: {fileID: 1923558147}
-  birdShowtimeMin: 20
-  birdShowtimeMax: 40
+  birdShowtimeMin: 30
+  birdShowtimeMax: 50
   spawnBirdHighest: {fileID: 1768030042}
   spawnBirdLowest: {fileID: 2009882304}
   autoResrouceStart: 0
@@ -8445,6 +8445,12 @@ MonoBehaviour:
   spawnPositionParent: {fileID: 1128002739}
   pestParent: {fileID: 672367350}
   autoResrouceStart: 0
+--- !u!4 &1642924713 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4612926043295774538, guid: 1899e341267b810499981b0f2c50cadc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1661948385}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1646452818
 GameObject:
   m_ObjectHideFlags: 0
@@ -8616,8 +8622,7 @@ PrefabInstance:
         type: 3}
       propertyPath: allInTreeNode
       value: 
-      objectReference: {fileID: 1197249091497338600, guid: 816d1c9254bd72348a9eb51a8f3d33af,
-        type: 3}
+      objectReference: {fileID: 1642924713}
     - target: {fileID: 4612926042656937925, guid: 1899e341267b810499981b0f2c50cadc,
         type: 3}
       propertyPath: finishedTreeType

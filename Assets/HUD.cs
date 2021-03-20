@@ -15,6 +15,7 @@ public class HUD : Singleton<HUD>
     public TMP_Text pauseText;
     public GameObject gardenButton;
     public List<Sprite> propertyImage;
+    public bool isInGarden = false;
     public List<Transform> propertyResourceTransform = new List<Transform>(6);
     public bool isGameover;
     public GameObject gameoverPanel;
@@ -81,7 +82,7 @@ public class HUD : Singleton<HUD>
         currentSpeedId += 1;
         if (currentSpeedId >= speedList.Count)
         {
-            currentSpeedId = 0;
+            currentSpeedId = 1;
         }
         resumeSpeed();
 
@@ -93,6 +94,7 @@ public class HUD : Singleton<HUD>
         var speed = speedList[currentSpeedId];
         Time.timeScale = speed;
         speedText.text = speed + "x speed";
+        pauseText.text = "Pause";
     }
 
     public void togglePause()
@@ -195,7 +197,8 @@ public class HUD : Singleton<HUD>
         DOTween.To(() => Camera.main.transform.position, x => Camera.main.transform.position = x, treeCamera.transform.position, cameraMoveTime).SetUpdate(true);
         treePanel.SetActive(true);
         gardenPanel.SetActive(false);
-        Time.timeScale = previousSpeed;
+
+        resumeSpeed();
 
     }
     public void HidePlantDetail()

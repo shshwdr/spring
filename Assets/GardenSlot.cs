@@ -23,6 +23,7 @@ public class GardenSlot : MonoBehaviour
     {
         Popup.Instance.Init(Dialogues.StartTreeConfirm, () =>
         {
+            Debug.Log(tree);
             GardenManager.Instance.StartTree(this);
 
             PlantsManager.Instance.background.sprite = tree.GetComponent<MainTree>().background;

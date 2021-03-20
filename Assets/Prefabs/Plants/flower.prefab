@@ -406,7 +406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWindActive: 1
   speed: 0.002
-  strongerScale: 6
+  strongerScale: 4
   windTime: 1
 --- !u!114 &1359968094571028419
 MonoBehaviour:

@@ -76,12 +76,12 @@ public class PestManager : Singleton<PestManager>
     public void updateGenerateTime()
     {
         var beeValue = PlantsManager.Instance.currentResource[PlantProperty.pest];
-        if (beeValue == 0)
+        if (beeValue <= 6)
         {
             beeGenerateTime = -1;
             return;
         }
-        beeGenerateTime = Utils.SuperLerp(30, 10, 0, 20, beeValue);
+        beeGenerateTime = Utils.SuperLerp(30, 5, 6, 40, beeValue);
     }
     // Update is called once per frame
     void Update()
