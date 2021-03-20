@@ -24,16 +24,6 @@ public class PlantsManager : Singleton<PlantsManager>
         {HelperPlantType.lavender, HelperPlantType.marigold },
     };
 
-    //Dictionary<HelperPlantType, PlantProperty> treeToUnlockResource = new Dictionary<HelperPlantType, PlantProperty>()
-    //{
-    //    {HelperPlantType.pond, PlantProperty.water },
-    //    {HelperPlantType.waterlily, PlantProperty.frog },
-    //    {HelperPlantType.crimson, PlantProperty.n },
-    //    {HelperPlantType.lavender, PlantProperty.p },
-    //    {HelperPlantType.marigold, PlantProperty.bee },
-    //    {HelperPlantType.lavender, PlantProperty.p },
-    //};
-
     public Dictionary<PlantProperty, int> currentResource;
     public Dictionary<PlantProperty, int> baseResource;
 
@@ -399,6 +389,7 @@ public class PlantsManager : Singleton<PlantsManager>
         {
             currentResource[key] = baseResource[key];
         }
+        
     }
 
     public void AddResource(Dictionary<PlantProperty, int> resource)

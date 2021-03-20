@@ -378,7 +378,7 @@ MonoBehaviour:
   slotCount: 020000000400000006000000
   treeFlowerPrefab: {fileID: 8642666184622232475, guid: e457f7363358d6a43ba158381bfa39ae,
     type: 3}
-  flowerPositionParent: {fileID: 0}
+  flowerPositionParent: {fileID: 112367385957393852}
 --- !u!60 &8902472433256744567
 PolygonCollider2D:
   m_ObjectHideFlags: 0

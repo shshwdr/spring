@@ -46,5 +46,8 @@ public class Dialogues : MonoBehaviour
 
     static public string GetFlowerTree = "Your tree is at its max size, you should keep upgrade to get flowers on it, and plant Marigold to attact bees.";
     static public string FinishFirstTree = "Congratulations! You finish your first tree! Stay around and enjoy or move your tree to the garden.";
+
+
+    static public string RemovePlant = "You can right click a flower to remove it. You can do that on a tree to restart the tree";
     // static public string FinishPlantMarigold = "Marigold will attract bees.";
 }

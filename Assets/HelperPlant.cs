@@ -76,7 +76,7 @@ public class HelperPlant : HPObject
         }
     }
 
-    private void OnMouseOver()
+    protected void OnMouseOver()
     {
         if (Input.GetMouseButtonDown(1))
         {

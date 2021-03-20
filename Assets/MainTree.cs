@@ -49,7 +49,7 @@ public class MainTree : HelperPlant
         {
             if (!isFlowerPositionUsed[i])
             {
-                var go = Instantiate(treeFlowerPrefab, flowerGeneratedPositions[i].position, flowerGeneratedPositions[i].rotation);
+                var go = Instantiate(treeFlowerPrefab, flowerGeneratedPositions[i].position, flowerGeneratedPositions[i].rotation,transform);
                 go.GetComponent<TreeFlower>().tree = this;
 
                 CollectionManager.Instance.RemoveCoins(go.transform.position, PlantsManager.Instance.helperPlantCost[flowerPlantType]);
