@@ -23,6 +23,7 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -54,9 +55,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -100,7 +104,47 @@ TextureImporter:
     sprites: []
     outline: []
     physicsShape: []
-    bones: []
+    bones:
+    - name: bone_1
+      position: {x: 115.11014, y: 58.31348, z: 0}
+      rotation: {x: 0, y: 0, z: 0.67329764, w: 0.73937154}
+      length: 25.75886
+      parentId: -1
+    - name: bone_2
+      position: {x: 25.758858, y: -0.0000049923615, z: 0}
+      rotation: {x: 0, y: 0, z: 0.085021436, w: 0.99637914}
+      length: 41.79851
+      parentId: 0
+    - name: bone_3
+      position: {x: 41.798504, y: 0.0000041794283, z: 0}
+      rotation: {x: 0, y: 0, z: 0.04769155, w: 0.99886215}
+      length: 37.420094
+      parentId: 1
+    - name: bone_4
+      position: {x: 37.42009, y: 0.0000018212795, z: 0}
+      rotation: {x: 0, y: 0, z: -0.070889555, w: 0.9974842}
+      length: 26.460001
+      parentId: 2
+    - name: bone_5
+      position: {x: 26.459993, y: -0.0000012571722, z: 0}
+      rotation: {x: 0, y: 0, z: 0.02137172, w: 0.9997716}
+      length: 32.947292
+      parentId: 3
+    - name: bone_6
+      position: {x: 32.947285, y: -0.0000026814935, z: 0}
+      rotation: {x: 0, y: 0, z: -0.018343883, w: 0.99983174}
+      length: 44.108894
+      parentId: 4
+    - name: bone_7
+      position: {x: 44.1089, y: 0.00000960674, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      length: 44.10891
+      parentId: 5
+    - name: bone_8
+      position: {x: 44.108906, y: 0.000009305898, z: 0}
+      rotation: {x: 0, y: 0, z: -0.10335938, w: 0.99464417}
+      length: 47.169975
+      parentId: 6
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []

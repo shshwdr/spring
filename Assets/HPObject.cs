@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HPObject : MonoBehaviour
 {
+    protected AudioSource audiosource;
     public bool isAlive = true;
     public int maxHP = 1;
     public int getCurrentHp() { return hp; }
@@ -12,6 +13,7 @@ public class HPObject : MonoBehaviour
     protected virtual void Start()
     {
         hp = maxHP;
+        audiosource = GetComponent<AudioSource>();
     }
 
     public void beAttacked(int damage = 1)

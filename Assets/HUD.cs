@@ -125,7 +125,7 @@ public class HUD : Singleton<HUD>
         // The generic way
         //DOTween.To(() => transform.position, x => transform.position = x, new Vector3(2, 2, 2), 1);
 
-        if (PlantsManager.Instance.maintree.isFinished())
+        if (PlantsManager.Instance.maintree.isFinished() || GardenManager.Instance.alwaysUpdateTree)
         {
             GardenManager.Instance.finishTree(PlantsManager.Instance.maintree.type);
         }

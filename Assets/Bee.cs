@@ -46,6 +46,8 @@ public class Bee : Animal
         currentFocusTime = 0;
         target = t;
         hasTargetP = false;
+
+        audiosource.PlayOneShot(attackSound);
     }
 
     public  override void die()

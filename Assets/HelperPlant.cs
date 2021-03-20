@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HelperPlant : HPObject
 {
+
+    public AudioClip plantSound;
+    public AudioClip removeSound;
     public HelperPlantType type;
     [HideInInspector]
     public int slot;
@@ -52,6 +55,8 @@ public class HelperPlant : HPObject
 
     private void Plant()
     {
+
+        audiosource.PlayOneShot(plantSound);
         isDragging = false;
         if (canPlant())
         {
@@ -66,6 +71,12 @@ public class HelperPlant : HPObject
         }
 
         //PlantsManager.Instance.shadowCollider.gameObject.SetActive(false);
+    }
+
+    private void OnMouseDown()
+    {
+
+        GetComponent<UnityChan.RandomWind>().interact();
     }
 
     private void OnMouseExit()
@@ -84,8 +95,10 @@ public class HelperPlant : HPObject
         }
     }
 
-    private void remove()
+    public void remove()
     {
+
+        PlantsManager.Instance.audiosource.PlayOneShot(removeSound);
         die();
         HUD.Instance.HidePlantDetail();
     }

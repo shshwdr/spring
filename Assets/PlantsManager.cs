@@ -6,6 +6,7 @@ public enum PlantProperty { s, p, n, water, bee, pest, frog };
 public enum HelperPlantType { crimson, marigold, pond, lavender, appleTree1, appleTree2, appleTree3, appleTree4, appleTreeFlower, waterlily, lupin, zinnia, stawberry };
 public class PlantsManager : Singleton<PlantsManager>
 {
+    public  AudioSource audiosource;
     public bool ignoreResourcePlant = true;
     public bool unlockAllFlowers = true;
     public MainTree maintree;
@@ -198,6 +199,7 @@ public class PlantsManager : Singleton<PlantsManager>
         {
             plantSlots.Add(plantsSlotParent.GetChild(i).GetComponent<PlantSlot>());
         }
+        audiosource = GetComponent<AudioSource>();
     }
     void Start()
     {

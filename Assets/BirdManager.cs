@@ -6,6 +6,8 @@ public class BirdManager : Singleton<BirdManager>
 {
     public GameObject bird;
     Vector3 originPosition;
+    AudioSource audiosource;
+
 
     public float birdShowtimeMin = 5f;
     public float birdShowtimeMax = 10f;
@@ -29,6 +31,7 @@ public class BirdManager : Singleton<BirdManager>
     {
         originPosition = bird.transform.position;
         updateShowTimer();
+        audiosource = GetComponent<AudioSource>();
     }
     void updateShowTimer()
     {
@@ -55,6 +58,7 @@ public class BirdManager : Singleton<BirdManager>
             //Instantiate(bird, position,Quaternion.identity);
             bird.transform.position = position;
             bird.GetComponent<Bird>().isClicked = false;
+            bird.GetComponent<Bird>().Appear();
             birdShowCurrentTime = 0;
             StartCoroutine(delayShow());
         }

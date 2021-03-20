@@ -5,6 +5,7 @@ using UnityEngine;
 public class GardenManager : Singleton<GardenManager>
 {
     public Transform gardenSlots;
+    public bool alwaysUpdateTree;
     // Start is called before the first frame update
     void Start()
     {

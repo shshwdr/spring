@@ -23,6 +23,7 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -54,9 +55,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -100,7 +104,52 @@ TextureImporter:
     sprites: []
     outline: []
     physicsShape: []
-    bones: []
+    bones:
+    - name: bone_1
+      position: {x: 78.21315, y: 48.969593, z: 0}
+      rotation: {x: 0, y: 0, z: 0.70014143, w: 0.7140042}
+      length: 37.98555
+      parentId: -1
+    - name: bone_2
+      position: {x: 37.98555, y: 0.000004046994, z: 0}
+      rotation: {x: 0, y: 0, z: 0.065085575, w: 0.9978797}
+      length: 26.973148
+      parentId: 0
+    - name: bone_3
+      position: {x: 26.973152, y: -0.0000109770735, z: 0}
+      rotation: {x: 0, y: 0, z: 0.011831379, w: 0.99993}
+      length: 27.803276
+      parentId: 1
+    - name: bone_4
+      position: {x: 27.803274, y: -0.0000074134055, z: 0}
+      rotation: {x: 0, y: 0, z: -0.023155425, w: 0.9997319}
+      length: 25.417183
+      parentId: 2
+    - name: bone_5
+      position: {x: 25.417185, y: 0.000016472914, z: 0}
+      rotation: {x: 0, y: 0, z: 0.0027295754, w: 0.9999963}
+      length: 23.933979
+      parentId: 3
+    - name: bone_6
+      position: {x: 23.93398, y: 0.000022574279, z: 0}
+      rotation: {x: 0, y: 0, z: -0.091928765, w: 0.9957656}
+      length: 32.900642
+      parentId: 4
+    - name: bone_7
+      position: {x: 32.900635, y: 0.000012146972, z: 0}
+      rotation: {x: 0, y: 0, z: 0.09501666, w: 0.9954757}
+      length: 29.935429
+      parentId: 5
+    - name: bone_8
+      position: {x: 29.935434, y: 0.0000029817902, z: 0}
+      rotation: {x: 0, y: 0, z: -0.09606399, w: 0.99537516}
+      length: 32.159134
+      parentId: 6
+    - name: bone_9
+      position: {x: 32.159164, y: -0.000009192873, z: 0}
+      rotation: {x: 0, y: 0, z: -0.12527652, w: 0.99212193}
+      length: 52.997334
+      parentId: 7
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []

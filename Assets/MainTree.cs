@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MainTree : HelperPlant
 {
+    public List<AudioClip> growSound;
+    public AudioClip flowerSound;
+    public AudioClip fruitSound;
+
     public int fruitNumberToFinish;
     int fruitNumberFinished;
     public List<HelperPlantType> upgradeList;
@@ -21,10 +25,12 @@ public class MainTree : HelperPlant
     // Start is called before the first frame update
     protected override void Start()
     {
+
+        base.Start();
+        audiosource.PlayOneShot(growSound[0]);
         PlantsManager.Instance.maintree = this;
         PlantsManager.Instance.unlockedSlot = slotCount[currentLevel];
         type = upgradeList[currentLevel];
-        base.Start();
         isDragging = false;
         flowerGeneratedPositions = new List<Transform>();
         isFlowerPositionUsed = new List<bool>();
@@ -44,6 +50,7 @@ public class MainTree : HelperPlant
     }
     public void SpawnFlower()
     {
+        audiosource.PlayOneShot(flowerSound);
         currentFlowerNumber++;
         for(int i = 0;i< flowerGeneratedPositions.Count; i++)
         {
@@ -66,6 +73,8 @@ public class MainTree : HelperPlant
 
     public void createFruit()
     {
+        
+        audiosource.PlayOneShot(fruitSound);
         fruitNumberFinished++;
         if (fruitNumberFinished >= fruitNumberToFinish)
         {
@@ -82,6 +91,8 @@ public class MainTree : HelperPlant
             return;
         }
         currentLevel += 1;
+        
+        audiosource.PlayOneShot(growSound[currentLevel]);
         PlantsManager.Instance.increaseShadowSize();
         type = upgradeList[currentLevel];
         BirdManager.Instance.startTreePlant(type);

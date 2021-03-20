@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Animal : HPObject
 {
+    public AudioClip attackSound;
     public Transform target;
     public float attackRadius = 1f;
     public float attackCooldown = 1f;
@@ -27,6 +28,8 @@ public class Animal : HPObject
 
     protected virtual void attack()
     {
+        audiosource.PlayOneShot(attackSound);
+        
         target.GetComponent<HPObject>().beAttacked(atk);
 
     }
