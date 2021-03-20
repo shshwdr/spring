@@ -986,8 +986,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed18a594cbf366541a10a88cfdcda76b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreResourcePlant: 0
-  unlockAllFlowers: 0
+  ignoreResourcePlant: 1
+  unlockAllFlowers: 1
   maintree: {fileID: 0}
   mainTreePrefab: {fileID: 6984865398421117964, guid: ec275effd023f264abcea41a25a7b042,
     type: 3}
@@ -1131,7 +1131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f32e7c92d485d4a99826648958171a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipTutorial: 0
+  skipTutorial: 1
 --- !u!1 &210852912
 GameObject:
   m_ObjectHideFlags: 0
@@ -7235,7 +7235,7 @@ SpriteRenderer:
   m_SortingLayerID: 229259395
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d8b338a19d1721341a0edad79ab28082, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bd0b1fe2e9cf99140b851a9d0d17092d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

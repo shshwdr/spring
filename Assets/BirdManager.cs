@@ -90,7 +90,7 @@ public class BirdManager : Singleton<BirdManager>
         box.dropboxType = DropboxType.resource;
 
         PlantProperty[] dropProperties = new PlantProperty[]{
-            PlantProperty.n, PlantProperty.s, PlantProperty.p
+            PlantProperty.n,  PlantProperty.p, PlantProperty.water,
         };
         var typeRandom = Random.Range(0, 3);
 
