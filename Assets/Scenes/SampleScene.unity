@@ -1095,7 +1095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audiosource: {fileID: 0}
   background: {fileID: 1614464718}
-  ignoreResourcePlant: 0
+  ignoreResourcePlant: 1
   unlockAllFlowers: 0
   maintree: {fileID: 0}
   mainTreePrefab: {fileID: 6984865398421117964, guid: ec275effd023f264abcea41a25a7b042,
@@ -1241,7 +1241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f32e7c92d485d4a99826648958171a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipTutorial: 0
+  skipTutorial: 1
 --- !u!82 &204554943
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3520,7 +3520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &744610583
 RectTransform:
   m_ObjectHideFlags: 0

@@ -65,7 +65,8 @@ public class GardenManager : Singleton<GardenManager>
         {
             GameObject.Destroy(child.gameObject);
         }
-        Instantiate(slot.tree, PlantsManager.Instance.allInTreeGame);
+        PlantsManager.Instance.mainTreePrefab = slot.tree;
+        //Instantiate(slot.tree, PlantsManager.Instance.allInTreeGame);
         HUD.Instance.MoveToTree();
     }
 
