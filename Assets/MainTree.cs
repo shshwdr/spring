@@ -29,7 +29,7 @@ public class MainTree : HelperPlant
     {
 
         base.Start();
-        audiosource.PlayOneShot(growSound[0]);
+        //audiosource.PlayOneShot(growSound[0]);
         PlantsManager.Instance.maintree = this;
         PlantsManager.Instance.unlockedSlot = slotCount[currentLevel];
         type = upgradeList[currentLevel];

@@ -78,6 +78,7 @@ MonoBehaviour:
   isFacingRight: 0
   hasTargetP: 0
   targetP: {x: 0, y: 0, z: 0}
+  clickSound: {fileID: 8300000, guid: 7dac9ed7cc8275e4d8579a6fc918ef51, type: 3}
 --- !u!70 &7729941256849587594
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

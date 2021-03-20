@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pest : Animal
 {
-
+    public AudioClip clickSound;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -32,7 +32,10 @@ public class Pest : Animal
         if (targeter)
         {
             targeter.GetComponent<HelperInsect>().target = transform;
+
+            audiosource.PlayOneShot(clickSound);
         }
+
     }
 
     // Update is called once per frame

@@ -19,35 +19,41 @@ public class Dialogues : MonoBehaviour
 
     //tutorial
 
-    static public string Welcome = "Welcome To The Garden!";
-    static public string PlantPond = "First drag the pond around your tree.";
-    static public string FinishPlantPond = "Great! You can collect water from pond after a while.";
+    static public string Welcome = "Welcome to your first garden!";
+    static public string Welcome2 = "The goal of each garden is to make your tree bear fruit.\nTo do this, you need to plant flowers and place ponds that collect resources for you.";
+    static public string PlantPond = "Start off by placing a pond in your garden. \nClick and drag the icon below to place it.";
+    static public string FinishPlantPond = "Great! The pond generates water for you, which you need to plant flowers. You can place more pond to speed up generation.";
 
-    static public string FinishCollectForWaterLily = "Good Job! Now you have enough resources, you can plant the new flower - Water Lily! Drag it in the pond!";
-    static public string FinishPlantWaterLily = "Water Lily will attract some frogs for you, they will be useful soon! Now build more pond and keep collecting resources!";
-    static public string FinishCollectForCrimson = "Good Job! Now you have enough resources, you can plant the new flower - Crimson Clover! Drag it around the tree!";
-    static public string FinishPlantCrimson = "Crimson Clover will provide N for you, which is important for plant grow. You can use it grow new plants!";
-    static public string FinishCollectForLavender = "It could take a while for plant to generate resource, remember to plant more pond and flowers to get resource faster! But now Let's plant Lavender!";
-    static public string FinishPlantLavender = "Lavender will provide P. The main target for the garden is to upgrade your tree. Check what resource you need for upgrading tree";
+    static public string FinishCollectForWaterLily = "Good job! You have gathered enough resources to plant the Water Lily. To place it, click and drag it into your pond.";
+    static public string FinishPlantWaterLily = "The Water Lily will attract frogs to your garden. The frogs are your friends and will help you later on. For now, keep gathering more water.";
+    static public string FinishPlantWaterLily2 = "Does it feel slow? You can always increase the game speed in the top right corner.";
+    static public string FinishCollectForCrimson = "Good job! You have gathered enough resources to plant the Crimson Clover. To plant it, click and drag it into your garden.";
+    static public string FinishPlantCrimson = "The Crimson Clover will provide the resource N (nitrogen) for you - an essential nutrient for many flowers and trees.";
+    static public string FinishCollectForLavender = "To generate resources faster, remember to plant more flowers and place more ponds - or increase the speed of the game.";
+    static public string FinishCollectForLavender2 = "Now, let's plant some lavender.";
+    static public string FinishPlantLavender = "Lavender will provide the resource P (potassium) for you - another essential nutrient in a garden. ";
+    static public string FinishPlantLavender2 = "The main target for the garden is to upgrade your tree. Check what resource you need for upgrading tree.";
 
-    static public string FinishCollectForTree1 = "Now you can upgrade your tree.";
-    static public string FinishUpgradeTree1 = "Awesome! Keep an eye on what resource you will need for next level. Keep upgrade the tree!";
-    static public string FinishPlantMarigold = "Marigold will attract bees. It will be useful later when you have flowers on the tree.";
+    static public string FinishCollectForTree1 = "Now you have collected enough resources to upgrade your tree.";
+    static public string FinishPlantMarigold = "The Marigold will attract bees. The bees will be useful later on, when you have fruit flowers on your tree.";
 
-    static public string GetPestValue = "See Snail Value? Take care of it, the higher this value means more snails will shows up in your garden and eat your plants!";
-    static public string GetBeeValue = "See Bee Value? The higher this value means more bees will shows up in your garden and help your pollinate your tree!";
-
-
-    static public string SeeBird = "Sometimes the bird will fly to your place. click them and they will surprise you!";
-    static public string SeePest = "Snail shows up! click them and the frog will go to eat them.";
-    static public string SeeBee = "Bee shows up! You can drag from the flower to the bee to attact bees to your flowers.";
-    static public string SeeUnlock = "You Unlocked a new plants from the bird! what a surprise! try it!";
+    static public string GetPestValue = "See the snail value? It will increase when you plant more flowers. A higher value means that it is more likely that snails will arrive to try to eat your plants.";
+    static public string GetBeeValue = "See the bee value? The higher the value, the more likely it is that bees will show up in your garden.";
 
 
-    static public string GetFlowerTree = "Your tree is at its max size, you should keep upgrade to get flowers on it, and plant Marigold to attact bees.";
-    static public string FinishFirstTree = "Congratulations! You finish your first tree! Stay around and enjoy or move your tree to the garden.";
+    static public string SeeBird = "Sometimeds a bird will fly through your garden. Click it to recieve a surprise!";
+    static public string SeePest = "A snail has shown up! Click the snail to command one of your frogs to eat it. If you don't have any frogs, plant a Water Lily in a pond - quickly!";
+    static public string SeeBee = "A bee has shown up! If you have generated fruit flowers on your tree, you can click and drag a scent trail from the flower to the bee to make it fly towards the flower and pollinate it.";
+    static public string SeeUnlock = "The bird have brought a new seed into your garden. Try it out!";
 
 
-    static public string RemovePlant = "You can right click a flower to remove it. You can do that on a tree to restart the tree";
+    static public string FinishUpgradeTree1 = "Great job! Always keep track of which resources you need to upgrade your tree to the next level - that is your goal!";
+    static public string GetFlowerTree = "Your tree is now full grown! The next step is to generate fruit flowers on it, and then attract bees ";
+    static public string FinishFirstTree = "Congratulations, you have completed your first tree!";
+    static public string FinishFirstTree2 = "Now you can stay around a bit and enjoy your garden, or move your plants into the garden overview and try growing another tree.";
+    
+
+
+    static public string RemovePlant = "If you don't like a plant, you can right click a flower to remove it. You can do that on a tree to restart the tree";
     // static public string FinishPlantMarigold = "Marigold will attract bees.";
 }

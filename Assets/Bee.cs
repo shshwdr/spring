@@ -27,6 +27,7 @@ public class Bee : Animal
     protected override void Start()
     {
         currentBeeLife = 0;
+        base.Start();
     }
 
     protected override void attack()
@@ -46,8 +47,11 @@ public class Bee : Animal
         currentFocusTime = 0;
         target = t;
         hasTargetP = false;
+        if (!audiosource.isPlaying)
+        {
 
-        audiosource.PlayOneShot(attackSound);
+            audiosource.PlayOneShot(attackSound);
+        }
     }
 
     public  override void die()

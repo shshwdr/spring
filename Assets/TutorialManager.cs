@@ -6,8 +6,13 @@ public class TutorialManager : Singleton<TutorialManager>
 {
     public bool skipTutorial = true;
     Dictionary<string, string> finishDialogToStartDialog = new Dictionary<string, string>() {
-        {Dialogues.Welcome,Dialogues.PlantPond },
-
+        {Dialogues.Welcome,Dialogues.Welcome2 },
+        {Dialogues.Welcome2,Dialogues.PlantPond },
+        {Dialogues.FinishPlantWaterLily,Dialogues.FinishPlantWaterLily2 },
+        {Dialogues.FinishCollectForLavender,  Dialogues.FinishCollectForLavender2},
+        {Dialogues.FinishPlantLavender,  Dialogues.FinishPlantLavender2},
+        {Dialogues.FinishFirstTree,  Dialogues.FinishFirstTree2},
+        {Dialogues.FinishPlantMarigold,  Dialogues.RemovePlant},
     };
 
     Dictionary<string, string> firstSeeSomethingToStartDialog = new Dictionary<string, string>() {
@@ -115,9 +120,23 @@ public class TutorialManager : Singleton<TutorialManager>
             if (!hadDialog.ContainsKey(value))
             {
                 hadDialog[value] = true;
-                TutorialPanel.Instance.Init(value);
+                if(type == HelperPlantType.appleTree2 || type == HelperPlantType.appleTree4)
+                {
+                    StartCoroutine( waitShow(1, value));
+                }
+                else
+                {
+
+                    TutorialPanel.Instance.Init(value);
+                }
             }
         }
+    }
+
+    IEnumerator waitShow(float waitTime, string value)
+    {
+        yield return new WaitForSeconds(waitTime);
+        TutorialPanel.Instance.Init(value);
     }
 
     public void canPurchasePlant(HelperPlantType type)

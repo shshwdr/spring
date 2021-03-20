@@ -9,6 +9,7 @@ public enum HelperPlantType { crimson, marigold, pond, lavender,
     peachTree1, peachTree2, peachTree3, peachTree4, peachTreeFlower,
     lemonTree1, lemonTree2, lemonTree3, lemonTree4, lemonTreeFlower,
     cherryTree1, cherryTree2, cherryTree3, cherryTree4, cherryTreeFlower,
+    marsh, sweat, sun, viola, water , indigo, snapdragon, lutos,
 };
 public class PlantsManager : Singleton<PlantsManager>
 {
@@ -119,7 +120,7 @@ public class PlantsManager : Singleton<PlantsManager>
         { HelperPlantType.stawberry,false },
         };
         plantName = new Dictionary<HelperPlantType, string>() {
-        { HelperPlantType.crimson, "Crimon Clover" },
+        { HelperPlantType.crimson, "Crimson Clover" },
         { HelperPlantType.marigold, "Marigold" },
         { HelperPlantType.pond, "Pond" },
         { HelperPlantType.lavender, "Lavender" },
