@@ -14,7 +14,7 @@ public class Dialogues : MonoBehaviour
     static public string UpgradeTreeInst = "Click To Upgrade";
     static public string SpawnTreeFlowerInst = "Click To Spawn Flowers";
     static public string AttactBeeInst = "Attract Bees And Wait For Fruit.";
-    static public string StartTreeConfirm = "Do you want to start this tree?";
+    static public string StartTreeConfirm = "Do you want to start this tree? Current progress will lost.";
 
 
     //tutorial

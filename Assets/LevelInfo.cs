@@ -5,6 +5,7 @@ using TMPro;
 
 public class LevelInfo : MonoBehaviour
 {
+
     public TMP_Text levelInfoText;
     PlantsManager plantManager;
     // Start is called before the first frame update
@@ -17,7 +18,10 @@ public class LevelInfo : MonoBehaviour
     {
         levelInfoText.text = "This is a " + plantManager.plantName[treeType];
 
-        levelInfoText.text += "\n this level has more pests";
+        levelInfoText.text += "\n";
+
+        levelInfoText.text += plantManager.levelDetail[treeType];
+        
     }
 
     // Update is called once per frame

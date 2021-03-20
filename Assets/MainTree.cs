@@ -8,6 +8,8 @@ public class MainTree : HelperPlant
     public AudioClip flowerSound;
     public AudioClip fruitSound;
 
+    public Sprite background;
+
     public int fruitNumberToFinish;
     int fruitNumberFinished;
     public List<HelperPlantType> upgradeList;

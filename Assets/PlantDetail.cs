@@ -61,7 +61,7 @@ public class PlantDetail : Singleton<PlantDetail>
                 plantName.text = getName(maintree);
                 UpdateHealth(maintree);
                 //stats.text += getDurationCost(maintree);
-                getProduction(maintree);
+                //getProduction(maintree);
                 getUpgrade(maintree);
                 //stats.text += getProduction(maintree);
                 //stats.text += getUpgrade(maintree);

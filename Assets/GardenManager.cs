@@ -22,7 +22,7 @@ public class GardenManager : Singleton<GardenManager>
     {
         foreach (Transform slot in gardenSlots)
         {
-            if (slot.GetComponent<GardenSlot>().finishedTreeType == treeType)
+            if (slot.GetComponent<GardenSlot>().tree.GetComponent<MainTree>().upgradeList[0] == treeType)
             {
                 foreach (Transform child in slot.GetComponent<GardenSlot>().allInTreeNode)
                 {

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: lemonTreeController
+  m_Controller: {fileID: 9100000, guid: 6b779207ca27ecb448395cffaf7f561a, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 238c5e288e70613478b6395154a54a0a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 259013f7790dae24ab114814ae90fc58, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 2d71013c5b2b9c8418b366724291d6cb, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f13614090447dfa43956aef7fab1b4ee, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 10d3045f18675ea41868604bffd9a855, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2a4fa21dce0562a429bf49ef1e6e2973, type: 2}

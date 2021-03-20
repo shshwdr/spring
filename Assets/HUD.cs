@@ -124,10 +124,10 @@ public class HUD : Singleton<HUD>
         //transform.DOMove(new Vector3(2, 2, 2), 1);
         // The generic way
         //DOTween.To(() => transform.position, x => transform.position = x, new Vector3(2, 2, 2), 1);
-
+        
         if (PlantsManager.Instance.maintree.isFinished() || GardenManager.Instance.alwaysUpdateTree)
         {
-            GardenManager.Instance.finishTree(PlantsManager.Instance.maintree.type);
+            GardenManager.Instance.finishTree(PlantsManager.Instance.maintree.upgradeList[0]);
         }
 
         DOTween.To(() => Camera.main.orthographicSize, x => Camera.main.orthographicSize = x, gardenCamera.orthographicSize, cameraMoveTime).SetUpdate(true);

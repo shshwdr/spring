@@ -27,6 +27,8 @@ public class Popup : Singleton<Popup>
         group.interactable = true;
         group.blocksRaycasts = true;
         text.text = t;
+
+        HUD.Instance.togglePause();
         clearButton();
         yesButton.onClick.AddListener(delegate { 
             y(); Hide();

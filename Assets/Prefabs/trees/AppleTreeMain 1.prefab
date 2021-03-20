@@ -366,6 +366,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAlive: 1
   maxHP: 10
+  plantSound: {fileID: 0}
+  removeSound: {fileID: 0}
   type: 4
   slot: 0
   plantCollider: {fileID: 0}
@@ -380,6 +382,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9e4e553bbb01e9b42ac91d086a1e7c55, type: 3}
   flowerSound: {fileID: 8300000, guid: 23721a837abe47b4caf8a71fd2aae2ad, type: 3}
   fruitSound: {fileID: 8300000, guid: 1a935c6278ae6744ba411b9547dcfaa7, type: 3}
+  background: {fileID: 21300000, guid: bd0b1fe2e9cf99140b851a9d0d17092d, type: 3}
   fruitNumberToFinish: 2
   upgradeList: 04000000050000000600000007000000
   flowerPlantType: 8
