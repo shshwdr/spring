@@ -12,6 +12,7 @@ public class HUD : Singleton<HUD>
     public GameObject plantButtonPrefab;
     public GameObject plantDetailPanel;
     public TMP_Text speedText;
+    public TMP_Text pauseText;
     public GameObject gardenButton;
     public List<Sprite> propertyImage;
     public List<Transform> propertyResourceTransform = new List<Transform>(6);
@@ -106,10 +107,12 @@ public class HUD : Singleton<HUD>
 
             Time.timeScale = 0;
             speedText.text = 0 + "x speed";
+            pauseText.text = "Play";
         }
         else
         {
             resumeSpeed();
+            pauseText.text = "Pause";
         }
     }
 
@@ -137,6 +140,8 @@ public class HUD : Singleton<HUD>
         previousSpeed = Time.timeScale;
         Time.timeScale = 0;
     }
+
+
 
     public void showLevelInfo(HelperPlantType type)
     {
