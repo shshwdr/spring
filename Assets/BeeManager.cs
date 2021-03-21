@@ -42,12 +42,12 @@ public class BeeManager : Singleton<BeeManager>
     public void updateGenerateTime()
     {
         var beeValue = PlantsManager.Instance.currentResource[PlantProperty.bee];
-        if(beeValue <=3)
+        if(beeValue <=2)
         {
             beeGenerateTime = -1;
             return;
         }
-        beeGenerateTime = Utils.SuperLerp(20, 3, 3, 30, beeValue);
+        beeGenerateTime = Utils.SuperLerp(15, 5, 2, 30, beeValue);
     }
     public void Clear()
     {
