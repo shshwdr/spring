@@ -1844,6 +1844,16 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[102].y
       value: -0.525
       objectReference: {fileID: 0}
+    - target: {fileID: 5718688822822655125, guid: 9332ecff35b325048a9701cd272249cc,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.21067949
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718688822822655125, guid: 9332ecff35b325048a9701cd272249cc,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.19113888
+      objectReference: {fileID: 0}
     - target: {fileID: 8682640099129570432, guid: 9332ecff35b325048a9701cd272249cc,
         type: 3}
       propertyPath: type

@@ -231,7 +231,7 @@ public class PlantsManager : Singleton<PlantsManager>
             { PlantProperty.pest, 2 },
         }},
         {HelperPlantType.lupin,new Dictionary<PlantProperty, int>() {
-            { PlantProperty.n, 6 },
+            { PlantProperty.n, 12 },
             { PlantProperty.pest, 6 },
         }},
 

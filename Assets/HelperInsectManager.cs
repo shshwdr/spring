@@ -19,7 +19,8 @@ public class HelperInsectManager : Singleton<HelperInsectManager>
         List<Transform> res = new List<Transform>();
         foreach (var plantValue in helperInsects)
         {
-            res.Add(plantValue.transform);
+            if(plantValue)
+                res.Add(plantValue.transform);
         }
         return res;
     }

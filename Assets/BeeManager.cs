@@ -42,12 +42,12 @@ public class BeeManager : Singleton<BeeManager>
     public void updateGenerateTime()
     {
         var beeValue = PlantsManager.Instance.currentResource[PlantProperty.bee];
-        if(beeValue == 0)
+        if(beeValue <=3)
         {
             beeGenerateTime = -1;
             return;
         }
-        beeGenerateTime = Utils.SuperLerp(20, 3, 0, 10, beeValue);
+        beeGenerateTime = Utils.SuperLerp(20, 3, 3, 30, beeValue);
     }
     public void Clear()
     {
@@ -57,6 +57,7 @@ public class BeeManager : Singleton<BeeManager>
         }
         currentBeeCount = 0;
         currentBeeGenerateTime = 0;
+        beeGenerateTime = -1;
     }
     // Update is called once per frame
     void Update()

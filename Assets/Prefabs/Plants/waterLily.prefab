@@ -302,6 +302,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1072396907640421471, guid: a8a1250397108d844a42a91938184908,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072396907640421471, guid: a8a1250397108d844a42a91938184908,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072396907640421471, guid: a8a1250397108d844a42a91938184908,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -510,6 +520,16 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[13].y
       value: -0.17
       objectReference: {fileID: 0}
+    - target: {fileID: 4162409400496757835, guid: a8a1250397108d844a42a91938184908,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.25844634
+      objectReference: {fileID: 0}
+    - target: {fileID: 4162409400496757835, guid: a8a1250397108d844a42a91938184908,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.027654093
+      objectReference: {fileID: 0}
     - target: {fileID: 5439368059161503804, guid: a8a1250397108d844a42a91938184908,
         type: 3}
       propertyPath: m_Enabled
@@ -528,7 +548,7 @@ PrefabInstance:
     - target: {fileID: 5439368059161503804, guid: a8a1250397108d844a42a91938184908,
         type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.000000059604645
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5439368059161503804, guid: a8a1250397108d844a42a91938184908,
         type: 3}
@@ -538,7 +558,7 @@ PrefabInstance:
     - target: {fileID: 5439368059161503804, guid: a8a1250397108d844a42a91938184908,
         type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 0.64711004
+      value: 0.6471101
       objectReference: {fileID: 0}
     - target: {fileID: 5439368059161503804, guid: a8a1250397108d844a42a91938184908,
         type: 3}

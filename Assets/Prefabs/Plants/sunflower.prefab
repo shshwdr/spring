@@ -1860,6 +1860,21 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[3].Array.data[10].y
       value: 0.375
       objectReference: {fileID: 0}
+    - target: {fileID: 5718688822822655125, guid: 9332ecff35b325048a9701cd272249cc,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.17518589
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718688822822655125, guid: 9332ecff35b325048a9701cd272249cc,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.069508135
+      objectReference: {fileID: 0}
+    - target: {fileID: 5718688822822655125, guid: 9332ecff35b325048a9701cd272249cc,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.34247965
+      objectReference: {fileID: 0}
     - target: {fileID: 8682640099129570432, guid: 9332ecff35b325048a9701cd272249cc,
         type: 3}
       propertyPath: type

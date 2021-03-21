@@ -27,6 +27,7 @@ public class PestManager : Singleton<PestManager>
             Destroy(t.gameObject);
         }
         currentBeeGenerateTime = 0;
+        beeGenerateTime = -1;
     }
     public List<Transform> pestsList()
     {

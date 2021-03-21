@@ -4,35 +4,40 @@ using UnityEngine;
 
 public class CheatManager : MonoBehaviour
 {
+    public bool isOn = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.U))
+        if (isOn)
         {
-            PlantsManager.Instance.ignoreResourcePlant = true;
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            PestManager.Instance.lotsPest = true;
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            BeeManager.Instance.lotsPest = true;
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            PlantsManager.Instance.unlockAllFlowers = true;
-            HUD.Instance.UpdatePlantButtons();
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            TutorialManager.Instance.skipTutorial = true;
+
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                PlantsManager.Instance.ignoreResourcePlant = true;
+            }
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                PestManager.Instance.lotsPest = true;
+            }
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                BeeManager.Instance.lotsPest = true;
+            }
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                PlantsManager.Instance.unlockAllFlowers = true;
+                HUD.Instance.UpdatePlantButtons();
+            }
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                TutorialManager.Instance.skipTutorial = true;
+            }
         }
     }
 }
