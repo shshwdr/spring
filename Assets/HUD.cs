@@ -63,9 +63,16 @@ public class HUD : Singleton<HUD>
         {
             if ((!plantManager.isPlantUnlocked.ContainsKey(go.GetComponent<HelperPlant>().type) || plantManager.isPlantUnlocked[go.GetComponent<HelperPlant>().type]) || plantManager.unlockAllFlowers)
             {
-                GameObject buttonInstance = Instantiate(plantButtonPrefab, plantsContent.transform);
-                PlantsButton plantButtonInstance = buttonInstance.GetComponent<PlantsButton>();
-                plantButtonInstance.init(go, this);
+                foreach (var plantType in plantManager.levelToPlants[plantManager.mainTreePrefab.GetComponent<MainTree>().upgradeList[0]])
+                {
+                    if(plantType == go.GetComponent<HelperPlant>().type)
+                    {
+
+                        GameObject buttonInstance = Instantiate(plantButtonPrefab, plantsContent.transform);
+                        PlantsButton plantButtonInstance = buttonInstance.GetComponent<PlantsButton>();
+                        plantButtonInstance.init(go, this);
+                    }
+                }
 
             }
         }
@@ -205,6 +212,7 @@ public class HUD : Singleton<HUD>
 
         isInGarden = false;
         resumeSpeed();
+        UpdatePlantButtons();
     }
     public void HidePlantDetail()
     {

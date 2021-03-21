@@ -122,7 +122,7 @@ public class TutorialManager : Singleton<TutorialManager>
                 hadDialog[value] = true;
                 if(type == HelperPlantType.appleTree2 || type == HelperPlantType.appleTree4)
                 {
-                    StartCoroutine( waitShow(1, value));
+                    StartCoroutine( waitShow(2, value));
                 }
                 else
                 {
