@@ -1,22 +1,29 @@
 # =============== #
 # Unity generated #
 # =============== #
-Temp/
-Obj/
-UnityGenerated/
-Library/
-Assets/AssetStoreTools*
-builds
-windowsBuild
-build
-WindowsBuild
-buildWindows
-pakcedBuild
-*.rar
+/.vs/
+/Temp/
+/Obj/
+/UnityGenerated/
+/Library/
+/Assets/AssetStoreTools*
+/builds/
+/windowsBuild/
+/build/
+/Editor/
+/buildWindows/
+/pakcedBuild
+/Logs/
+/UserSettings/
+/*.zip
+/*.apk
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
 ExportedObj/
+*.apk
+*.aab
+*.keystore
 *.svd
 *.userprefs
 *.csproj
@@ -26,6 +33,7 @@ ExportedObj/
 *.user
 *.unityproj
 *.booproj
+*.log
 
 # ============ #
 # OS generated #
@@ -38,3 +46,10 @@ ExportedObj/
 Icon?
 ehthumbs.db
 Thumbs.db
+
+# ============ #
+# FMOD #
+# ============ #
+/[Aa]ssets/Plugins/FMOD/Cache/*
+/Assets/FMODAssets/*
+/Assets/FMODStudioCache.meta
