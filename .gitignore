@@ -17,6 +17,8 @@
 /UserSettings/
 /*.zip
 /*.apk
+/*.rar
+/Logs/
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #

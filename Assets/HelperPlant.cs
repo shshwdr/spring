@@ -110,10 +110,10 @@ public class HelperPlant : HPObject
     private void HandleFingerUp(LeanFinger finger)
     {
         // Ignore?
-        if (finger.StartedOverGui == true)
-        {
-            return;
-        }
+        //if (finger.StartedOverGui == true)
+        //{
+        //    return;
+        //}
 
         if (finger.IsOverGui == true)
         {
@@ -124,15 +124,15 @@ public class HelperPlant : HPObject
         private void HandleFingerDown(LeanFinger finger)
     {
         // Ignore?
-        if (finger.StartedOverGui == true)
-        {
-            return;
-        }
+        //if (finger.StartedOverGui == true)
+        //{
+        //    return;
+        //}
 
-        if (finger.IsOverGui == true)
-        {
-            return;
-        }
+        //if (finger.IsOverGui == true)
+        //{
+        //    return;
+        //}
         isFingerDown = true;
 
         //if (requiredTapCount > 0 && finger.TapCount != requiredTapCount)
