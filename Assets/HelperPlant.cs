@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Lean.Touch;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class HelperPlant : HPObject
     public Collider2D plantCollider;
 
     public Sprite iconSprite;
-
+    bool isFingerDown;
     public bool isWater = false;
 
     public bool ignorePest = false;
@@ -26,6 +27,16 @@ public class HelperPlant : HPObject
 
     float harvestTime;
     float currentHarvestTimer;
+    private void OnEnable()
+    {
+        LeanTouch.OnFingerDown += HandleFingerDown;
+        LeanTouch.OnFingerUp += HandleFingerUp;
+    }
+    private void OnDisable()
+    {
+        LeanTouch.OnFingerDown -= HandleFingerDown;
+        LeanTouch.OnFingerUp -= HandleFingerUp;
+    }
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -96,13 +107,78 @@ public class HelperPlant : HPObject
             HUD.Instance.HidePlantDetail();
         }
     }
+    private void HandleFingerUp(LeanFinger finger)
+    {
+        // Ignore?
+        if (finger.StartedOverGui == true)
+        {
+            return;
+        }
+
+        if (finger.IsOverGui == true)
+        {
+            return;
+        }
+        isFingerDown = false;
+    }
+        private void HandleFingerDown(LeanFinger finger)
+    {
+        // Ignore?
+        if (finger.StartedOverGui == true)
+        {
+            return;
+        }
+
+        if (finger.IsOverGui == true)
+        {
+            return;
+        }
+        isFingerDown = true;
+
+        //if (requiredTapCount > 0 && finger.TapCount != requiredTapCount)
+        //{
+        //    return;
+        //}
+
+        //if (requiredTapInterval > 0 && (finger.TapCount % requiredTapInterval) != 0)
+        //{
+        //    return;
+        //}
+
+        //if (requiredSelectable != null && requiredSelectable.IsSelected == false)
+        //{
+        //    return;
+        //}
+
+        //if (onFinger != null)
+        //{
+        //    onFinger.Invoke(finger);
+        //}
+
+        //if (onCount != null)
+        //{
+        //    onCount.Invoke(finger.TapCount);
+        //}
+
+        //if (onWorld != null)
+        //{
+        //    var position = ScreenDepth.Convert(finger.ScreenPosition, gameObject);
+
+        //    onWorld.Invoke(position);
+        //}
+
+        //if (onScreen != null)
+        //{
+        //     finger.ScreenPosition
+        //}
+    }
 
     protected void OnMouseOver()
     {
-        if (!isDragging&& Input.GetMouseButtonDown(1))
-        {
-            RemovePlant();
-        }
+        //if (!isDragging&& Input.GetMouseButtonDown(1))
+        //{
+        //    RemovePlant();
+        //}
     }
 
     public void remove()
@@ -146,8 +222,11 @@ public class HelperPlant : HPObject
             }
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             transform.Translate(mousePosition);
-            if (Input.GetMouseButtonUp(0) && isDragging)
+            if ((Input.GetMouseButtonUp(0)|| !isFingerDown) && isDragging)
+            {
+
                 Plant();
+            }
 
         }
         else
