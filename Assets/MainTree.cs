@@ -136,15 +136,15 @@ public class MainTree : HelperPlant
         }
 
 
-        GameObject cameraCurrent = GameObject.Find("camera" + (currentLevel+1));
-        if (cameraPrevious && !cameraPrevious.active)
-        {
-            cameraPrevious.SetActive(true);
-        }
-        else
-        {
-            Debug.LogError("current camra is wrong");
-        }
+        //GameObject cameraCurrent = GameObject.Find("camera" + (currentLevel+1));
+        //if (cameraCurrent && !cameraCurrent.active)
+        //{
+        //    cameraCurrent.SetActive(true);
+        //}
+        //else
+        //{
+        //    Debug.LogError("current camra is wrong");
+        //}
 
 
         GameObject growCollider = GameObject.Find("growCollider" + currentLevel);
