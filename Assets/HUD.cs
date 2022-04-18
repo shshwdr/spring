@@ -80,7 +80,10 @@ public class HUD : Singleton<HUD>
 
     public void ShowPlantDetail(GameObject plant)
     {
-        plantDetailPanel.SetActive(true);
+        DOTween.To(() => plantDetailPanel.GetComponent<CanvasGroup>().alpha, x => plantDetailPanel.GetComponent<CanvasGroup>().alpha = x, 1, detailFadeInTime);
+
+        
+        //plantDetailPanel.SetActive(true);
         plantDetailPanel.GetComponent<PlantDetail>().updateValue(plant);
     }
 
@@ -214,9 +217,12 @@ public class HUD : Singleton<HUD>
         resumeSpeed();
         UpdatePlantButtons();
     }
+    float detailFadeInTime = 0.5f;
     public void HidePlantDetail()
     {
-        plantDetailPanel.SetActive(false);
+
+        DOTween.To(() => plantDetailPanel.GetComponent<CanvasGroup>().alpha, x => plantDetailPanel.GetComponent<CanvasGroup>().alpha = x, 0, detailFadeInTime);
+        //plantDetailPanel.SetActive(false);
     }
         // Update is called once per frame
         void Update()

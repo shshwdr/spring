@@ -18,7 +18,7 @@ public class PlantDetail : Singleton<PlantDetail>
     void Start()
     {
         plantManager = PlantsManager.Instance;
-        gameObject.SetActive(false);
+       // gameObject.SetActive(false);
     }
 
     public void UpdateValue()

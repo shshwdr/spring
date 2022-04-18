@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Lean.Touch;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class MainTree : HelperPlant
     public int fruitNumberToFinish;
     int fruitNumberFinished;
     public List<HelperPlantType> upgradeList;
+
     public HelperPlantType flowerPlantType;
     public List<int> slotCount = new List<int>() { 2, 4, 6 };
     int currentLevel = 0;
@@ -43,6 +45,25 @@ public class MainTree : HelperPlant
         }
         totalFlowerNumber = flowerGeneratedPositions.Count;
 
+    }
+
+    private void OnEnable()
+    {
+        LeanTouch.OnFingerDown += HandleFingerDown;
+        //LeanTouch.OnFingerUp += HandleFingerUp;
+    }
+    private void OnDisable()
+    {
+        LeanTouch.OnFingerDown -= HandleFingerDown;
+        //LeanTouch.OnFingerUp -= HandleFingerUp;
+    }
+
+    private void HandleFingerDown(LeanFinger finger)
+    {
+        if(finger.TapCount == 2)
+        {
+            OnMouseDown();
+        }
     }
     public override void die()
     {
@@ -103,6 +124,39 @@ public class MainTree : HelperPlant
         CollectionManager.Instance.RemoveCoins(transform.position, PlantsManager.Instance.helperPlantCost[type]);
         HUD.Instance.ShowPlantDetail(gameObject);
         GetComponent<Animator>().SetTrigger("grow");
+
+        GameObject cameraPrevious = GameObject.Find("camera" + currentLevel);
+        if (cameraPrevious && cameraPrevious.active)
+        {
+            cameraPrevious.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("previous camra is wrong");
+        }
+
+
+        GameObject cameraCurrent = GameObject.Find("camera" + (currentLevel+1));
+        if (cameraPrevious && !cameraPrevious.active)
+        {
+            cameraPrevious.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("current camra is wrong");
+        }
+
+
+        GameObject growCollider = GameObject.Find("growCollider" + currentLevel);
+        if (growCollider)
+        {
+            growCollider.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("growCollider" + currentLevel+ " does not existed");
+        }
+
     }
 
     public void PurchaseFlower()

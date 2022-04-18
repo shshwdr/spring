@@ -82,6 +82,13 @@ public class PlantsManager : Singleton<PlantsManager>
     float currentTime = 0;
 
     public Transform allInTreeGame;
+
+    public override CSSerializedObject Save()
+    {
+        var res = new SerializedLevel();
+        //res.water = PlantsManager.Instance.currentResource["water"];
+        return res;
+    }
     public List<Transform> plantsList()
     {
         List<Transform> res = new List<Transform>();
@@ -458,6 +465,11 @@ public class PlantsManager : Singleton<PlantsManager>
             {
                 collideGround = false;
                 //break;
+            }
+            if(collided.tag == "ground")
+            {
+
+                collideGround = false;
             }
             if (collided == shadowCollider)
             {
