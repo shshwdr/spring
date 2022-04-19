@@ -159,12 +159,12 @@ public class MainTree : HelperPlant
         }
         wasUpgradable = false;
         glowValue = 0;
-        DOTween.KillAll();
+        DOTween.Kill(this);
 
         foreach (var renderer in GetComponentsInChildren<Renderer>())
         {
             var mat = renderer.material;
-
+            mat.DisableKeyword("GLOW_ON");
             mat.SetFloat("_Glow", 0);
         }
 
@@ -241,6 +241,7 @@ public class MainTree : HelperPlant
             {
                 var mat = renderer.material;
 
+                mat.EnableKeyword("GLOW_ON");
                 mat.SetFloat("_Glow", glowValue);
             }
         }

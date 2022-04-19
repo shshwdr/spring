@@ -29,7 +29,7 @@ public class SlideAnotherPanel : MonoBehaviour
                 hideImage.SetActive(true);
                 showImage.SetActive(false);
             }
-            isPressed = true;
+            isPressed = !isPressed;
         });
     }
 
