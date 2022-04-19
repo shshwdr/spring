@@ -1,4 +1,5 @@
-﻿using Lean.Touch;
+﻿using DG.Tweening;
+using Lean.Touch;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -156,6 +157,16 @@ public class MainTree : HelperPlant
         {
             Debug.LogError("growCollider" + currentLevel+ " does not existed");
         }
+        wasUpgradable = false;
+        glowValue = 0;
+        DOTween.KillAll();
+
+        foreach (var renderer in GetComponentsInChildren<Renderer>())
+        {
+            var mat = renderer.material;
+
+            mat.SetFloat("_Glow", 0);
+        }
 
     }
 
@@ -214,9 +225,24 @@ public class MainTree : HelperPlant
         return upgradeList[currentLevel + 1];
     }
 
+    bool wasUpgradable = false;
+    float glowValue = 0;
     // Update is called once per frame
     void Update()
     {
-        
+        if (upgradable())
+        {
+            if (!wasUpgradable)
+            {
+                wasUpgradable = true;
+                DOTween.To(() => glowValue, x => glowValue = x, 0.4f, 1).SetLoops(-1, LoopType.Yoyo);
+            }
+            foreach (var renderer in GetComponentsInChildren<Renderer>())
+            {
+                var mat = renderer.material;
+
+                mat.SetFloat("_Glow", glowValue);
+            }
+        }
     }
 }
