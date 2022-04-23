@@ -11,10 +11,7 @@ public class HelperInsect : Animal
         base.Start();
     }
 
-    private void OnMouseDown()
-    {
-        
-    }
+
 
     public override void die()
     {

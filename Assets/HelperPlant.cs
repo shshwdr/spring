@@ -94,11 +94,7 @@ public class HelperPlant : HPObject
 
     }
 
-    private void OnMouseDown()
-    {
 
-       // GetComponent<UnityChan.RandomWind>().interact();
-    }
 
     private void OnMouseExit()
     {

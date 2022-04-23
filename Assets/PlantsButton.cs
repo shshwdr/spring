@@ -32,11 +32,11 @@ public class PlantsButton : MonoBehaviour
 
     }
 
-    private void OnMouseDown()
-    {
-        SpawnPlant();
-       // PlantsManager.Instance.shadowCollider.gameObject.SetActive(true);
-    }
+    //private void OnMouseDown()
+    //{
+    //    SpawnPlant();
+    //   // PlantsManager.Instance.shadowCollider.gameObject.SetActive(true);
+    //}
     public void SpawnPlant()
     {
         //try to purchase

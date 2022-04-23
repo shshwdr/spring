@@ -11,7 +11,7 @@ public class Pest : Animal
         PestManager.Instance.AddPest(this);
         base.Start();
     }
-    private void OnMouseDown()
+    public void OnOneTap()
     {
         //find closest helperInsect
         //no target

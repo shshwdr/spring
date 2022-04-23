@@ -19,7 +19,7 @@ public class Bird : MonoBehaviour
         audiosource = GetComponent<AudioSource>();
     }
 
-    private void OnOneTap()
+    public void OnOneTap()
     {
         if (!isClicked)
         {

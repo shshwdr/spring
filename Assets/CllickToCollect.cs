@@ -33,7 +33,7 @@ public class CllickToCollect : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = HUD.Instance.propertyImage[(int)(maxP)];
     }
 
-    private void OnMouseDown()
+    public void OnOneTap()
     {
         collect();
     }
