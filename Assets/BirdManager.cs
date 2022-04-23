@@ -53,15 +53,20 @@ public class BirdManager : Singleton<BirdManager>
         birdShowCurrentTime += Time.deltaTime;
         if (birdShowCurrentTime >= birdShowTimer)
         {
-            updateShowTimer();
-            Vector3 position = new Vector3(spawnBirdHighest.position.x, Random.Range(spawnBirdLowest.position.y, spawnBirdHighest.position.y), -1f);
-            //Instantiate(bird, position,Quaternion.identity);
-            bird.transform.position = position;
-            bird.GetComponent<Bird>().isClicked = false;
-            bird.GetComponent<Bird>().Appear();
-            birdShowCurrentTime = 0;
-            StartCoroutine(delayShow());
+            showBird();
         }
+    }
+
+    public void showBird()
+    {
+        updateShowTimer();
+        Vector3 position = new Vector3(spawnBirdHighest.position.x, Random.Range(spawnBirdLowest.position.y, spawnBirdHighest.position.y), -1f);
+        //Instantiate(bird, position,Quaternion.identity);
+        bird.transform.position = position;
+        bird.GetComponent<Bird>().isClicked = false;
+        bird.GetComponent<Bird>().Appear();
+        birdShowCurrentTime = 0;
+        StartCoroutine(delayShow());
     }
 
     IEnumerator delayShow()

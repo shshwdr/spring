@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheatManager : MonoBehaviour
+public class CheatManager : Singleton<CheatManager>
 {
     public bool isOn = false;
     // Start is called before the first frame update
@@ -11,6 +11,11 @@ public class CheatManager : MonoBehaviour
 
     }
 
+    public void unlimitedResource()
+    {
+
+        PlantsManager.Instance.ignoreResourcePlant = true;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -19,7 +24,7 @@ public class CheatManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.U))
             {
-                PlantsManager.Instance.ignoreResourcePlant = true;
+                unlimitedResource();
             }
             if (Input.GetKeyDown(KeyCode.I))
             {

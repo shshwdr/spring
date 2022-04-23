@@ -48,24 +48,28 @@ public class MainTree : HelperPlant
 
     }
 
-    private void OnEnable()
-    {
-        LeanTouch.OnFingerDown += HandleFingerDown;
-        //LeanTouch.OnFingerUp += HandleFingerUp;
-    }
-    private void OnDisable()
-    {
-        LeanTouch.OnFingerDown -= HandleFingerDown;
-        //LeanTouch.OnFingerUp -= HandleFingerUp;
-    }
+    //private void OnEnable()
+    //{
+    //   // LeanTouch.OnFingerDown += HandleFingerDown;
+    //    LeanTouch.OnFingerTap += HandleFingerDown;
+    //    //LeanTouch.OnFingerUp += HandleFingerUp;
+    //}
+    //private void OnDisable()
+    //{
+    //   // LeanTouch.OnFingerDown -= HandleFingerDown;
+    //    LeanTouch.OnFingerTap -= HandleFingerDown;
+    //    //LeanTouch.OnFingerUp -= HandleFingerUp;
+    //}
 
-    private void HandleFingerDown(LeanFinger finger)
-    {
-        if(finger.TapCount == 2)
-        {
-            OnMouseDown();
-        }
-    }
+
+    //private void HandleFingerDown(LeanFinger finger)
+    //{
+    //    Debug.Log("tap count " + finger.TapCount);
+    //    if(finger.TapCount == 2)
+    //    {
+    //        OnDoubleClick();
+    //    }
+    //}
     public override void die()
     {
         isAlive = false;
@@ -202,12 +206,12 @@ public class MainTree : HelperPlant
     {
         return currentFlowerNumber >= totalFlowerNumber;
     }
-    void OnMouseDown()
+    public void OnDoubleClick()
     {
-        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
+        //if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        //{
+        //    return;
+        //}
         if (isAtMaxLevel())
         {
 
